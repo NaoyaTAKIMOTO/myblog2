@@ -1,4 +1,4 @@
-baseurl = "http://www.subcul-science.com"
+baseurl = "https://www.subcul-science.com"
 DefaultContentLanguage = "en"
 title = "サブカル科学研究会のブログ"
 theme = "beautifulhugo"
