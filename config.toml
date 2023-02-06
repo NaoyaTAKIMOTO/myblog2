@@ -76,3 +76,6 @@ pygmentsCodefencesGuessSyntax = true
         endLevel = 3
         ordered = true
         startLevel = 2
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
