@@ -31,3 +31,6 @@ tags: [Docker, 環境構築, asdf]
 
 ## 感想
 - Dockerとasdfと何重にも仮想環境を重ねることにどれだけの意味があるだろうか？
+
+## 参考資料
+- [Can install asdf inside Docker container, but not at build time via Dockerfile](https://stackoverflow.com/questions/72063324/can-install-asdf-inside-docker-container-but-not-at-build-time-via-dockerfile)
