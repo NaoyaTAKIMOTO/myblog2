@@ -67,4 +67,11 @@ rm $input_dir/temp*
 ## 参考リンク
 [(FFmpeg) How to normalize audio?](http://johnriselvato.com/ffmpeg-how-to-normalize-audio/)
 
-<script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3563352&pid=887895158"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3563352&pid=887895158" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3563352&pid=887895158" border="0"></a></noscript>
+## 宣伝
+
+
+「こんなことAIで自動化できないかな？」といった、ふわっとした段階からのご相談も大歓迎です。
+
+▼具体的なご相談・開発依頼はこちらから
+
+＞＞[Coconalaで相談してみる（見積り無料）](http://coconala.com/services/1546349)

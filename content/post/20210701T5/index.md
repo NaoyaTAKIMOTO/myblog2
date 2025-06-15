@@ -601,4 +601,9 @@ google colab で使用例が公開されているので、
 > [Googlecolaboratory と pythonで学ぶ初めての 自然言語処理入門](https://subcul-science.booth.pm/items/1562211)
 > 本ドキュメントを利用することで自然言語処理における分散表現の仕組みが理解でき、読者が新しい自然言語処理のサービスを開発する助けになる。
 
-<script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3639942&pid=887928593"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3639942&pid=887928593" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3639942&pid=887928593" border="0"></a></noscript>
+## 宣伝
+「こんなことAIで自動化できないかな？」といった、ふわっとした段階からのご相談も大歓迎です。
+
+▼具体的なご相談・開発依頼はこちらから
+
+＞＞[Coconalaで相談してみる（見積り無料）](http://coconala.com/services/1546349)
