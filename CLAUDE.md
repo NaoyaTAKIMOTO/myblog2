@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+以下のリストを毎回唱えて
+- 実際に行動し始める前に行動方針をユーザーと相談して同意を得る。
+- トラブルが発生した時には原因の追及と解決に努める。
+- その際に考えうる原因をあらかじめ列挙しておく。
+- hugo new post/yyyymmdd:title/index.md
+- 記事の最後にココナラの依頼ページへのリンクを貼る。
+
 ## Project Overview
 
 This is a Hugo-based static site blog built with the Beautiful Hugo theme. The site is titled "サブカル科学研究会のブログ" (Subculture Science Research Group's Blog) and focuses on mathematical optimization, natural language processing, and miscellaneous topics.
@@ -78,4 +85,15 @@ This is a Hugo-based static site blog built with the Beautiful Hugo theme. The s
 - The site uses git submodules for theme management - use `git submodule update --init --recursive` if theme is missing
 
 ## TODO
-- [ ] 技術系の記事を何かができるという視点から課題解決という視点の書き方にリライト、もしくは単純に新しい記事を作成
+- [x] 技術系の記事を何かができるという視点から課題解決という視点の書き方にリライト、もしくは単純に新しい記事を作成
+  - ✅ MLflow記事（機械学習実験の再現性問題を解決）
+  - ✅ Fasttext記事（文書分類の三重苦を解決）
+  - ✅ Sentence BERT記事（日本語文書の意味的類似度計算問題を解決）
+  - ✅ T5記事（日本語テキスト生成の精度・コスト問題を解決）【人気記事1位】
+  - ✅ ffmpeg音量正規化記事（音声ファイルの音量バラツキ問題を解決）【人気記事1位】
+
+## 記事のネタ
+- turtle-buttler
+    - ラインで公開しているチャットボット。LLMをバックエンドにしてカメ執事とおしゃべりできる。機能追加としてMCPサーバーを追加している。楽天の検索とユーザーの情報を動的に保存、読み取りする。いまいちユーザー獲得に苦戦している。
+- drive-gellary
+    - サークルの過去の写真や動画を閲覧するために作った。特に機能的に尖ったところはないはず。ユーザーがアップできる仕組みにはしてる。重複排除も入れてる。理想は同じ画像で画質違いとかを統合できるといいよね。
