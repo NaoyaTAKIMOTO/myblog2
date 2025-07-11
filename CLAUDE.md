@@ -95,5 +95,13 @@ This is a Hugo-based static site blog built with the Beautiful Hugo theme. The s
 ## 記事のネタ
 - turtle-buttler
     - ラインで公開しているチャットボット。LLMをバックエンドにしてカメ執事とおしゃべりできる。機能追加としてMCPサーバーを追加している。楽天の検索とユーザーの情報を動的に保存、読み取りする。いまいちユーザー獲得に苦戦している。
+    - git@github.com:NaoyaTAKIMOTO/turtle-buttler.git
 - drive-gellary
     - サークルの過去の写真や動画を閲覧するために作った。特に機能的に尖ったところはないはず。ユーザーがアップできる仕組みにはしてる。重複排除も入れてる。理想は同じ画像で画質違いとかを統合できるといいよね。
+    - git@github.com:NaoyaTAKIMOTO/drive-gallery.git
+- Booking-buttler
+  - git@github.com:NaoyaTAKIMOTO/BookingButler.git
+  - ✅ 記事化完了（2025-07-11）
+  - 出張管理の自動化WebアプリとしてGoogle Calendar API統合、Go+React実装
+  - OAuth認証部分に課題があるが主要機能は実装済み
+  - 移動時間自動計算、スケジュール分析機能など価値ある機能を紹介
