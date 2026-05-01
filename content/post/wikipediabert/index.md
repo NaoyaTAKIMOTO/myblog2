@@ -12,9 +12,9 @@ tags : [技術系,自然言語処理,bert,技術,python,分散表現]
 
 ## 前準備:mecabのインストール
 
-- 形態素解析エンジンであるmecabが BERT の日本語モデルを利用する際に必要になります。
+- 形態素解析エンジンである[MeCab](https://taku910.github.io/mecab/)が BERT の日本語モデルを利用する際に必要になります。
 - おそらくトークナイザがmecabを要求する仕組みになっています。
-- 今回はhomebrew を利用して、Mecab とipadicをインストールします。
+- 今回は[Homebrew](https://brew.sh/)を利用して、MeCabとipadicをインストールします。
 
 ```sh
 brew install mecab mecab-ipadic
@@ -99,6 +99,7 @@ hidden_states = result.hidden_states
 
 - [文書分類問題の応用はなにがある？]({{<ref "/post/20200618blog-post_54.md">}})
 - [分散表現の利用法 バギングによるクラス分類や汎化性能について]({{<ref "/post/20210204classifier.md">}})
+- [日本語の分散表現の計算方法まとめ]({{<ref "/post/20220302embedding-matome/">}})
 
 
 ### 分散表現の仕組みについて学ぶ

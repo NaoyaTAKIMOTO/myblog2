@@ -6,7 +6,7 @@ tags: [poetry, python, pytorch, 環境構築]
 ---
 
 ## `poetry add torch` でパスが通らない
-- Dcokerfile＋poetry で環境構築をしていた
+- Dcokerfile＋[Poetry](https://python-poetry.org/)で環境構築をしていた
 - `poetry add torch`でpytorchをインストールした
 - `import torch`でエラー
 - cuda周りのパスが通っていないらしい
@@ -17,5 +17,9 @@ tags: [poetry, python, pytorch, 環境構築]
 - poetry.tomlに記述することもできるらしい
 
 
+## 関連記事
+- [Dockerfileでasdfを実行できないことについて]({{<ref "/post/20230607dockerfileasdf/">}})
+- [pycharmからpoetryで環境の作成ができない]({{<ref "/post/20220224poetry/">}})
+
 ## 参考資料
-- [stack overflow](https://stackoverflow.com/questions/59158044/poetry-and-pytorch)
+- [Poetry + PyTorch（Stack Overflow）](https://stackoverflow.com/questions/59158044/poetry-and-pytorch)

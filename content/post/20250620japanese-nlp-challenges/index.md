@@ -165,7 +165,7 @@ normalized_text = processor.normalize_text(text)
 
 ### 2. 高精度な形態素解析
 
-#### MeCab + NEologdによる現代日本語対応
+#### [MeCab](https://taku910.github.io/mecab/) + [NEologd](https://github.com/neologd/mecab-ipadic-neologd)による現代日本語対応
 
 ```python
 import MeCab
@@ -586,3 +586,7 @@ for doc in documents:
 - **用途に応じた最適化**：検索、分類、要約など目的に応じた処理の調整
 
 日本語の特殊性を理解し、適切な技術的対応を行うことで、英語並みの処理精度を実現することが可能です。現実的な制約の中でも、段階的なアプローチにより着実に改善を図ることが重要です。
+
+## 関連記事
+- [日本語Wikipediaで学習したBERTが公開されたので使い方のメモ]({{<ref "/post/wikipediabert/">}})
+- [Google Colaboratoryでword2vecを使う方法のメモ]({{<ref "/post/20200615google-colaboratory-word2vec/">}})

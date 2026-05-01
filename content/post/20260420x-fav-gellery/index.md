@@ -99,7 +99,7 @@ CREATE INDEX ON images USING ivfflat (embedding vector_cosine_ops)
 
 ## DINOv2 による画像埋め込み
 
-DINOv2 は Meta が開発した自己教師あり学習の Vision Transformer です。画像から 768 次元の特徴ベクトルを生成でき、意味的に類似した画像（同じ構図・スタイル・被写体）を高精度で見つけられます。
+[DINOv2](https://github.com/facebookresearch/dinov2) は Meta が開発した自己教師あり学習の Vision Transformer です。画像から 768 次元の特徴ベクトルを生成でき、意味的に類似した画像（同じ構図・スタイル・被写体）を高精度で見つけられます。
 
 ```typescript
 // workers/clip-worker.ts

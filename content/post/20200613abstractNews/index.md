@@ -81,7 +81,7 @@ encoderーdecoderモデルです。
 
 AlbertはBERTからパラメータ数を効率化したモデルです。同じtransformerの層を繰り返し経由することで、モデルサイズの削減を行っています。 詳しくは[BERTはまだまだ進化する！軽くて強いALBERTが登場！](https://ai-scholar.tech/articles/treatise/albert-ai-227)を参照してください。
 
-またencoderーdecoderモデルを採用した理由としては、ようやくモデルであるPEGASUS、BARTなどが同様の構造を採用しているからです。
+またencoderーdecoderモデルを採用した理由としては、ようやくモデルである[PEGASUS](https://arxiv.org/abs/1912.08777)、[BART](https://arxiv.org/abs/1910.13461)などが同様の構造を採用しているからです。
 
 今回のモデルは深層学習系のattenntionモデルのため、 学習にはGPUやTPUを必要となります。
 
@@ -93,7 +93,7 @@ AlbertはBERTからパラメータ数を効率化したモデルです。同じt
 
 ### 開発環境
 
-環境の良さからpython-pytorchを用いた。
+環境の良さからpython-[PyTorch](https://pytorch.org/)を用いた。
 
 すでに深層学習モデルの基本的なコンポーネントや道具が整備されており、車輪の再発明をせずに済みます。また記述が楽なのでプロトタイプに向いています。
 

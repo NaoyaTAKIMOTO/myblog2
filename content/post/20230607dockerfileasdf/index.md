@@ -12,7 +12,7 @@ tags: [Docker, 環境構築, asdf]
 - デフォルトのシェルをbashに変更した
    `SHELL [/bin/bash,-lc]`
 
-## Dockerfile でasdf が実行できない
+## Dockerfile で[asdf](https://asdf-vm.com/)が実行できない
 - RUN asdf　に失敗する
   - asdfが見つからない
 - しかしDocker内部ではasdfを実行できる
@@ -31,6 +31,9 @@ tags: [Docker, 環境構築, asdf]
 
 ## 感想
 - Dockerとasdfと何重にも仮想環境を重ねることにどれだけの意味があるだろうか？
+
+## 関連記事
+- [poetry環境でpytorchをインストールしても失敗したのでその対処法]({{<ref "/post/20230607poetrytorch/">}})
 
 ## 参考資料
 - [Can install asdf inside Docker container, but not at build time via Dockerfile](https://stackoverflow.com/questions/72063324/can-install-asdf-inside-docker-container-but-not-at-build-time-via-dockerfile)

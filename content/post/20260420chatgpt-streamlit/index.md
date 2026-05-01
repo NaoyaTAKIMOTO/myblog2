@@ -12,7 +12,7 @@ summary: "Streamlit と LangChain を組み合わせて、Google検索・Wikiped
 
 2023年当時、ChatGPT の知識は学習データのカットオフ以降の情報を持っていませんでした。最新のニュースや現在の情報を調べてほしいとき、ChatGPT だけでは回答できません。
 
-LangChain の **ReAct エージェント**を使うと、LLM が自律的に「どのツールを使うか」を判断して検索・参照してから回答できます。これを Streamlit でシンプルな Chat UI として実装しました。
+[LangChain](https://python.langchain.com/) の **ReAct エージェント**を使うと、LLM が自律的に「どのツールを使うか」を判断して検索・参照してから回答できます。これを [Streamlit](https://streamlit.io/) でシンプルな Chat UI として実装しました。
 
 ## 完成したアプリの機能
 

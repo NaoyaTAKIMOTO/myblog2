@@ -4,7 +4,7 @@ date: 2023-06-18T01:53:52+09:00
 draft: false
 tags: [環境構築, python, poetry]
 ---
-## pysenが入っていたらlangChainと依存関係がバッティングする？
+## [pysen](https://github.com/pfnet/pysen)が入っていたら[LangChain](https://python.langchain.com/)と依存関係がバッティングする？
 
 ## 環境
 Mac OS

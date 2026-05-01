@@ -41,7 +41,7 @@ doc2 = "AIモデルの性能を改善する手法"
 # 毎回エンコードが必要で、大量データに不向き
 ```
 
-この問題を解決するのが**Sentence BERT**です。
+この問題を解決するのが**[Sentence BERT](https://github.com/UKPLab/sentence-transformers)**です。
 
 ## Sentence BERTによる問題解決アプローチ
 
@@ -254,6 +254,10 @@ model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=30)
 特に、**文書検索・推薦システム・重複検出**など、意味的類似度が重要な用途で大幅な性能向上を実現できます。
 
 従来の表面的な単語一致から、深層学習による意味理解へのパラダイムシフトにより、より知的な文書処理システムの構築が可能になります。
+
+## 関連記事
+- [SentenceBERTを使って日本語の文書の類似度を計算する]({{<ref "/post/20210203SBERT/">}})
+- [学習済みUniversal Sentence Encoder を使って日本語の文章の分散表現を得る手順]({{<ref "/post/universal-sentence-encoder/">}})
 
 ## 宣伝
 

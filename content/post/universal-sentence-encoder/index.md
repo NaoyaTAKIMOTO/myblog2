@@ -22,7 +22,7 @@ Universal Sentence Encoder を使って文書のベクトルが得られる。
 
 ## 使い方
 
-準備として以下のコマンドを実行する。
+準備として以下のコマンドを実行する（[TensorFlow](https://www.tensorflow.org/)と[tensorflow_hub](https://www.tensorflow.org/hub)が必要）。
 
 ```sh
 pip install tensorflow tensorflow_hub tensorflow_text numpy   

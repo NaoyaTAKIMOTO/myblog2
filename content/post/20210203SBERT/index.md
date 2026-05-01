@@ -13,7 +13,7 @@ tags: ["技術系","自然言語処理","BERT","分散表現",技術,sentence tr
 ## 2022/03追記
 - [Hugging Face](https://huggingface.co/sonoisa/sentence-bert-base-ja-mean-tokens-v2)
 で日本語のSentence BERTが公開されているのでそちらを利用してもいい。
-- fugashi ipadicが単語分割のために要求されるのでインストールしておく
+- [fugashi](https://github.com/polm/fugashi)・[ipadic](https://github.com/polm/ipadic-py)が単語分割のために要求されるのでインストールしておく
 ```
 pip transformers fugashi ipadic
 ```
@@ -179,8 +179,11 @@ model2 = SentenceTransformer(path.join(ROOT, "model","sentenceBERT"))
   - [Fasttextで文書分類問題までやったった]({{<ref "post/20200613fasttext/index.md">}})もオススメします。
 
 
+## 関連記事
+- [日本語文書の意味的類似度計算問題をSentence BERTで解決]({{<ref "/post/20250705document-similarity-solution/">}})
+
 ## 参考リンク
-- [公式ドキュメント](https://www.sbert.net/docs/package_reference/losses.html)
+- [sentence-transformers公式ドキュメント](https://www.sbert.net/docs/package_reference/losses.html)
 - [日本語での使用例](https://www.ogis-ri.co.jp/otc/hiroba/technical/similar-document-search/part9.html)
 
 DNN系の自然言語処理には以下の書籍がおすすめ！

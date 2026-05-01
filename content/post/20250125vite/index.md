@@ -12,6 +12,6 @@ tags: [React, Vite, 環境構築, TypeScript]
 
 上の方法は古いらしい
 
-下記の方法でviteを利用してReact+TypeScriptの環境構築を行う
+下記の方法で[Vite](https://vitejs.dev/)を利用してReact+TypeScriptの環境構築を行う
 
     npm create vite@latest

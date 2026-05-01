@@ -5,7 +5,7 @@ date: "2021-02-17T10:32:03+09:00"
 thumbnail: ""
 tags: [NLI,sentence transformer,技術,自然言語処理,文書分類]
 ---
-Sentence Transformer を使って、
+[Sentence Transformer](https://www.sbert.net/)を使って、
 文書間の因果関係を推論しようとしている。
 
 これができれば、報告書からそのインシデントの原因と症状を抽出できる。

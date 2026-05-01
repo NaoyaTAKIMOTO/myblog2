@@ -23,7 +23,7 @@ npm install -g firebase-tools
 
 ## todo list の作成
 
-vueとjavascriptについてはまだあんまり理解していない。
+[Vue.js](https://vuejs.org/)とjavascriptについてはまだあんまり理解していない。
 
 公式サイトの作例をもとに多少改造した。
 

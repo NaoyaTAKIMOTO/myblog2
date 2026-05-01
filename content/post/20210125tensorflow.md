@@ -6,7 +6,7 @@ thumbnail: ""
 tags: [技術系,python,tensorflow,gpu,技術]
 ---
 
-tensorflow 1系は使える全てのGPUリソースを確保する。
+[TensorFlow](https://www.tensorflow.org/) 1系は使える全てのGPUリソースを確保する。
 
 メモリオーバーを観測できないので、
 逐次的にGPUメモリを確保するように設定を変更する。
@@ -27,5 +27,5 @@ sess = sess = tf.Session(config=config)
 
 ## 参考リンク
 
-https://qiita.com/kikusumk3/items/907565559739376076b9
+[TensorFlow GPUメモリ設定（Qiita）](https://qiita.com/kikusumk3/items/907565559739376076b9)
 

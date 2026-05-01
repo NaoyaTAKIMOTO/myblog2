@@ -14,5 +14,8 @@ tags: [bash,zsh,技術]
 1. bashからzshへの切り替え
 
     chsh -s /bin/zsh
+## 関連記事
+- [Mac bashからzshへ変更する際の設定と注意点]({{<ref "/post/20210127zsh/">}})
+
 ## 参考リンク
-https://qiita.com/shionit/items/31bfffa5057e66e46450
+[bashからzshへの移行（Qiita）](https://qiita.com/shionit/items/31bfffa5057e66e46450)

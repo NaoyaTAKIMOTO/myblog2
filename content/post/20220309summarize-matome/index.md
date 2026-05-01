@@ -56,5 +56,8 @@ tags: [要約,BART,技術系,自然言語処理,技術,分散表現,文生成]
   - ３文に要約
   - 抜粋型か？
 
+## 関連記事
+- [日本語テキスト生成の精度が低い・コストが高い問題をT5で解決]({{<ref "/post/20250705japanese-text-generation-solution/">}})
+
 ## 参考文献
 - [文書要約のための数理的手法](http://www.orsj.or.jp/archive2/or62-11/or62_11_711.pdf)

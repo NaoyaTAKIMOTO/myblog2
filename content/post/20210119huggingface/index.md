@@ -27,7 +27,7 @@ pip install transformers
 ```py
 from transformers import BartTokenizer, BartForConditionalGeneration, BartConfig
 
-model = BartForConditionalGeneration.from_pretrained('facebook/bart-large')
+model = BartForConditionalGeneration.from_pretrained('facebook/bart-large')  # https://huggingface.co/facebook/bart-large
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
 
 ARTICLE_TO_SUMMARIZE = "My friends are cool but they eat too many carbs."
@@ -43,7 +43,7 @@ print([tokenizer.decode(g, skip_special_tokens=True, clean_up_tokenization_space
 面白い。
 
 ## ハマったところ
-pytorchのバージョンがtransformersの指定と異なるとエラーが出た。
+[PyTorch](https://pytorch.org/)のバージョンがtransformersの指定と異なるとエラーが出た。
 ```
 pip install -U torch
 ```

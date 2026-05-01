@@ -32,7 +32,7 @@ tags: ["natural-language-processing", "semantic-search", "document-similarity", 
 - 概念的に類似した文書を発見可能
 - 異なる表現でも同じ意味なら高い類似度を算出
 
-### 2. 実装アプローチ：Universal Sentence Encoderを使った解決法
+### 2. 実装アプローチ：[Universal Sentence Encoder](https://tfhub.dev/google/universal-sentence-encoder/4)を使った解決法
 
 #### ステップ1：文書のベクトル化
 
@@ -109,7 +109,7 @@ def hybrid_search(query, documents, keyword_weight=0.3, semantic_weight=0.7):
 
 **計算時間の短縮：**
 - 事前にすべての文書をベクトル化してキャッシュ
-- 近似近傍探索（Annoy、Faiss）の活用
+- 近似近傍探索（[Annoy](https://github.com/spotify/annoy)、[Faiss](https://github.com/facebookresearch/faiss)）の活用
 
 ```python
 import faiss
@@ -166,3 +166,7 @@ def fast_search(query_embedding, index, k=5):
 - **ユーザー体験の改善**：期待する結果により近い検索結果
 
 このアプローチは、情報検索の根本的な課題である「意図と結果のギャップ」を技術的に解決する実用的な手法です。まずは小規模なデータセットで試してみることをお勧めします。
+
+## 関連記事
+- [学習済みUniversal Sentence Encoder を使って日本語の文章の分散表現を得る手順]({{<ref "/post/universal-sentence-encoder/">}})
+- [SentenceBERTを使って日本語の文書の類似度を計算する]({{<ref "/post/20210203SBERT/">}})

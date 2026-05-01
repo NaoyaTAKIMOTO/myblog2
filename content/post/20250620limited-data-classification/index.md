@@ -58,7 +58,7 @@ test_text = "サッカーの試合結果"
 
 ### 1. Transfer Learning：事前学習済みモデルの活用
 
-#### 戦略1: 事前学習済みBERTの活用
+#### 戦略1: 事前学習済み[BERT](https://huggingface.co/cl-tohoku/bert-base-japanese)の活用
 
 ```python
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -427,3 +427,8 @@ final_accuracy = 0.78  # 最終的に78%達成
 - **継続的な改善**：運用しながらデータとモデルを改善
 
 「データが少ないから機械学習は無理」ではなく、「データが少ないからこそ工夫が必要」という発想転換が重要です。現実的な制約の中でも、適切な技術選択により問題解決は可能です。
+
+## 関連記事
+- [日本語Wikipediaで学習したBERTが公開されたので使い方のメモ]({{<ref "/post/wikipediabert/">}})
+- [SentenceBERTを使って日本語の文書の類似度を計算する]({{<ref "/post/20210203SBERT/">}})
+- [文書分類問題に対応するめちゃたくさんのモデルを提供するライブラリNeuralClassifier の使い方について]({{<ref "/post/neuralclassifier/">}})

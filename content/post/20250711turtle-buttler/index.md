@@ -44,12 +44,12 @@ turtle-buttler/
 
 **言語・フレームワーク**
 - TypeScript + Node.js + Express.js
-- Google Gemini AI（対話生成）
-- LINE Messaging API
+- [Google Gemini AI](https://ai.google.dev/)（対話生成）
+- [LINE Messaging API](https://developers.line.biz/ja/services/messaging-api/)
 
 **データ管理**
-- Firebase Realtime Database（ユーザー情報）
-- 楽天市場API（商品データ）
+- [Firebase](https://firebase.google.com/) Realtime Database（ユーザー情報）
+- [楽天市場API](https://webservice.rakuten.co.jp/)（商品データ）
 
 ## 技術実装：課題解決への具体的アプローチ
 
@@ -139,6 +139,10 @@ interface UserProfile {
 LINEボットのユーザー獲得課題は、単なる対話機能の改善だけでは解決できません。**MCPアーキテクチャによる機能拡張**、**実用的価値の提供**、**個人化されたユーザー体験**の3つの要素を組み合わせることで、ユーザーが継続的に利用したくなるボットを構築できます。
 
 turtle-buttlerの開発事例が、LINEボット開発で同様の課題を抱える方の参考になれば幸いです。技術的な詳細やソースコードについては、GitHubリポジトリで公開していますので、ぜひご参照ください。
+
+## 関連記事
+- [BookingButler：Googleカレンダー連携で出張管理を自動化するWebアプリ]({{<ref "/post/20250711booking-buttler/">}})
+- [サークル写真管理の分散・重複問題をSHA256ハッシュで解決 - drive-gallery開発事例]({{<ref "/post/20250711drive-gallery/">}})
 
 ## 宣伝
 

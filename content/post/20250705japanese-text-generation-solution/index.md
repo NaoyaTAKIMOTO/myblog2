@@ -39,7 +39,7 @@ title_generation_model = load_title_model()        # タイトル生成用
 # - 開発・保守コストが高い
 ```
 
-この問題を解決するのが**日本語T5（Text-To-Text Transfer Transformer）**です。
+この問題を解決するのが**[日本語T5（Text-To-Text Transfer Transformer）](https://huggingface.co/sonoisa/t5-base-japanese)**です。
 
 ## T5による統一的な問題解決アプローチ
 
@@ -273,6 +273,10 @@ def document_processor(document):
 特に、**要約・分類・生成タスクの統合**により、従来の個別開発アプローチから大幅に効率化できます。
 
 「何ができる」から「どんな課題を解決できるか」への発想転換により、T5は単なる技術ツールではなく、日本語NLP業務の生産性を革新する実用的なソリューションとなります。
+
+## 関連記事
+- [日本語T5モデルでテキスト生成をしてみた]({{<ref "/post/20210701T5/">}})
+- [日本語テキスト要約のまとめ]({{<ref "/post/20220309summarize-matome/">}})
 
 ## 宣伝
 

@@ -7,7 +7,7 @@ tags: [python, ctranslate2, Docker, whisper]
 ## 公式のインストール方法
     pip install ctranslate2
 
-https://github.com/OpenNMT/CTranslate2
+[CTranslate2（GitHub）](https://github.com/OpenNMT/CTranslate2)
 
 ## Macでは上手く動作しない
 `segmentatioin fault`になった。
@@ -30,7 +30,7 @@ RUN python -m pip install ctranslate2
 
 下記コマンドでモデルの変換を試みる。
 
-    ct2-transformers-converter --model openai/whisper-tiny --output_dir whisper-tiny-ct
+    ct2-transformers-converter --model openai/whisper-tiny --output_dir whisper-tiny-ct  # https://github.com/openai/whisper
 すると失敗した。
 
     ModuleNotFoundError:No module named "torch"

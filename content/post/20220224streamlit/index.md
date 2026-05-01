@@ -19,6 +19,10 @@ tags: [python,poetry,streamlit]
 - その場合の対処法は公式サイトに載っている
 
 
+## 関連記事
+- [pycharmからpoetryで環境の作成ができない]({{<ref "/post/20220224poetry/">}})
+- [StreamlitでChatGPTのUIを作る]({{<ref "/post/20260420chatgpt-streamlit/">}})
+
 ## 参考リンク
 - [streamlit 公式サイト](https://streamlit.io/)
 - [poetry 公式サイト](https://python-poetry.org/)

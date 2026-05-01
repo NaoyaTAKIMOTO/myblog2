@@ -5,7 +5,7 @@ date: "2021-05-17T15:07:00+09:00"
 thumbnail: "/img/man-593333_1920.jpg"
 tags: [AWS, 文字起こし]
 ---
-Amazon Transcribe という文字起こしのサービスがある。
+[Amazon Transcribe](https://aws.amazon.com/transcribe/)という文字起こしのサービスがある。
 
 このサービスの特徴として、
 
@@ -22,7 +22,7 @@ GUIでの使い方をメモしておく。
 
 1. AWSコンソールにログインする。
    1. AWS用にアカウントを作成する必要がある
-2. S3に音声ファイルをアップする。
+2. [S3](https://aws.amazon.com/s3/)に音声ファイルをアップする。
    1. 特にオプションをいじる必要はない。
    2. リージョン（地域）設定は自分の所在地に近いところを選ぶといいくらいか？
 3. Amazon Transcribeで文字起こしを行う

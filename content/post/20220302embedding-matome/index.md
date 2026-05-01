@@ -10,7 +10,7 @@ tags: [自然言語処理, T5,BERT,Sentece Transformers,SBERT,word2vec,fasttext]
 - [Word2vec]({{<ref "/post/20200615google-colaboratory-word2vec/index.md">}})
   - 自然言語処理における分散表現の一つのオリジナル
   - 基本原理くらいは知っていてもいいかもしれない
-  - gensimがよく使われる
+  - [gensim](https://radimrehurek.com/gensim/)がよく使われる
 - [Fasttext で文書分類問題までやったった]({{<ref "/post/20200613fasttext.md">}})
   - fastと名前がついているだけあってfacebookが公開しているモデルは高速に動作する
   - 分散表現とクラス分類に対応していたり、利便性が高い

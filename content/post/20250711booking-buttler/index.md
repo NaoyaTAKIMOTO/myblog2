@@ -179,9 +179,13 @@ make run       # localhost:8080
 
 ## まとめ
 
-BookingButlerは、出張管理の効率化という実用的な課題に対し、複数のAPIを統合したWebアプリケーションとして開発しました。Google Calendar APIを軸とした外部サービス連携により、手作業では困難な複雑な移動時間計算を自動化できます。
+BookingButlerは、出張管理の効率化という実用的な課題に対し、複数のAPIを統合したWebアプリケーションとして開発しました。[Google Calendar API](https://developers.google.com/calendar)を軸とした外部サービス連携により、手作業では困難な複雑な移動時間計算を自動化できます。
 
 現在は認証部分の調整を進めており、この課題を解決することで完全に実用可能なアプリケーションとなる予定です。Go言語とReactによるモダンな技術スタックで構築されており、今後の機能拡張にも柔軟に対応できる設計となっています。
+
+## 関連記事
+- [サークル写真管理の分散・重複問題をSHA256ハッシュで解決 - drive-gallery開発事例]({{<ref "/post/20250711drive-gallery/">}})
+- [LINEボットのユーザー獲得苦戦問題をMCP連携で解決 - turtle-buttler開発事例]({{<ref "/post/20250711turtle-buttler/">}})
 
 ---
 

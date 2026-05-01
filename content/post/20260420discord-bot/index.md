@@ -12,7 +12,7 @@ summary: "Mac mini M4上のOllama（qwen2.5:14b）を使って、関西弁で雑
 
 こんなモチベーションで Discord Bot「**ロブスター**」を開発しました。OpenAI の API を使う方法が一般的ですが、月額費用と会話内容の外部送信が気になっていました。
 
-そこで、**ローカルで動く Ollama（qwen2.5:14b）を使い、完全にオンプレミスで動作する Discord Bot** を作りました。おまけにテックニュースを毎日2回自動投稿する機能も付けています。
+そこで、**ローカルで動く [Ollama](https://ollama.ai/)（qwen2.5:14b）を使い、完全にオンプレミスで動作する Discord Bot** を作りました。おまけにテックニュースを毎日2回自動投稿する機能も付けています。
 
 ## ロブスターの機能
 
@@ -245,6 +245,10 @@ Discord Developer Portal で Bot を作成する際、**Message Content Intent**
 - Mac mini M4 があれば月0円で24時間稼働できる
 
 Discord サーバーに常駐するキャラクター性のあるBotは、コミュニティの雰囲気を盛り上げるのに意外と効果的です。ローカルLLMの実験場としても活用できるので、Ollamaが使える環境があればぜひ試してみてください。
+
+## 関連記事
+- [ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成]({{<ref "/post/20260420dessan-sensei/">}})
+- [LINEボットのユーザー獲得苦戦問題をMCP連携で解決 - turtle-buttler開発事例]({{<ref "/post/20250711turtle-buttler/">}})
 
 ---
 

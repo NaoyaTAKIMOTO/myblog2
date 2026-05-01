@@ -6,7 +6,7 @@ thumbnail: ""
 tags: [git,技術]
 ---
 
-hugoのthemeを`git submodule add`で導入したため、少し手順を踏まないとthemeの更新が反映されない。
+[Hugo]({{<ref "/post/20210110hugo/">}})のthemeを`git submodule add`で導入したため、少し手順を踏まないとthemeの更新が反映されない。
 
 以下の手順でthemeの最新バージョンへの更新ができる。
 
@@ -22,4 +22,4 @@ git submodule foreach git pull origin master
 
 
 ## 参考リンク
-https://m-tmatma.github.io/git/update-submodule.html
+[git submodule update方法](https://m-tmatma.github.io/git/update-submodule.html)

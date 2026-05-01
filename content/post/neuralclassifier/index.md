@@ -19,12 +19,12 @@ NeuralClassifier: An Open-source Neural Hierarchical Multi-label Text Classifica
 
 文書分類問題に特化して複数のモデルで学習、分類が可能なライブラリです。
 
-mecabなどを用いて前処理として単語の分割を行えば日本語のデータに対しても利用可能です。
+[MeCab](https://taku910.github.io/mecab/)などを用いて前処理として単語の分割を行えば日本語のデータに対しても利用可能です。
 
 さて、以下ではこのライブラリの使い方を開設します。
 
 ## 環境設定
-pytorch に依存しているライブラリなので、あらかじめ以下のコマンドでinstallしておきます。
+[PyTorch](https://pytorch.org/)に依存しているライブラリなので、あらかじめ以下のコマンドでinstallしておきます。
 
 ```sh
 pip install torch

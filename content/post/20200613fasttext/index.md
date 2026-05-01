@@ -16,7 +16,7 @@ tags : [技術系,自然言語処理, fasttext,技術,分散表現,文書分類]
 
 文書分類のタスクに取り組むことになり、当初は、
 
-> NeuralClassifier: An Open-source Neural Hierarchical Multi-label Text Classification Toolkit
+> [NeuralClassifier: An Open-source Neural Hierarchical Multi-label Text Classification Toolkit]({{<ref "/post/neuralclassifier/">}})
 
 を使っていました。ですが、あまり精度が出ませんでした。
 
@@ -54,7 +54,7 @@ pip install fasttext
 - 教師データとして'data_train.txt'を作成する必要があります。
 - データの形式は"**label**"とトークナイズされた文書を各行に持つテキストファイルです。
   - 日本語の文書はトークナイズしておく必要がある
-  - pythonだとjanomeやspacyなどが利用できる
+  - pythonだと[janome](https://mocobeta.github.io/janome/)や[spacy](https://spacy.io/)などが利用できる
 
 ```
 train.txt   
@@ -84,7 +84,7 @@ model.predict("あなた は 愛 を 信じ ます か ？")
 
 ## 評価
 
-- sklearnを用いて混合行列や精度比較が出来ます。
+- [scikit-learn](https://scikit-learn.org/)を用いて混合行列や精度比較が出来ます。
 - 以下はscikit-learnの公式サイトからの引用です。
 
 ```py
@@ -119,6 +119,7 @@ weighted avg       0.70      0.60
 - `sudo apt install g++`で最近のバージョンのコンパイラを入れる
 ## まとめ
 - fastText とscikit-learnを利用することで、
+- fasttextがなぜ速いのかについては[fasttext はなぜ速いのか？]({{<ref "/post/20210519fasttext/">}})を参照してください。
 - python 環境下で、簡単に文書分類問題に取り組むことが出来ます。
 - python はデータセット作成時にも便利なので、ひとまず文書分類を試したいという場合には有効な選択肢の一つです。
 - 実応用については下記のリンクを参考にしてください。

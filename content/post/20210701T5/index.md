@@ -579,6 +579,10 @@ for output, target, input in zip(outputs, targets, inputs):
   - しかし、ハイパラチューニングしている間に新しいSOTAモデルが提案されている気はする
 
 
+## 関連記事
+- [日本語テキスト生成の精度が低い・コストが高い問題をT5で効率的に解決]({{<ref "/post/20250705japanese-text-generation-solution/">}})
+- [日本語要約の手法・サービスのまとめ]({{<ref "/post/20220309summarize-matome/">}})
+
 ## 参考リンク
 公開元の解説や使用例がわかりやすいので、そちらを是非読んでいただきたい。
 

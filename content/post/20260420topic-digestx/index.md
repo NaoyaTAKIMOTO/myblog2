@@ -37,7 +37,7 @@ FastAPI BackgroundTasks / Celery
 
 | レイヤー | 技術 |
 |---------|------|
-| バックエンド | Python 3.12+ / FastAPI / SQLAlchemy |
+| バックエンド | Python 3.12+ / [FastAPI](https://fastapi.tiangolo.com/) / SQLAlchemy |
 | フロントエンド | React + Vite + TypeScript |
 | データベース | PostgreSQL 15 |
 | コンテナ | Docker Compose |

@@ -45,14 +45,14 @@ Luke Avenue Drive Gallery
 ### 技術的特徴
 
 **フロントエンド**
-- React 19 + TypeScript（型安全性）
-- Vite（高速ビルド）
+- [React](https://react.dev/) 19 + TypeScript（型安全性）
+- [Vite](https://vitejs.dev/)（高速ビルド）
 - React Query（効率的なAPI通信）
 
 **バックエンド**
 - Go 1.23（高性能・並行処理）
-- Firebase Admin SDK（認証・ストレージ）
-- gorilla/websocket（リアルタイム通信）
+- [Firebase](https://firebase.google.com/) Admin SDK（認証・ストレージ）
+- [gorilla/websocket](https://github.com/gorilla/websocket)（リアルタイム通信）
 
 ## 技術実装：課題解決への具体的アプローチ
 
@@ -215,6 +215,10 @@ type AdvancedDuplicateDetector struct {
 drive-galleryの開発事例が、同様の課題を抱えるチームや組織の参考になれば幸いです。特にSHA256ハッシュベースの重複排除は、シンプルながら非常に効果的な手法として、様々なファイル管理システムに応用可能です。
 
 技術的な詳細やソースコードについては、GitHubリポジトリで公開していますので、ぜひご参照ください。
+
+## 関連記事
+- [BookingButler：Googleカレンダー連携で出張管理を自動化するWebアプリ]({{<ref "/post/20250711booking-buttler/">}})
+- [LINEボットのユーザー獲得苦戦問題をMCP連携で解決 - turtle-buttler開発事例]({{<ref "/post/20250711turtle-buttler/">}})
 
 ## 宣伝
 
