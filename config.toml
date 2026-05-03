@@ -87,6 +87,12 @@ pygmentsCodefencesGuessSyntax = true
     parent = "アプリ"
     weight = 2
 
+[[menu.main]]
+    name = "AIコールセンター"
+    url = "page/ai-callcenter/"
+    parent = "アプリ"
+    weight = 3
+
 [markup]
     [markup.tableOfContents]
         endLevel = 3
