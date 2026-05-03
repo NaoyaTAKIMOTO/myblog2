@@ -71,6 +71,22 @@ pygmentsCodefencesGuessSyntax = true
     url = "tags"
     weight = 3
 
+[[menu.main]]
+    name = "アプリ"
+    weight = 4
+
+[[menu.main]]
+    name = "X Favorites Gallery"
+    url = "page/x-fav/"
+    parent = "アプリ"
+    weight = 1
+
+[[menu.main]]
+    name = "tsuzukan（続刊）"
+    url = "page/tsuzukan/"
+    parent = "アプリ"
+    weight = 2
+
 [markup]
     [markup.tableOfContents]
         endLevel = 3
