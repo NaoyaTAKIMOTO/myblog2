@@ -250,6 +250,13 @@ Discord サーバーに常駐するキャラクター性のあるBotは、コミ
 - [ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成]({{<ref "/post/20260420dessan-sensei/">}})
 - [LINEボットのユーザー獲得苦戦問題をMCP連携で解決 - turtle-buttler開発事例]({{<ref "/post/20250711turtle-buttler/">}})
 
+## β版 先行登録
+
+β版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=discord-bot" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+
 ---
 
 **Discord Bot やローカルLLM導入でお困りのことはありませんか？**

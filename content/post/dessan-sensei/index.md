@@ -202,6 +202,13 @@ Qwen3.5 の添削クオリティは想像以上でした。「線が震えてお
 
 ローカルLLMは毎月 API 費用を心配する必要がなく、インターネット接続がない環境でも動くのが大きなメリットです。デッサン以外でも、画像に対してAIのフィードバックが欲しいシーンに幅広く応用できます。
 
+## β版 先行登録
+
+β版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=dessan-sensei" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+
 ---
 
 **AI アプリ開発でお困りのことはありませんか？**

@@ -201,6 +201,13 @@ EasyOCR を使った日本語 OCR のポイント：
 
 無料・オフラインで動く日本語OCRとして、書類のデジタル化・ノートの文字起こしなど幅広い場面で活用できます。
 
+## β版 先行登録
+
+β版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=ocr" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+
 ---
 
 **OCRや画像処理の自動化でお困りのことはありませんか？**

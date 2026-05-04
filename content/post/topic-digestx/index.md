@@ -261,6 +261,13 @@ TopicDigestX の設計で意識したポイント：
 
 MVP として基本構造を作ってから段階的に機能追加するアプローチにより、設計の見通しが立てやすくなっています。X API 制限の変更など外部要因に左右される部分はインターフェースで抽象化しておくことが重要です。
 
+## β版 先行登録
+
+β版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=topic-digestx" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+
 ---
 
 **FastAPI・LLMを使ったシステム開発でお困りのことはありませんか？**

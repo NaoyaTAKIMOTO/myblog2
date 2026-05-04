@@ -239,6 +239,13 @@ X Favorites Gallery の実装で学んだポイント：
 
 「見た画像を忘れない」「似た画像をすぐ見つける」という目的のために、AI（DINOv2）とベクトルDB（pgvector）を組み合わせることで実用的なレコメンドシステムが作れました。
 
+## β版 先行登録
+
+β版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=x-fav-gellery" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+
+
 ---
 
 **ベクトル検索・AIアプリ開発でお困りのことはありませんか？**
