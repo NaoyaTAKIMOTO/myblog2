@@ -21,10 +21,13 @@ This is a Hugo-based static site blog built with the Beautiful Hugo theme. The s
 - `hugo gen chromastyles --style=trac > static/css/syntax.css` - Generate syntax highlighting CSS
 
 ### Deployment
-- Site is configured for Netlify deployment via `netlify.toml`
+- **ホスティング: Netlify**（GitHub Pagesではない。`server: Netlify` ヘッダーで確認済み）
+- GitHubの `master` ブランチにpushすると自動デプロイされる
+- 設定ファイル: `netlify.toml`
 - Build command: `hugo`
 - Publish directory: `public`
 - Hugo version: 0.142.0
+- Netlify Forms が使える（静的フォームのバックエンドとして利用可能）
 
 ## Architecture and Structure
 
