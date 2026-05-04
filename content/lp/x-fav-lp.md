@@ -80,3 +80,11 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     X Favorites Gallery を使ってみる →
   </a>
 </div>
+
+---
+
+## β版 先行登録
+
+新機能のβ版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=x-fav-gellery" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
