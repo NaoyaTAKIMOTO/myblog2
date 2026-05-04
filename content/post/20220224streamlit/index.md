@@ -21,7 +21,7 @@ tags: [python,poetry,streamlit]
 
 ## 関連記事
 - [pycharmからpoetryで環境の作成ができない]({{<ref "/post/20220224poetry/">}})
-- [StreamlitでChatGPTのUIを作る]({{<ref "/post/20260420chatgpt-streamlit/">}})
+- [StreamlitでChatGPTのUIを作る]({{<ref "/post/chatgpt-streamlit/">}})
 
 ## 参考リンク
 - [streamlit 公式サイト](https://streamlit.io/)

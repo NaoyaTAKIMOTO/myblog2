@@ -77,19 +77,19 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     name = "X Favorites Gallery"
-    url = "page/x-fav/"
+    url = "lp/x-fav-lp/"
     parent = "アプリ"
     weight = 1
 
 [[menu.main]]
     name = "tsuzukan（続刊）"
-    url = "page/tsuzukan/"
+    url = "lp/tsuzukan-lp/"
     parent = "アプリ"
     weight = 2
 
 [[menu.main]]
     name = "AIコールセンター"
-    url = "page/ai-callcenter/"
+    url = "lp/ai-callcenter/"
     parent = "アプリ"
     weight = 3
 

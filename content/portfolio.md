@@ -12,12 +12,12 @@ tags: [制作物,ポートフォリオ,自然言語処理,画像処理,python,R]
 
 #### フルスタックWebアプリケーション
 - **X Favorites Gallery** - X(Twitter)いいねギャラリー + AIレコメンド
-  - [X Favorites Gallery LP]({{< ref "page/x-fav" >}}) / [アプリを開く](https://x-fav-gellery.com/)
+  - [X Favorites Gallery LP]({{< ref "lp/x-fav-lp" >}}) / [アプリを開く](https://x-fav-gellery.com/)
   - 技術スタック: Next.js + React + PostgreSQL + pgvector, Chrome拡張, Docker
   - 成果: いいねしたコンテンツをAI（DINOv2）が自動レコメンド、NSFW自動フィルタリング対応
 
 - **tsuzukan（続刊）** - 漫画・小説の続刊管理アプリ
-  - [tsuzukan LP]({{< ref "page/tsuzukan" >}}) / [アプリを開く](https://tsuzukan.com/)
+  - [tsuzukan LP]({{< ref "lp/tsuzukan-lp" >}}) / [アプリを開く](https://tsuzukan.com/)
   - 技術スタック: Go + Gin + React + TypeScript, 楽天Books API / openBD API
   - 成果: バーコードスキャン・CSV一括登録でシリーズ新刊を自動検出、Amazon/楽天ワンクリック購入
 
