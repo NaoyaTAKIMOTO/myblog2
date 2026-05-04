@@ -57,7 +57,7 @@ tags : [技術系,技術,数理最適化]
     
     文書分類問題
     
-    [文書分類問題の応用](https://www.subcul-science.com/2020/06/blog-post_54.html)
+    [文書分類問題の応用]({{<ref "/post/20200618blog-post_54/index.md">}})
     
 
 ## 資料
