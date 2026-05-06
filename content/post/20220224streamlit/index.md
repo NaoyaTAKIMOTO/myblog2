@@ -3,7 +3,7 @@ title: "poetry環境でstreamlitを実行する方法"
 description: ""
 date: "2022-02-24T16:01:29+09:00"
 thumbnail: ""
-tags: [python,poetry,streamlit]
+tags: [Python,poetry,streamlit,技術]
 ---
 ## 症状
 - streamlitをpoetryを使ってインストールした場合に、streamlitが実行できない

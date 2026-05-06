@@ -2,7 +2,7 @@
 title: "配信録画を自動で分割！FFmpegのsilencedetectで作る動画分割Webアプリ"
 date: 2026-04-20T09:00:00+09:00
 draft: false
-tags: ["FFmpeg", "Python", "FastAPI", "React", "動画処理", "Node.js"]
+tags: [ffmpeg,Python,FastAPI,React,動画処理,Node.js,技術,音声処理]
 summary: "FFmpegのsilencedetect フィルターを使って動画を無音区間で自動分割する Webアプリ「JamSlicer」を開発しました。従来の librosa/moviepy 実装と比べてメモリ使用量を 1/100 以下に抑えつつ、分割速度を10〜20倍に向上させた実装を解説します。"
 ---
 

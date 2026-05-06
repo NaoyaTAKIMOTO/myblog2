@@ -3,7 +3,7 @@ title: "tensorflow GPUメモリを一気に確保しない設定の仕方"
 description: ""
 date: "2021-01-25T08:17:54+09:00"
 thumbnail: ""
-tags: [技術系,python,tensorflow,gpu,技術]
+tags: [技術,Python,tensorflow,gpu,機械学習]
 ---
 
 [TensorFlow](https://www.tensorflow.org/) 1系は使える全てのGPUリソースを確保する。

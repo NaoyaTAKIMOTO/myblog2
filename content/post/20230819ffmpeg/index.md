@@ -2,7 +2,7 @@
 title: "Dockerfileでffmpegをインストールするときのメモ"
 date: 2023-08-19T11:01:33+09:00
 draft: false
-tags: [ffmpeg, docker]
+tags: [ffmpeg,Docker,技術,音声処理]
 ---
 ## 失敗例
 `RUN apt update && apt install -y ffmpeg`

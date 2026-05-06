@@ -2,7 +2,7 @@
 title: "LINEボットのユーザー獲得苦戦問題をMCP連携で解決 - turtle-buttler開発事例"
 date: 2025-07-11T06:44:16+09:00
 draft: false
-tags: ["LINE Bot", "MCP", "TypeScript", "Firebase", "楽天API", "Google Gemini", "ユーザー獲得"]
+tags: [LINE Bot,MCP,TypeScript,Firebase,楽天API,Google Gemini,ユーザー獲得,技術]
 bigimg: []
 ---
 

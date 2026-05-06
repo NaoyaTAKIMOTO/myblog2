@@ -2,7 +2,7 @@
 title: "ctranslate2でpytorchがimportできないエラーが出たので回避方法メモ"
 date: 2023-08-18T16:23:27+09:00
 draft: false
-tags: [python, ctranslate2, Docker, whisper]
+tags: [Python,ctranslate2,Docker,whisper,技術]
 ---
 ## 公式のインストール方法
     pip install ctranslate2

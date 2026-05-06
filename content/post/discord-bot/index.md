@@ -2,7 +2,7 @@
 title: "Mac mini M4でローカルLLMを動かすDiscord Bot—関西弁AIとニュース自動投稿の実装"
 date: 2026-04-20T11:00:00+09:00
 draft: false
-tags: ["Discord.js", "Ollama", "Node.js", "TypeScript", "LLM", "ローカルLLM", "RSS"]
+tags: [Discord.js,Ollama,Node.js,TypeScript,LLM,ローカルLLM,RSS,技術]
 summary: "Mac mini M4上のOllama（qwen2.5:14b）を使って、関西弁で雑談するDiscord Bot「ロブスター」を開発しました。クラウドAPIなしで動作し、はてなブックマーク・Zenn・Qiitaからのテックニュース自動投稿機能も実装しています。"
 ---
 
@@ -247,7 +247,7 @@ Discord Developer Portal で Bot を作成する際、**Message Content Intent**
 Discord サーバーに常駐するキャラクター性のあるBotは、コミュニティの雰囲気を盛り上げるのに意外と効果的です。ローカルLLMの実験場としても活用できるので、Ollamaが使える環境があればぜひ試してみてください。
 
 ## 関連記事
-- [ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成]({{<ref "/post/20260420dessan-sensei/">}})
+- [ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成]({{<ref "/post/dessan-sensei/">}})
 - [LINEボットのユーザー獲得苦戦問題をMCP連携で解決 - turtle-buttler開発事例]({{<ref "/post/20250711turtle-buttler/">}})
 
 ## β版 先行登録

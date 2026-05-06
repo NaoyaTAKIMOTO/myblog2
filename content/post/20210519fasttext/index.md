@@ -3,7 +3,7 @@ title: "fasttext はなぜ速いのか？"
 description: ""
 date: "2021-05-19T02:10:01+09:00"
 thumbnail: "/img/automobile-3075396_1920.jpg"
-tags: [自然言語処理,分散表現]
+tags: [自然言語処理,分散表現,機械学習,Python,技術]
 ---
 ## fasttextの特徴
 - 目的関数の改善

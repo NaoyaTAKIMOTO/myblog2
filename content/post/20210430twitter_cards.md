@@ -3,7 +3,7 @@ title: "hugo で作成したページをtwitter_cardsとして表示できるよ
 description: ""
 date: "2021-04-30T14:53:53+09:00"
 thumbnail: ""
-tags: [hugo]
+tags: [hugo,技術]
 ---
 
 hugoで作成した記事のリンクをtwitterなどで記載したときに、

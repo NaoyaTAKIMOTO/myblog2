@@ -3,7 +3,7 @@ title: "chromebookのセットアップ"
 description: ""
 date: "2021-04-13T15:12:55+09:00"
 thumbnail: ""
-tags: [chromebook,環境構築]
+tags: [chromebook,環境構築,技術]
 ---
 ## 手順
 1. OSの更新

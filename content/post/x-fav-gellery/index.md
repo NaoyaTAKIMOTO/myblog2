@@ -2,7 +2,7 @@
 title: "Xのいいねを資産化！Chrome拡張 + pgvector + DINOv2で作る画像レコメンドシステム"
 date: 2026-04-20T13:00:00+09:00
 draft: false
-tags: ["Next.js", "pgvector", "DINOv2", "Chrome拡張", "PostgreSQL", "TypeScript", "Docker", "AI"]
+tags: [Next.js,pgvector,DINOv2,Chrome拡張,PostgreSQL,TypeScript,Docker,AI,技術]
 summary: "X（Twitter）でいいねした画像・動画を自動収集し、DINOv2の埋め込みベクトルとpgvectorで類似コンテンツをレコメンドするWebアプリを開発しました。Chrome拡張でいいねを収集し、VPSのDocker環境でセルフホストします。"
 ---
 

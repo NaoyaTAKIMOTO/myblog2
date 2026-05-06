@@ -2,7 +2,7 @@
 title: "ジムから住む場所を決める！Go + Reactで作る「筋肉不動産」アプリの設計"
 date: 2026-04-20T17:00:00+09:00
 draft: false
-tags: ["Go", "React", "Gin", "TypeScript", "Clean Architecture", "styled-components", "API設計"]
+tags: [Go,React,Gin,TypeScript,Clean Architecture,styled-components,API設計,技術]
 summary: "「まずジムを選んでから家を探す」という筋トレ愛好家向けの住まい探しWebアプリ「筋肉不動産」を開発しました。Go + Gin のClean Architectureバックエンドと、React + TypeScriptフロントエンドの実装を解説します。"
 ---
 

@@ -2,7 +2,7 @@
 title: "声を学習してテキスト読み上げ！TADAで作る日本語ボイスクローンTTSシステム"
 date: 2026-04-20T14:00:00+09:00
 draft: false
-tags: ["TTS", "Python", "FastAPI", "音声合成", "ボイスクローン", "TADA", "HumeAI"]
+tags: [TTS,Python,FastAPI,音声合成,ボイスクローン,TADA,HumeAI,技術]
 summary: "HumeAIのTADA（Text-Acoustic Dual Alignment）を使って、参照音声の声質でテキストを読み上げるボイスクローンTTSシステムを構築しました。FastAPIサーバーとCLIツールで構成し、日本語の読み上げに対応しています。"
 ---
 
@@ -223,7 +223,7 @@ TADA を使ったボイスクローン TTS システムのポイント：
 ナレーション読み上げ・有声解説動画の自動生成・オーディオブック制作など、音声を使うプロジェクトに活用できます。
 
 ## 関連記事
-- [配信録画を自動で分割！FFmpegのsilencedetectで作る動画分割Webアプリ]({{<ref "/post/20260420jam-slicer/">}})
+- [配信録画を自動で分割！FFmpegのsilencedetectで作る動画分割Webアプリ]({{<ref "/post/jam-slicer/">}})
 - [音声ファイルの音量バラツキで品質が統一できない問題をffmpeg正規化で解決する方法]({{<ref "/post/20250705audio-volume-normalization-solution/">}})
 
 ## β版 先行登録

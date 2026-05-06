@@ -2,7 +2,7 @@
 title: "漫画の続刊を買い忘れない！Go + Reactで作った続刊管理Webアプリ「tsuzukan」"
 date: 2026-04-20T12:00:00+09:00
 draft: false
-tags: ["Go", "React", "PostgreSQL", "Firebase", "楽天API", "openBD", "TypeScript", "Gin"]
+tags: [Go,React,PostgreSQL,Firebase,楽天API,openBD,TypeScript,Gin,技術]
 summary: "手持ちの漫画・小説の続刊をピックアップし、Amazon/楽天のカート追加URLを自動生成するWebアプリ「tsuzukan（続刊）」を開発しました。Amazon・楽天の購入履歴CSVをインポートしてシリーズ管理し、新刊が出たら即カートに追加できます。"
 ---
 

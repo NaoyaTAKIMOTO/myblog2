@@ -3,7 +3,7 @@ title: "日本語で学習済みのT5がhugging face で公開されたので使
 description: ""
 date: "2021-07-01T20:57:39+09:00"
 thumbnail: ""
-tags: [自然言語処理,T5,技術]
+tags: [自然言語処理,T5,技術,機械学習,Python]
 ---
 ## T5(Text-To-Text Transfer Transformer) とは
 - 事前学習における入出力を文に統一してしまうことで、

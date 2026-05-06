@@ -3,7 +3,7 @@ title: "pycharmからpoetryで環境の作成ができない"
 description: ""
 date: "2022-02-24T11:56:49+09:00"
 thumbnail: ""
-tags: [環境構築,python,poetry]
+tags: [環境構築,Python,poetry,技術]
 ---
 ## 症状
 pycharmでinterpreterの指定にエラーが出た。

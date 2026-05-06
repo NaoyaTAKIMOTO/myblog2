@@ -2,7 +2,7 @@
 title: "StreamlitでChatGPTのUIを作る—LangChain ReActエージェントとGoogle検索の組み合わせ"
 date: 2026-04-20T21:00:00+09:00
 draft: false
-tags: ["Streamlit", "LangChain", "ChatGPT", "Python", "Google検索", "Wikipedia", "ReAct"]
+tags: [Streamlit,LangChain,ChatGPT,Python,Google検索,Wikipedia,ReAct,技術]
 summary: "Streamlit と LangChain を組み合わせて、Google検索・Wikipedia検索ツールを持つ ChatGPT エージェントのWebUIを作りました。LangChain の ReAct（Reason + Act）エージェントが自律的にツールを選択して質問に答えます。"
 ---
 

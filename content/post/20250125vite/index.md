@@ -2,7 +2,7 @@
 title: "ViteでReact の環境構築"
 date: 2025-01-25T13:55:51+09:00
 draft: false
-tags: [React, Vite, 環境構築, TypeScript]
+tags: [React,Vite,環境構築,TypeScript,技術]
 ---
 ## 環境構築
 

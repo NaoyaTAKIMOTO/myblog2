@@ -2,7 +2,7 @@
 title: "Xのタイムラインを自動要約！FastAPI + LLMで作るトピックダイジェストシステムの設計"
 date: 2026-04-20T18:00:00+09:00
 draft: false
-tags: ["FastAPI", "React", "PostgreSQL", "LLM", "X API", "Python", "Docker", "Pydantic"]
+tags: [FastAPI,React,PostgreSQL,LLM,X API,Python,Docker,Pydantic,技術]
 summary: "関心のあるトピック（キーワード）を登録すると、X（Twitter）の関連ツイートを収集しLLMで要約するWebアプリ「TopicDigestX」の設計を紹介します。FastAPI + SQLAlchemy + React + Viteの構成で、Docker Composeで手軽に起動できます。"
 ---
 

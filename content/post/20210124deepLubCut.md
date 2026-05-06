@@ -3,7 +3,7 @@ title: "deeplubcut 動画を対象にした点の位置の予測"
 description: ""
 date: "2021-01-24T12:56:01+09:00"
 thumbnail: ""
-tags: [python,画像処理,技術]
+tags: [Python,画像処理,技術,機械学習]
 ---
 点のアノテーションの予測
 

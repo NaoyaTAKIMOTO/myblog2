@@ -2,7 +2,7 @@
 title: "ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成"
 date: 2026-04-20T10:00:00+09:00
 draft: false
-tags: ["Ollama", "VLM", "Go", "React", "SQLite", "AI", "ローカルLLM", "TypeScript"]
+tags: [Ollama,VLM,Go,React,SQLite,AI,ローカルLLM,TypeScript,技術]
 summary: "Ollama上で動くVLM（Qwen3.5）を使ってデッサン添削Webアプリを開発しました。iPadから写真を撮ってアップロードするだけで、AIが6つの評価項目ごとに10点満点でスコアとアドバイスを返します。クラウドAPIを使わないため、絵の内容が外部に送信されることもありません。"
 ---
 

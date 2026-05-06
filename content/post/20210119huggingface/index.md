@@ -3,7 +3,7 @@ title: "hugging face でBART(文章要約モデル)を使ってみた"
 description: ""
 date: "2021-01-19T03:03:11+09:00"
 thumbnail: ""
-tags: [技術系,自然言語処理,python,技術,分散表現,文生成, 要約,BART]
+tags: [技術,自然言語処理,Python,分散表現,文生成,要約,BART,機械学習]
 ---
 
 - BARTは文書要約のためのモデル

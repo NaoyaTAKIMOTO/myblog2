@@ -2,7 +2,7 @@
 title: "バンドのセットリストをAIで自動生成！OR-Tools TSPで転換コストを最小化する方法"
 date: 2026-04-20T15:00:00+09:00
 draft: false
-tags: ["OR-Tools", "Python", "最適化", "Google スプレッドシート", "YouTube API", "組み合わせ最適化"]
+tags: [OR-Tools,Python,最適化,Google スプレッドシート,YouTube API,組み合わせ最適化,技術]
 summary: "バンド「Luke Avenue」のセットリスト作成を自動化するスクリプトを開発しました。OR-ToolsのTSP（巡回セールスマン問題）ソルバーで、メンバー交代によるパート転換コストを最小化した最適な曲順を自動生成します。YouTube APIで曲の長さも自動取得します。"
 ---
 
@@ -240,7 +240,7 @@ uv run python main.py
 組み合わせ最適化は「難しい数学の話」と思われがちですが、OR-Tools を使えば比較的簡単に実用的なソルバーが作れます。バンド活動以外にも、学校の時間割作成・配送ルート最適化など様々な場面に応用できます。
 
 ## 関連記事
-- [配信録画を自動で分割！FFmpegのsilencedetectで作る動画分割Webアプリ]({{<ref "/post/20260420jam-slicer/">}})
+- [配信録画を自動で分割！FFmpegのsilencedetectで作る動画分割Webアプリ]({{<ref "/post/jam-slicer/">}})
 
 ## β版 先行登録
 

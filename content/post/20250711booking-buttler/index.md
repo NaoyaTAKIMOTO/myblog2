@@ -2,7 +2,7 @@
 title: "BookingButler：Googleカレンダー連携で出張管理を自動化するWebアプリ"
 date: 2025-07-11T07:06:30+09:00
 draft: false
-tags: ["Go", "React", "Google Calendar API", "出張管理", "API統合"]
+tags: [Go,React,Google Calendar API,出張管理,API統合,技術]
 summary: "出張の移動時間計算とスケジュール調整を自動化するBookingButlerの開発記録。Googleカレンダーと連携し、予定間の最適な移動ルートを算出する技術実装を紹介。"
 ---
 

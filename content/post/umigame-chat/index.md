@@ -2,7 +2,7 @@
 title: "GradioでAI水平思考クイズを作ってHugging Face Spacesにデプロイした話"
 date: 2026-04-20T19:00:00+09:00
 draft: false
-tags: ["Gradio", "Python", "Hugging Face Spaces", "Cohere", "LLM", "ゲーム"]
+tags: [Gradio,Python,Hugging Face Spaces,Cohere,LLM,ゲーム,技術]
 summary: "水平思考クイズ（海亀スープ）のAI GMをGradioで作りました。Cohere の command-r-plus モデルが「はい」「いいえ」「わからない」で答えるGMを担当し、CSVで問題を管理します。Hugging Face Spacesに無料でデプロイしています。"
 ---
 

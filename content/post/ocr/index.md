@@ -2,7 +2,7 @@
 title: "EasyOCRで日本語画像をテキスト化—セットアップから実運用まで"
 date: 2026-04-20T20:00:00+09:00
 draft: false
-tags: ["EasyOCR", "Python", "OCR", "PIL", "画像処理"]
+tags: [EasyOCR,Python,OCR,PIL,画像処理,機械学習,技術]
 summary: "EasyOCRを使ってJPEG画像から日本語テキストを抽出するスクリプトを作りました。フォルダにまとめて置いた画像を一括処理し、テキストファイルに書き出します。日本語OCRの精度と前処理のコツも解説します。"
 ---
 

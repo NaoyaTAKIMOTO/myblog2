@@ -3,7 +3,7 @@ title: "mac os でpoetryによるpythonの環境構築"
 description: ""
 date: "2021-05-20T20:53:52+09:00"
 thumbnail: "/img/man-593333_1920.jpg"
-tags: [環境構築,python,poetry]
+tags: [環境構築,Python,poetry,技術]
 ---
 - pythonのライブラリをインストールする方法としてメジャーなpip
 - より開発環境のバージョン管理に特化した高機能なpoetry

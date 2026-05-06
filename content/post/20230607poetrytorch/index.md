@@ -2,7 +2,7 @@
 title: "poetry環境でpytorchをインストールしても失敗したのでその対処法"
 date: 2023-06-07T05:47:12+09:00
 draft: false
-tags: [poetry, python, pytorch, 環境構築]
+tags: [poetry,Python,pytorch,環境構築,機械学習,技術]
 ---
 
 ## `poetry add torch` でパスが通らない

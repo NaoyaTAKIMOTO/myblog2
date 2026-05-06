@@ -3,7 +3,7 @@ title: "Amazon Transcribe を使って文字起こしをして、話者分離し
 description: ""
 date: "2021-05-17T15:07:00+09:00"
 thumbnail: "/img/man-593333_1920.jpg"
-tags: [AWS, 文字起こし]
+tags: [AWS,文字起こし,技術]
 ---
 [Amazon Transcribe](https://aws.amazon.com/transcribe/)という文字起こしのサービスがある。
 

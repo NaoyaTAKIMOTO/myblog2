@@ -2,7 +2,7 @@
 title: "Dockerfileでasdfを実行できないことについて"
 date: 2023-06-07T05:58:28+09:00
 draft: false
-tags: [Docker, 環境構築, asdf]
+tags: [Docker,環境構築,asdf,技術]
 ---
 ## Dockerfile でsource ~/.bashrc ができない
 - Dockerfile　ではデフォルトのシェルはsh

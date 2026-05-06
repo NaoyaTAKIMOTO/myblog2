@@ -3,7 +3,7 @@ title: "ブログを多言語対応にするためにしたこと"
 description: ""
 date: "2021-06-11T06:44:01+09:00"
 thumbnail: "/img/silhouette.png"
-tags: [hugo]
+tags: [hugo,技術]
 ---
 ## hugo は多言語をサポートしている
 基本的には`index.md`を`index.en.md`

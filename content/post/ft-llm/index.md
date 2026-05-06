@@ -2,7 +2,7 @@
 title: "Apple SiliconでLLMをファインチューニング！MLX + LoRAで日本語読解モデルを自作する方法"
 date: 2026-04-20T16:00:00+09:00
 draft: false
-tags: ["MLX", "LoRA", "LLM", "Apple Silicon", "ファインチューニング", "Python", "機械学習"]
+tags: [MLX,LoRA,LLM,Apple Silicon,ファインチューニング,Python,機械学習,技術]
 summary: "LiquidAI の LFM2.5-1.2B-JP モデルを Apple Silicon の MLX フレームワークで LoRA ファインチューニングするパイプラインを構築しました。JsQuAD（日本語読解）データセットで学習し、カスタム Chunked Loss と早期停止も実装しています。"
 ---
 
@@ -245,8 +245,8 @@ python -m ft_llm.train.fuse \
 Apple Silicon の高いメモリ帯域幅と Unified Memory を活かすことで、クラウドGPU不要でLLMのファインチューニングが手軽に試せる時代になっています。
 
 ## 関連記事
-- [ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成]({{<ref "/post/20260420dessan-sensei/">}})
-- [Mac mini M4でローカルLLMを動かすDiscord Bot—関西弁AIとニュース自動投稿の実装]({{<ref "/post/20260420discord-bot/">}})
+- [ローカルLLMでデッサン添削アプリを作った！Ollama + Qwen3.5 + Go + Reactの構成]({{<ref "/post/dessan-sensei/">}})
+- [Mac mini M4でローカルLLMを動かすDiscord Bot—関西弁AIとニュース自動投稿の実装]({{<ref "/post/discord-bot/">}})
 
 ## β版 先行登録
 
