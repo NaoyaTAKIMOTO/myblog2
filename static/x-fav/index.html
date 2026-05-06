@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="X（Twitter）のいいねを自動収集し、DINOv2 AIで類似画像をレコメンド。Chrome拡張 + セルフホスト型ギャラリーアプリ。">
+<title>x-fav-gallery — いいねした画像を、ずっと手元に</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL5G30FP5R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XL5G30FP5R');
+</script>
+
+<!-- X conversion tracking -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','okhzr');
+</script>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray-900: #0f0f0f;
+    --gray-800: #1a1a1a;
+    --gray-700: #2a2a2a;
+    --gray-400: #6e7681;
+    --gray-200: #b0b8c4;
+    --accent: #1d9bf0;
+    --accent-dim: rgba(29,155,240,0.15);
+    --accent-glow: rgba(29,155,240,0.4);
+    --red: #f4212e;
+    --green: #00ba7c;
+  }
+
+  html { scroll-snap-type: y mandatory; overflow-y: scroll; }
+  body { background: var(--black); color: var(--white); font-family: -apple-system, "Helvetica Neue", sans-serif; }
+
+  /* ── Site nav ── */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .site-nav-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -.01em;
+    opacity: .7;
+    transition: opacity .2s;
+  }
+  .site-nav-logo:hover { opacity: 1; }
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .site-nav-links a {
+    font-size: 12px;
+    color: var(--gray-400);
+    text-decoration: none;
+    letter-spacing: .04em;
+    transition: color .2s;
+  }
+  .site-nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    font-size: 12px !important;
+    color: var(--accent) !important;
+    font-weight: 700;
+    border: 1px solid rgba(29,155,240,.4);
+    padding: 5px 12px;
+    border-radius: 999px;
+    transition: background .2s, color .2s !important;
+  }
+  .nav-cta:hover { background: var(--accent-dim); color: var(--accent) !important; }
+
+  /* ── Section Base ── */
+  .scene {
+    height: 100svh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 24px;
+  }
+
+  /* ── Scroll hint ── */
+  .scroll-hint {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.5;
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--gray-400);
+    z-index: 100;
+    transition: opacity .4s;
+  }
+  .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+  .scroll-hint svg { animation: bounce 1.6s ease-in-out infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+  /* ── Dot nav ── */
+  .dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gray-700);
+    transition: background .3s, transform .3s;
+    cursor: pointer;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.5); }
+
+  /* ════════════════════════════════
+     SCENE 1 – 問題提起
+  ════════════════════════════════ */
+  #s1 { background: var(--black); }
+
+  .timeline-feed {
+    width: 360px;
+    max-width: 100%;
+    position: relative;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 60%, transparent);
+  }
+
+  .tweet-card {
+    background: var(--gray-800);
+    border: 1px solid var(--gray-700);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    animation: scrollUp 8s linear infinite;
+    opacity: 0;
+  }
+  .tweet-card:nth-child(1) { animation-delay: 0s; }
+  .tweet-card:nth-child(2) { animation-delay: 1.2s; }
+  .tweet-card:nth-child(3) { animation-delay: 2.4s; }
+  .tweet-card:nth-child(4) { animation-delay: 3.6s; }
+  .tweet-card:nth-child(5) { animation-delay: 4.8s; }
+  .tweet-card:nth-child(6) { animation-delay: 6s; }
+
+  @keyframes scrollUp {
+    0%   { opacity: 0; transform: translateY(40px); }
+    10%  { opacity: 1; transform: translateY(0); }
+    80%  { opacity: 1; transform: translateY(-20px); }
+    100% { opacity: 0; transform: translateY(-60px); }
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--gray-700);
+  }
+  .tweet-content { flex: 1; }
+  .tweet-name { font-size: 13px; font-weight: 700; color: var(--white); }
+  .tweet-handle { font-size: 12px; color: var(--gray-400); margin-bottom: 6px; }
+  .tweet-text { font-size: 13px; line-height: 1.5; color: var(--gray-200); }
+  .tweet-img {
+    width: 100%;
+    height: 80px;
+    border-radius: 8px;
+    margin-top: 8px;
+    object-fit: cover;
+  }
+  .heart-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--red);
+    margin-top: 6px;
+  }
+
+  .s1-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,.5) 0%, rgba(0,0,0,.85) 100%);
+    text-align: center;
+    padding: 24px;
+  }
+  .problem-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp .6s .3s forwards;
+  }
+  .problem-heading {
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    opacity: 0;
+    animation: fadeUp .6s .55s forwards;
+  }
+  .problem-heading em { color: var(--red); font-style: normal; }
+  .problem-sub {
+    font-size: 15px;
+    color: var(--gray-200);
+    margin-top: 14px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp .6s .8s forwards;
+  }
+  .problem-stat {
+    margin-top: 28px;
+    display: flex;
+    gap: 28px;
+    opacity: 0;
+    animation: fadeUp .6s 1.05s forwards;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 900; color: var(--red); }
+  .stat-desc { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+  /* ════════════════════════════════
+     SCENE 2 – 解決策
+  ════════════════════════════════ */
+  #s2 { background: var(--gray-900); }
+
+  .solution-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 840px;
+    width: 100%;
+    align-items: center;
+  }
+  @media (max-width: 640px) {
+    .solution-layout { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  .solution-text { opacity: 0; transform: translateX(-30px); transition: all .7s cubic-bezier(.22,1,.36,1); }
+  .solution-text.visible { opacity: 1; transform: none; }
+
+  .solution-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .solution-heading {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+  }
+  .solution-heading span { color: var(--accent); }
+  .solution-desc {
+    font-size: 14px;
+    color: var(--gray-200);
+    line-height: 1.7;
+    margin-top: 14px;
+  }
+  .feature-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray-200);
+  }
+  .feature-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  .gallery-mock {
+    opacity: 0;
+    transform: translateX(30px) scale(.96);
+    transition: all .7s .15s cubic-bezier(.22,1,.36,1);
+  }
+  .gallery-mock.visible { opacity: 1; transform: none; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--gray-700), 0 24px 60px rgba(0,0,0,.6);
+  }
+  .gallery-cell {
+    aspect-ratio: 1;
+    background: var(--gray-700);
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-cell svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .gallery-cell.has-label::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    font-size: 9px;
+    background: rgba(0,0,0,.7);
+    color: var(--white);
+    padding: 2px 5px;
+    border-radius: 4px;
+    letter-spacing: .03em;
+  }
+
+  /* ════════════════════════════════
+     SCENE 3 – 登録CTA
+  ════════════════════════════════ */
+  #s3 {
+    background: radial-gradient(ellipse at 60% 40%, rgba(29,155,240,.08) 0%, var(--black) 65%);
+  }
+
+  .experience-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .experience-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--green);
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all .6s .1s cubic-bezier(.22,1,.36,1);
+  }
+  .experience-label.visible { opacity: 1; transform: none; }
+
+  .experience-heading {
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .6s .25s cubic-bezier(.22,1,.36,1);
+  }
+  .experience-heading.visible { opacity: 1; transform: none; }
+  .experience-heading span { color: var(--accent); }
+
+  .experience-sub {
+    font-size: 14px;
+    color: var(--gray-200);
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all .6s .35s cubic-bezier(.22,1,.36,1);
+  }
+  .experience-sub.visible { opacity: 1; transform: none; }
+
+  .cta-block {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all .6s .5s cubic-bezier(.22,1,.36,1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .cta-block.visible { opacity: 1; transform: none; }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s, transform .2s, box-shadow .2s;
+    box-shadow: 0 0 24px var(--accent-glow);
+    letter-spacing: -.01em;
+  }
+  .cta-btn:hover {
+    background: #1a8cd8;
+    transform: scale(1.04);
+    box-shadow: 0 0 40px var(--accent-glow);
+    color: var(--white);
+  }
+  .cta-sub { font-size: 12px; color: var(--gray-400); }
+
+  .article-link {
+    font-size: 12px;
+    color: var(--gray-400);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 1px;
+    transition: color .2s, border-color .2s;
+  }
+  .article-link:hover { color: var(--gray-200); border-color: var(--gray-400); }
+
+  /* ── Shared animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Palette blocks in gallery ── */
+  .c1 { background: #1e3a5f; }
+  .c2 { background: #2d1b4e; }
+  .c3 { background: #1a3d2b; }
+  .c4 { background: #3d1f1f; }
+  .c5 { background: #1a2a3a; }
+  .c6 { background: #2a1a3a; }
+  .c7 { background: #1a3a3a; }
+  .c8 { background: #3a2a1a; }
+  .c9 { background: #2a3a1a; }
+</style>
+</head>
+<body>
+
+<!-- Site nav -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-logo">サブカル科学研究会</a>
+  <div class="site-nav-links">
+    <a href="/post/x-fav-gellery/">技術記事</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?entry.219602922=x-fav-gellery" target="_blank" rel="noopener" class="nav-cta">β版に登録</a>
+  </div>
+</nav>
+
+<!-- Dot nav -->
+<nav class="dots" id="dots">
+  <div class="dot active" data-idx="0"></div>
+  <div class="dot" data-idx="1"></div>
+  <div class="dot" data-idx="2"></div>
+</nav>
+
+<!-- Scroll hint -->
+<div class="scroll-hint" id="scrollHint">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  SCROLL
+</div>
+
+
+<!-- ═══════════════════════════════
+     SCENE 1 — 問題提起
+═══════════════════════════════ -->
+<section class="scene" id="s1">
+  <div class="timeline-feed" aria-hidden="true">
+    <div class="tweet-card">
+      <div class="avatar" style="background:#1e3a5f"></div>
+      <div class="tweet-content">
+        <div class="tweet-name">デザイナー田中</div>
+        <div class="tweet-handle">@tanaka_design</div>
+        <div class="tweet-text">このビジュアル天才すぎる… 🎨</div>
+        <div class="tweet-img" style="background:linear-gradient(135deg,#1e3a5f,#2d1b4e)"></div>
+        <div class="heart-badge">♥ 2,847</div>
+      </div>
+    </div>
+    <div class="tweet-card">
+      <div class="avatar" style="background:#2d1b4e"></div>
+      <div class="tweet-content">
+        <div class="tweet-name">写真家 Kei</div>
+        <div class="tweet-handle">@kei_photo</div>
+        <div class="tweet-text">夕暮れの渋谷。光と影が好きすぎる</div>
+        <div class="tweet-img" style="background:linear-gradient(135deg,#3d1f1f,#1a2a3a)"></div>
+        <div class="heart-badge">♥ 1,204</div>
+      </div>
+    </div>
+    <div class="tweet-card">
+      <div class="avatar" style="background:#1a3d2b"></div>
+      <div class="tweet-content">
+        <div class="tweet-name">イラスト / Riku</div>
+        <div class="tweet-handle">@riku_illust</div>
+        <div class="tweet-text">新作できた！ サイバーパンク風</div>
+        <div class="tweet-img" style="background:linear-gradient(135deg,#1a3d2b,#1d9bf0)"></div>
+        <div class="heart-badge">♥ 5,672</div>
+      </div>
+    </div>
+    <div class="tweet-card">
+      <div class="avatar" style="background:#3a2a1a"></div>
+      <div class="tweet-content">
+        <div class="tweet-name">建築家 Mori</div>
+        <div class="tweet-handle">@mori_arch</div>
+        <div class="tweet-text">コンクリートの質感、これ好き</div>
+        <div class="tweet-img" style="background:linear-gradient(135deg,#3a2a1a,#2a2a2a)"></div>
+        <div class="heart-badge">♥ 934</div>
+      </div>
+    </div>
+    <div class="tweet-card">
+      <div class="avatar" style="background:#2a1a3a"></div>
+      <div class="tweet-content">
+        <div class="tweet-name">AI Art / Sora</div>
+        <div class="tweet-handle">@sora_aigenart</div>
+        <div class="tweet-text">Midjourney v7、進化しすぎ ✨</div>
+        <div class="tweet-img" style="background:linear-gradient(135deg,#2a1a3a,#1a3a3a)"></div>
+        <div class="heart-badge">♥ 8,123</div>
+      </div>
+    </div>
+    <div class="tweet-card">
+      <div class="avatar" style="background:#1a3a3a"></div>
+      <div class="tweet-content">
+        <div class="tweet-name">映像 / Yuki</div>
+        <div class="tweet-handle">@yuki_film</div>
+        <div class="tweet-text">この色使いがずっと気になってた…</div>
+        <div class="tweet-img" style="background:linear-gradient(135deg,#1a3a3a,#3d1f1f)"></div>
+        <div class="heart-badge">♥ 3,401</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s1-overlay">
+    <div class="problem-label">Problem</div>
+    <h1 class="problem-heading">
+      いいねした画像、<br><em>どこへ消えた？</em>
+    </h1>
+    <p class="problem-sub">
+      タイムラインは流れ続ける。<br>
+      あの感動を、また探せますか？
+    </p>
+    <div class="problem-stat">
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-desc">流れていくポスト</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0</div>
+        <div class="stat-desc">後で見つかる確率</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════
+     SCENE 2 — 解決策
+═══════════════════════════════ -->
+<section class="scene" id="s2">
+  <div class="solution-layout">
+
+    <div class="solution-text" id="solText">
+      <div class="solution-label">Solution</div>
+      <h2 class="solution-heading">
+        いいね全部を<br>
+        <span>あなたのギャラリーへ</span>
+      </h2>
+      <p class="solution-desc">
+        Chrome拡張が自動でいいねを収集。<br>
+        画像・動画・テキストを一括保存し、<br>
+        いつでも手元のギャラリーで閲覧できます。
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <span>Chrome拡張で自動収集・即時保存</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🖼</div>
+          <span>画像・動画・テキストを一元管理</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔍</div>
+          <span>DINOv2 AI による類似画像レコメンド</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <span>完全プライベート — 自分のサーバーに保存</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-mock" id="solGallery">
+      <div class="gallery-grid">
+        <div class="gallery-cell c1 has-label" data-label="写真"></div>
+        <div class="gallery-cell c2 has-label" data-label="イラスト"></div>
+        <div class="gallery-cell c3 has-label" data-label="AI Art"></div>
+        <div class="gallery-cell c4"></div>
+        <div class="gallery-cell c5"></div>
+        <div class="gallery-cell c6"></div>
+        <div class="gallery-cell c7"></div>
+        <div class="gallery-cell c8 has-label" data-label="動画"></div>
+        <div class="gallery-cell c9"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════
+     SCENE 3 — β版先行登録
+═══════════════════════════════ -->
+<section class="scene" id="s3">
+  <div class="experience-layout">
+    <div class="experience-label" id="expLabel">Early Access</div>
+    <h2 class="experience-heading" id="expHeading">
+      β版、先行登録を<br>
+      <span>受け付けています</span>
+    </h2>
+
+    <p class="experience-sub" id="expSub">
+      リリース時に真っ先にお知らせします。<br>
+      無料・セルフホスト・OSSで公開予定。
+    </p>
+
+    <div class="cta-block" id="ctaBlock">
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?entry.219602922=x-fav-gellery"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn"
+        onclick="twq('event','tw-okhzr-registration',{});"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.636 5.904-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        β版に先行登録する
+      </a>
+      <div class="cta-sub">無料 · 自己ホスト · OSSで公開中</div>
+      <a href="/post/x-fav-gellery/" class="article-link">技術的な詳細を読む →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const dots = document.querySelectorAll('.dot');
+  const scrollHint = document.getElementById('scrollHint');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = Array.from(scenes).indexOf(e.target);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      if (idx === scenes.length - 1) scrollHint.classList.add('hidden');
+      else scrollHint.classList.remove('hidden');
+    });
+  }, { threshold: 0.55 });
+
+  scenes.forEach(s => io.observe(s));
+
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      scenes[+d.dataset.idx].scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const io2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.getElementById('solText')?.classList.add('visible');
+      document.getElementById('solGallery')?.classList.add('visible');
+    });
+  }, { threshold: 0.35 });
+  io2.observe(document.getElementById('s2'));
+
+  const io3 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.getElementById('expLabel')?.classList.add('visible');
+      document.getElementById('expHeading')?.classList.add('visible');
+      document.getElementById('expSub')?.classList.add('visible');
+      document.getElementById('ctaBlock')?.classList.add('visible');
+    });
+  }, { threshold: 0.25 });
+  io3.observe(document.getElementById('s3'));
+</script>
+</body>
+</html>
