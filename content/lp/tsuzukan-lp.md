@@ -16,6 +16,11 @@ comments: false
   </a>
 </div>
 
+<div style="text-align: center; margin: 2.5rem 0;">
+  <img src="/img/image.png" alt="tsuzukan ダッシュボード画面" style="max-width: 680px; width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: 1px solid #e0e0e0;">
+  <p style="color: #888; font-size: 0.9rem; margin-top: 0.75rem;">ダッシュボードで所有書籍・シリーズ数・新刊数を一目で把握できる</p>
+</div>
+
 ---
 
 ## なぜ続刊を見逃してしまうのか
@@ -64,6 +69,17 @@ comments: false
 
 ### 新刊をチェックして購入する
 「新刊一覧」ページを開くと、シリーズ別に未所持巻が表示されます。欲しい巻の「Amazon」または「楽天」ボタンを押すとカートへ直接遷移します。
+
+---
+
+## 資料ダウンロード
+
+<div style="text-align: center; margin: 1.5rem 0;">
+  <a href="/tsuzukan.pdf" target="_blank" rel="noopener noreferrer"
+     style="background-color: #f5f5f5; color: #333; padding: 12px 32px; border-radius: 8px; font-size: 1rem; font-weight: bold; text-decoration: none; display: inline-block; border: 1px solid #ccc;">
+    📄 tsuzukan 概要資料をダウンロード（PDF）
+  </a>
+</div>
 
 ---
 
