@@ -315,3 +315,8 @@ GAFAみたいな情報技術産業がもてはやされている中で、
 
 
 <div data-vc_mylinkbox_id="887689144"></div>
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

@@ -105,3 +105,8 @@ tags: [うつ病の対処法]
 
 さいごに厚生労働省のうつ病に対する説明のリンク
 [厚生労働省の案内](https://www.mhlw.go.jp/kokoro/know/disease_depressive.html)
+---
+
+**関連書籍**
+
+[セルフ・コンパッション 新訳版](https://www.amazon.co.jp/dp/4772418202?tag=subculturesci-22)

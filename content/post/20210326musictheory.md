@@ -53,3 +53,8 @@ draft: false
 [セカンダリードミナントコード｜成り立ちとその表記などをわかりやすく解説](https://sakkyoku.info/theory/secondary-dominant/)
 
 <div data-vc_mylinkbox_id="887689621"></div>
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)

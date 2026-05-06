@@ -67,3 +67,9 @@ tags : [技術系,技術,数理最適化]
 [東京大学　計画数理情報学研究室](www.or.mist.i.u-tokyo.ac.jp)
 
 <div data-vc_mylinkbox_id="887689559"></div>
+
+---
+
+**関連書籍**
+
+[しっかり学ぶ数理最適化 モデルからアルゴリズムまで](https://www.amazon.co.jp/dp/4065212707?tag=subculturesci-22)

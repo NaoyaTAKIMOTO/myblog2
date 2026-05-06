@@ -82,3 +82,9 @@ docker-compose run --rm review rake pdf
 ```
 
 成功すればbook.pdfが作成される。
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

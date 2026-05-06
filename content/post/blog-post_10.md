@@ -104,4 +104,8 @@ tags : [思考のネタ, うつ病の対処法]
 
 ハクキンカイロ
 - [amazon](https://amzn.to/2LeIGcr)
-- [楽天](https://hb.afl.rakuten.co.jp/ichiba/1e6aff8a.09648bfe.1e6aff8b.b418e745/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fthree-r2012%2F10000300%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9)
+---
+
+**関連書籍**
+
+[セルフ・コンパッション 新訳版](https://www.amazon.co.jp/dp/4772418202?tag=subculturesci-22)

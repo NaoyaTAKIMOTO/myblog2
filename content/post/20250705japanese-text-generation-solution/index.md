@@ -41,6 +41,14 @@ title_generation_model = load_title_model()        # タイトル生成用
 
 この問題を解決するのが**[日本語T5（Text-To-Text Transfer Transformer）](https://huggingface.co/sonoisa/t5-base-japanese)**です。
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## T5による統一的な問題解決アプローチ
 
 ### 特徴1：Text-to-Text統一フレームワーク
@@ -286,3 +294,9 @@ def document_processor(document):
 
 ＞＞[Coconalaで相談してみる（見積り無料）](http://coconala.com/services/1546349)
 
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

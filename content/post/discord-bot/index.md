@@ -264,3 +264,9 @@ Discord サーバーに常駐するキャラクター性のあるBotは、コミ
 技術相談や開発サポートを承っています。お気軽にご相談ください。
 
 [ココナラで開発相談を依頼する](https://coconala.com/users/1993863)
+
+---
+
+**関連書籍**
+
+[プログラミング言語Go](https://www.amazon.co.jp/dp/4621300253?tag=subculturesci-22)

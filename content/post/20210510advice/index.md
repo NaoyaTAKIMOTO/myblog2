@@ -72,3 +72,8 @@ draft: false
 個人的にはかなり好きな漫画
 
 <div data-vc_mylinkbox_id="887685189"></div>
+---
+
+**関連書籍**
+
+[通りがかりにワンポイントアドバイスしていくタイプのヤンキー 1巻](https://www.amazon.co.jp/dp/4757559984?tag=subculturesci-22)

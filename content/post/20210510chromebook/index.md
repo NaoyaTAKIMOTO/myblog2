@@ -75,3 +75,8 @@ cpuがエネルギー効率のよいモデルを採用しているため、
 購入を検討する材料にしてほしい。
 
 <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3563352&pid=887700003"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3563352&pid=887700003" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3563352&pid=887700003" border="0"></a></noscript>
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

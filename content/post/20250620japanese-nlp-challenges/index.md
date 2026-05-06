@@ -590,3 +590,8 @@ for doc in documents:
 ## 関連記事
 - [日本語Wikipediaで学習したBERTが公開されたので使い方のメモ]({{<ref "/post/wikipediabert/">}})
 - [Google Colaboratoryでword2vecを使う方法のメモ]({{<ref "/post/20200615google-colaboratory-word2vec/">}})
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

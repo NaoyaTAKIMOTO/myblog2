@@ -55,3 +55,9 @@ tags: [節約, 楽天,MNP]
   - わざわざ手間をかける必要がすくない
 
 <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3563352&pid=887689205"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3563352&pid=887689205" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3563352&pid=887689205" border="0"></a></noscript>
+
+---
+
+**関連書籍**
+
+[新版 お金持ちになれる黄金の羽根の拾い方](https://www.amazon.co.jp/dp/4344426398?tag=subculturesci-22)

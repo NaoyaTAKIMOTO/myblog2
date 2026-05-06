@@ -5,3 +5,9 @@ draft: false
 tags: []
 ---
 
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

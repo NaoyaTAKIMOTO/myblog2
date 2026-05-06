@@ -256,3 +256,9 @@ uv run python main.py
 技術相談や開発サポートを承っています。お気軽にご相談ください。
 
 [ココナラで開発相談を依頼する](https://coconala.com/users/1993863)
+
+---
+
+**関連書籍**
+
+[しっかり学ぶ数理最適化 モデルからアルゴリズムまで](https://www.amazon.co.jp/dp/4065212707?tag=subculturesci-22)

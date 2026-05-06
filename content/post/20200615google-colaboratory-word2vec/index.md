@@ -42,3 +42,9 @@ tags : [技術系,技術,分散表現,word2vec,google colaboratory,制作物]
 ## 以下のリンクからどうぞ。
 - 購入は以下のリンクから
   - [Googlecolaboratory と pythonで学ぶ初めての 自然言語処理入門](https://subcul-science.booth.pm/items/1562211)
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

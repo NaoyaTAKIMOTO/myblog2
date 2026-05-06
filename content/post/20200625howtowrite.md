@@ -83,3 +83,8 @@ tags : [感想,思考のネタ,アウトラインライティング]
 [書きなぐれ、そのあとレヴィ＝ストロースのように推敲しよう／書き物をしていて煮詰まっている人へ　書き物をしていて煮詰まっているという人には、いつもする話があるから、今日はそれを紹介しよう。　レヴィ＝ストロースはこんなreadingmonkey.blog.fc2.com](https://readingmonkey.blog.fc2.com/blog-entry-461.html)[](https://readingmonkey.blog.fc2.com/blog-entry-461.html)
 
 [書けない時にあなたを助けるアウトライナー・ストーミング - 読書猿Classic: between / beyond readers読書猿名義でまた本を書きました。『問題解決大全』 11/20刊行です。readingmonkey.blog.fc2.com](https://readingmonkey.blog.fc2.com/blog-entry-456.html?sp)
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

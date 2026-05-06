@@ -37,6 +37,14 @@ epochs = 100          # 確か50で十分だった気がする...
 - 「再現しようとしたけど、同じ結果が出ません」
 - 「実験設定を教えてください」
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## [MLflow](https://mlflow.org/)による実験管理の解決策
 
 MLflowを使用することで、パラメータと実験結果の記録を自動化し、再現性を担保することができます。
@@ -169,3 +177,9 @@ mlflow.log_artifact("model_config.json")
 
 ＞＞[Coconalaで相談してみる（見積り無料）](http://coconala.com/services/1546349)
 
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

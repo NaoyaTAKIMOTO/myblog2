@@ -71,6 +71,14 @@ y_pred = bagging.predict(X_test)
     - 自然言語分野ではバックトランスレーションが使われる
         - 例えば機械翻訳によって日→英→日と翻訳する
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## 参考リンク
 - [sklearn.ensemble.BaggingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)
 - [optuna](https://optuna.org/)
@@ -79,3 +87,8 @@ y_pred = bagging.predict(X_test)
 <!-- MAF Rakuten Widget FROM HERE -->
 <script type="text/javascript">MafRakutenWidgetParam=function() { return{ size:'468x160',design:'slide',recommend:'on',auto_mode:'on',a_id:'2220301', border:'off'};};</script><script type="text/javascript" src="//image.moshimo.com/static/publish/af/rakuten/widget.js"></script>
 <!-- MAF Rakuten Widget TO HERE -->
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

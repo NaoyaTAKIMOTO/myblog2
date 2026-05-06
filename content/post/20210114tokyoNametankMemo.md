@@ -20,3 +20,9 @@ tags : [漫画,スクール]
 ## 参考リンク
 
 https://nametank.jp
+
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

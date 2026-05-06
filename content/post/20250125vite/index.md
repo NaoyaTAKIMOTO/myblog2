@@ -15,3 +15,9 @@ tags: [React, Vite, 環境構築, TypeScript]
 下記の方法で[Vite](https://vitejs.dev/)を利用してReact+TypeScriptの環境構築を行う
 
     npm create vite@latest
+
+---
+
+**関連書籍**
+
+[TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発](https://www.amazon.co.jp/dp/4297129167?tag=subculturesci-22)

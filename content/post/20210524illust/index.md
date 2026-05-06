@@ -25,3 +25,9 @@ tags: [イラスト]
       convert sample.PNG -resize 640  resize_sample.png
 
 
+
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

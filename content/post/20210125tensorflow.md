@@ -25,7 +25,21 @@ config = tf.ConfigProto(
 sess = sess = tf.Session(config=config)
 ```
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## 参考リンク
 
 [TensorFlow GPUメモリ設定（Qiita）](https://qiita.com/kikusumk3/items/907565559739376076b9)
 
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

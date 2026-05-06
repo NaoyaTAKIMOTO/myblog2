@@ -17,3 +17,8 @@ bloggerでもhtmlをいじらないといけないということに気がつか
 [![](//image.moshimo.com/af-img/0288/000000022849.png)](//af.moshimo.com/af/c/click?a_id=2258347&p_id=936&pc_id=1196&pl_id=22849&guid=ON)![](//i.moshimo.com/af/i/impression?a_id=2258347&p_id=936&pc_id=1196&pl_id=22849)
 
 <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3563352&pid=887689136" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3563352&pid=887689136" height="1" width="1" border="0">BTOパソコンならパソコンショップSEVEN</a>
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

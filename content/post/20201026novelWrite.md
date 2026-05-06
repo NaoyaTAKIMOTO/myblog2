@@ -60,3 +60,8 @@ tags : [思考のネタ,小説,アウトラインライティング]
 - [即興小説トレーニング](http://sokkyo-shosetsu.com/)
 
 <div data-vc_mylinkbox_id="887689564"></div>
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

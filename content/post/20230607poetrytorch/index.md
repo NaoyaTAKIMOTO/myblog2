@@ -17,9 +17,22 @@ tags: [poetry, python, pytorch, 環境構築]
 - poetry.tomlに記述することもできるらしい
 
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## 関連記事
 - [Dockerfileでasdfを実行できないことについて]({{<ref "/post/20230607dockerfileasdf/">}})
 - [pycharmからpoetryで環境の作成ができない]({{<ref "/post/20220224poetry/">}})
 
 ## 参考資料
 - [Poetry + PyTorch（Stack Overflow）](https://stackoverflow.com/questions/59158044/poetry-and-pytorch)
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

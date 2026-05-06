@@ -27,3 +27,8 @@ layouts/_default/baseof.html
 
 ## 参考リンク
 [HugoでOGPの設定をする](https://miyahara.hikaru.dev/posts/20200319/)
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

@@ -43,6 +43,14 @@ doc2 = "AIモデルの性能を改善する手法"
 
 この問題を解決するのが**[Sentence BERT](https://github.com/UKPLab/sentence-transformers)**です。
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## Sentence BERTによる問題解決アプローチ
 
 ### 特徴1：高精度な意味的類似度計算
@@ -267,3 +275,9 @@ model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=30)
 
 ＞＞[Coconalaで相談してみる（見積り無料）](http://coconala.com/services/1546349)
 
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

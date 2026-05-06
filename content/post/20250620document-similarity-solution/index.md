@@ -170,3 +170,8 @@ def fast_search(query_embedding, index, k=5):
 ## 関連記事
 - [学習済みUniversal Sentence Encoder を使って日本語の文章の分散表現を得る手順]({{<ref "/post/universal-sentence-encoder/">}})
 - [SentenceBERTを使って日本語の文書の類似度を計算する]({{<ref "/post/20210203SBERT/">}})
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

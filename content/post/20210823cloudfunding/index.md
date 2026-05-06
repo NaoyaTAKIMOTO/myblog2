@@ -37,3 +37,9 @@ tags: [同人誌, クラウドファンディング]
 ## 今回のプロジェクト
 [生活の中で日本語で最先端のAIが利用できる未来を実現したい](https://camp-fire.jp/projects/view/389314)
 
+
+---
+
+**関連書籍**
+
+[新版 お金持ちになれる黄金の羽根の拾い方](https://www.amazon.co.jp/dp/4344426398?tag=subculturesci-22)

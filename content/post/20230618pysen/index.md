@@ -39,3 +39,8 @@ pysenを除いて
 で解決した。
 
 どうせmypyはリンターとしても使ってなかったのでなんか上手く回避できないものか
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

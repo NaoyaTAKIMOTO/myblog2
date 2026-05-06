@@ -215,3 +215,9 @@ EasyOCR を使った日本語 OCR のポイント：
 技術相談や開発サポートを承っています。お気軽にご相談ください。
 
 [ココナラで開発相談を依頼する](https://coconala.com/users/1993863)
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

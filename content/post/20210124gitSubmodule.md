@@ -23,3 +23,8 @@ git submodule foreach git pull origin master
 
 ## 参考リンク
 [git submodule update方法](https://m-tmatma.github.io/git/update-submodule.html)
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

@@ -43,3 +43,8 @@ tux guitarの画面がちらつくのはしょうがないのか？
 https://askubuntu.com/questions/457321/tuxguitar-no-sound-in-14-04
 
 <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3563352&pid=887895158"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3563352&pid=887895158" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3563352&pid=887895158" border="0"></a></noscript>
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)

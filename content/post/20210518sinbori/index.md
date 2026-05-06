@@ -28,3 +28,9 @@ draft: false
 - 上達するかどうかは知らない
 - 楽しく描けそう
 
+
+---
+
+**関連書籍**
+
+[「やりたいこと」が見つかる時間編集術](https://www.amazon.co.jp/dp/486667251X?tag=subculturesci-22)

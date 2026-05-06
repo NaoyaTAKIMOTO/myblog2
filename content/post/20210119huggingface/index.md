@@ -42,6 +42,14 @@ print([tokenizer.decode(g, skip_special_tokens=True, clean_up_tokenization_space
 
 面白い。
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## ハマったところ
 [PyTorch](https://pytorch.org/)のバージョンがtransformersの指定と異なるとエラーが出た。
 ```
@@ -73,3 +81,8 @@ DNN系の自然言語処理には以下の書籍がおすすめ！
 <div data-vc_mylinkbox_id="887898765"></div>
 
 <script language="javascript" src="//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3639942&pid=887928593"></script><noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3639942&pid=887928593" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3639942&pid=887928593" border="0"></a></noscript>
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

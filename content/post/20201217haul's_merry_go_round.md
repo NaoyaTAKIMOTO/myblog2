@@ -22,3 +22,8 @@ tags : [音楽, ソロギター,guitar cover]
 
 ## 参考
 <div data-vc_mylinkbox_id="887689566"></div>
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)

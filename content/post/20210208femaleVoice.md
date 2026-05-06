@@ -34,3 +34,9 @@ tags: [音楽,両声類,発声方法]
 ## 参考リンク
 - [男性のための女声の出し方](https://youtu.be/JFnjOgOU4lU)
 - [ボイトレのやり方](https://youtu.be/60mE9g2NlQQ)
+
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論　やりたい曲を弾くために必要な知識と技術](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)

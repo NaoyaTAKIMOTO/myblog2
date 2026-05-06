@@ -26,3 +26,8 @@ draft: false
 - 読後感は爽やかでそれなりに感情の起伏を描いてくれるので好きな作品である
 
 <div data-vc_mylinkbox_id="887684989"></div>
+---
+
+**関連書籍**
+
+[えびがわ町の妖怪カフェ 1巻](https://www.amazon.co.jp/dp/4592147677?tag=subculturesci-22)

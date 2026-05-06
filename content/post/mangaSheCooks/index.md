@@ -60,3 +60,8 @@ tags: [書籍,漫画,感想]
 ## 参考リンク
 <div data-vc_mylinkbox_id="887680692"></div>
 <div data-vc_mylinkbox_id="887680695"></div>
+---
+
+**関連書籍**
+
+[作りたい女と食べたい女 1巻](https://www.amazon.co.jp/dp/4049136511?tag=subculturesci-22)

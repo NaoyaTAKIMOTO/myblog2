@@ -39,3 +39,9 @@ draft: false
 
 
 <div data-vc_mylinkbox_id="887679356"></div>
+
+---
+
+**関連書籍**
+
+[作りたい女と食べたい女 2巻](https://www.amazon.co.jp/dp/4049140241?tag=subculturesci-22)

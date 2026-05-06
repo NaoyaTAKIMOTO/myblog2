@@ -76,3 +76,8 @@ msmaflink({"n":"GUNSLINGER GIRL(1) (電撃コミックス)","b":"","t":"","d":"h
 </script>
 <div id="msmaflink-zzVJc">リンク</div>
 <!-- MoshimoAffiliateEasyLink END -->
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論　やりたい曲を弾くために必要な知識と技術](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)

@@ -47,3 +47,9 @@ msmaflink({"n":"LAVA ME 2 エフェクト付きのカーボンファイバーギ
 <div id="msmaflink-n2gXn">リンク</div>
 <!-- MoshimoAffiliateEasyLink END -->
 
+
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)

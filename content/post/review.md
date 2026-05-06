@@ -98,3 +98,9 @@ docker-compose run --rm review rake pdf
     
 *   [Re:VIEWクイックスタートガイド](https://github.com/kmuto/review/blob/master/doc/quickstart.ja.md)
     
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

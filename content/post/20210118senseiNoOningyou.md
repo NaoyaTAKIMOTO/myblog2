@@ -39,3 +39,8 @@ tags: [漫画,書籍,感想]
 - 
 
 <div data-vc_mylinkbox_id="887689602"></div>
+---
+
+**関連書籍**
+
+[せんせいのお人形 1巻](https://www.amazon.co.jp/dp/4046041129?tag=subculturesci-22)

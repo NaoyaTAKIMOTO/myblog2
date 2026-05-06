@@ -15,3 +15,8 @@ tags: [word2vec,分散表現,自然言語処理,技術,技術系,スクレイピ
 
 ## ソース
 [teratail_w2v_question.ipynb](https://colab.research.google.com/drive/1YeWBFTptroOury6DjI9ly7j-fVmtdYei?usp=sharing)
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

@@ -162,3 +162,8 @@ tags: [うつ病の対処法]
 
 <div data-vc_mylinkbox_id="887689148"></div>
 <div data-vc_mylinkbox_id="887689149"></div>
+---
+
+**関連書籍**
+
+[セルフ・コンパッション 新訳版](https://www.amazon.co.jp/dp/4772418202?tag=subculturesci-22)

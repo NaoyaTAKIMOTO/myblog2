@@ -47,3 +47,8 @@ tags: [モテる方法, 進化心理学]
 - <b>モテるために必要なことはダーウィンが教えてくれた</b>
 
 <div data-vc_mylinkbox_id="888738654"></div>
+---
+
+**関連書籍**
+
+[シュガーマンのマーケティング30の法則](https://www.amazon.co.jp/dp/4894512203?tag=subculturesci-22)

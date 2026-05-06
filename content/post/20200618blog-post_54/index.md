@@ -93,3 +93,8 @@ tags : [技術系,自然言語処理,技術,文書分類]
 
 自然言語処理の全体感を掴みたい場合には下記の書籍が便利です。
 <div data-vc_mylinkbox_id="887685224"></div>
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

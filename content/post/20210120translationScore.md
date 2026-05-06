@@ -26,6 +26,14 @@ tags: [自然言語処理,評価指標,技術]
 ## 人力
 多分、ネイティブの人間を雇って、点数をつけていくのだと思う。
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## 最後に
 補足情報などあるとコメントしてください。
 
@@ -34,3 +42,8 @@ tags: [自然言語処理,評価指標,技術]
 - https://www.cs.cmu.edu/~alavie/METEOR/README.html
 - https://arxiv.org/pdf/1904.09675.pdf
 -
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

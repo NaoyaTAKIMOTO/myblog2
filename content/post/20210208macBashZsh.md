@@ -19,3 +19,8 @@ tags: [bash,zsh,技術]
 
 ## 参考リンク
 [bashからzshへの移行（Qiita）](https://qiita.com/shionit/items/31bfffa5057e66e46450)
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

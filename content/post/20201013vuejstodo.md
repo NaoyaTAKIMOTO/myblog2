@@ -73,3 +73,8 @@ firebase deploy
 *   [https://cr-vue.mio3io.com/tutorials/todo.html#%E5%AE%8C%E6%88%90%E5%BD%A2](https://cr-vue.mio3io.com/tutorials/todo.html#%E5%AE%8C%E6%88%90%E5%BD%A2)
 *   [https://jp.vuejs.org/v2/examples/todomvc.html](https://jp.vuejs.org/v2/examples/todomvc.html)
 <div data-vc_mylinkbox_id="887689561"></div>
+---
+
+**関連書籍**
+
+[TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発](https://www.amazon.co.jp/dp/4297129167?tag=subculturesci-22)

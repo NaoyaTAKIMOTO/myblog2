@@ -24,6 +24,14 @@ tags: [自然言語処理, T5,BERT,Sentece Transformers,SBERT,word2vec,fasttext]
   - この日本語版のモデルの作者が公開しているサンプルがわかりやすい
   - また同じ作者がSBERTのモデルも公開している
 
+---
+
+**機械学習の基礎からモデルの仕組みまで体系的に学びたい方へ**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)
+
+---
+
 ## 文単位の分散表現
 - tf-idf
   - 最初の選択肢
@@ -41,3 +49,9 @@ tags: [自然言語処理, T5,BERT,Sentece Transformers,SBERT,word2vec,fasttext]
 - [SBERT]({{<ref "/post/20210203SBERT.md">}})
   - GPUがないとしんどいかも
   - 性能自体は上のUSEよりも体感ではいい
+
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

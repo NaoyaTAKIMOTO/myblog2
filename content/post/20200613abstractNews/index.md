@@ -152,3 +152,8 @@ GPU 11GB✖️2✖️5days で途中経過を観察しました。
 <!-- MAF Rakuten Widget FROM HERE -->
 <script type="text/javascript">MafRakutenWidgetParam=function() { return{ size:'468x160',design:'slide',recommend:'on',auto_mode:'on',a_id:'2220301', border:'off'};};</script><script type="text/javascript" src="//image.moshimo.com/static/publish/af/rakuten/widget.js"></script>
 <!-- MAF Rakuten Widget TO HERE -->
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

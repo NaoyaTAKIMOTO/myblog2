@@ -37,3 +37,8 @@ tags: [Docker, 環境構築, asdf]
 
 ## 参考資料
 - [Can install asdf inside Docker container, but not at build time via Dockerfile](https://stackoverflow.com/questions/72063324/can-install-asdf-inside-docker-container-but-not-at-build-time-via-dockerfile)
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

@@ -432,3 +432,8 @@ final_accuracy = 0.78  # 最終的に78%達成
 - [日本語Wikipediaで学習したBERTが公開されたので使い方のメモ]({{<ref "/post/wikipediabert/">}})
 - [SentenceBERTを使って日本語の文書の類似度を計算する]({{<ref "/post/20210203SBERT/">}})
 - [文書分類問題に対応するめちゃたくさんのモデルを提供するライブラリNeuralClassifier の使い方について]({{<ref "/post/neuralclassifier/">}})
+---
+
+**関連書籍**
+
+[Pythonではじめる機械学習](https://www.amazon.co.jp/dp/4873117984?tag=subculturesci-22)

@@ -35,3 +35,8 @@ draft: false
 gp5とpdf形式でtab譜をboothにて頒布しています。
 
 [ラブカ？(feat. Ado) guitar cover [tab譜]](https://subcul-science.booth.pm/items/2928910)
+---
+
+**関連書籍**
+
+[ギター・コードを覚える方法とほんの少しの理論](https://www.amazon.co.jp/dp/4845626098?tag=subculturesci-22)
