@@ -3,7 +3,7 @@ title: "日本語自然言語処理で直面する現実的な課題と解決策
 subtitle: "文字化け、分かち書き、敬語処理など、日本語特有の問題を技術的に克服する方法"
 date: 2025-06-20
 bigimg: [{src: "/img/man-593333_1920.jpg", desc: "Japanese Text Processing"}]
-tags: ["japanese-nlp", "text-processing", "encoding", "tokenization", "problem-solving"]
+tags: [自然言語処理,encoding,tokenization,課題解決,機械学習,Python,技術]
 ---
 
 ## 問題：なぜ日本語のテキスト処理は難しいのか

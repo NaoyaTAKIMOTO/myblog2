@@ -3,7 +3,7 @@ title: 'A note on how to use BERT learned from Japanese Wikipedia, now available
 date: 2020-06-17T07:34:00.013+09:00
 draft: false
 aliases: [ "/2020/06/wikipediabert.html" ]
-tags : [technical,natural language processing,bert,technology,python,distributed representation]
+tags: [technology,natural language processing,BERT,Python,distributed representation,machine learning]
 ---
 
 huggingface has released a Japanese model for BERT.

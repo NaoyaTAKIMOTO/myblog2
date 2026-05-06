@@ -3,7 +3,7 @@ title: 'スペースX アイデアの種をまくことも能力'
 date: 2020-05-31T14:59:00.002+09:00
 draft: false
 aliases: [ "/2020/05/blog-post_31.html" ]
-tags : [時事ネタ]
+tags: [時事ネタ]
 ---
 
 スペースX有人飛行

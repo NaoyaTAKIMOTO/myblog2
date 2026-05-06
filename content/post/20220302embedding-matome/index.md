@@ -3,7 +3,7 @@ title: "日本語の分散表現の計算方法まとめ"
 description: ""
 date: "2022-03-02T20:59:30+09:00"
 thumbnail: ""
-tags: [自然言語処理,T5,BERT,Sentence Transformers,SBERT,word2vec,fasttext,機械学習,Python,技術]
+tags: [自然言語処理,T5,BERT,Sentence Transformers,SBERT,Word2Vec,fasttext,機械学習,Python,技術]
 ---
 
 ## 単語単位の分散表現

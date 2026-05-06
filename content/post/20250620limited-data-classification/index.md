@@ -3,7 +3,7 @@ title: "少ないデータで高精度な文書分類を実現する戦略"
 subtitle: "データ不足という現実的制約下でのFew-shot学習とTransfer Learning活用法"
 date: 2025-06-20
 bigimg: [{src: "/img/branch-1290017_1280.png", desc: "Data Classification"}]
-tags: ["text-classification", "few-shot-learning", "transfer-learning", "data-augmentation", "problem-solving"]
+tags: [文書分類,少量データ学習,転移学習,データ拡張,課題解決,自然言語処理,機械学習,Python,技術]
 ---
 
 ## 問題：なぜ実際のプロジェクトでは十分なデータが集まらないのか

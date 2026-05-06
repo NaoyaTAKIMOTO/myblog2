@@ -3,7 +3,7 @@ title: "Chrome OS で　Rstudio Server のセットアップ"
 description: ""
 date: "2021-06-28T22:31:37+09:00"
 thumbnail: ""
-tags: [R, 開発環境]
+tags: [R,開発環境]
 ---
 Chrome OSでRを触るために環境を構築した。
 

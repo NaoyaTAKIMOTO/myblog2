@@ -3,7 +3,7 @@ title: 'Using Google colaboratory to learn how Word2Vec works and models'
 date: 2020-06-15T07:42:00.001+09:00
 draft: false
 aliases: [ "/2020/06/using-google-colaboratory-to-learn-how.html" ]
-tags : [技術系,技術]
+tags: [技術系,技術]
 ---
 
 **

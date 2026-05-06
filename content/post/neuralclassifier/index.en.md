@@ -3,7 +3,7 @@ title: 'How to use NeuralClassifier, a library that provides a crazy number of m
 date: 2020-06-15T02:11:00.007+09:00
 draft: false
 aliases: [ "/2020/06/neuralclassifier.html" ]
-tags : [technical,natural language processing,neural classifier,technology,python,fasttext,]
+tags: [technology,natural language processing,neural classifier,Python,fastText,machine learning]
 ---
 
 [! [](https://1.bp.blogspot.com/-YlMb8v77MN4/XurdQSzS1yI/AAAAAAAAg6Y/oSZrJ0c9yxYbzQnNNTynRvZnEp-xGE7NwCK4BGAsYHg/s320/AFE90C8A-A49C- 4475-9F05-50E2D56D5B63.jpeg)](https://1.bp.blogspot.com/-YlMb8v77MN4/XurdQSzS1yI/AAAAAAAAg6Y/oSZrJ0c9yxYbzQnNNTynRvZnEp-xGE7NwCK4 BGAsYHg/s1920/AFE90C8A-A49C-4475-9F05-50E2D56D5B63.jpeg)

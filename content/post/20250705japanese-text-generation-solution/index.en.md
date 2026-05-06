@@ -2,7 +2,7 @@
 title: "How to Efficiently Solve Low Accuracy and High Cost Issues in Japanese Text Generation with T5"
 date: 2025-07-05T21:00:38+09:00
 draft: false
-tags: [tech,nlp,T5,technology,text-generation,problem-solving,summarization]
+tags: [tech,NLP,T5,technology,text-generation,problem-solving,summarization,natural language processing,machine learning,Python]
 ---
 
 ## Challenges in Japanese Text Generation

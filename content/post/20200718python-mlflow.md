@@ -3,7 +3,7 @@ title: 'python でのmlflowの使い方'
 date: 2020-07-18T16:24:00.000+09:00
 draft: false
 aliases: [ "/2020/07/python-mlflow.html" ]
-tags : [技術系,python,devops,mlflow,技術]
+tags: [技術,Python,DevOps,MLflow]
 ---
 
 ## python でmlflow使うメモ

@@ -3,7 +3,7 @@ title: "Circle Ci を利用してre:viewをビルドしてpdfを得る手順"
 description: ""
 date: "2021-07-01T06:06:49+09:00"
 thumbnail: ""
-tags: [技術, circle ci, github]
+tags: [技術,CircleCI,github]
 ---
 ## Circle Ci を利用してre:viewをビルドしてpdfを得る手順
 1. [Re:VIEW Template](https://github.com/TechBooster/ReVIEW-Template) をローカルに用意する

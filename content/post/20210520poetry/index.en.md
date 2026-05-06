@@ -3,7 +3,7 @@ title: "Building a python environment with poetry on mac os"
 description: ""
 date: "2021-05-20T20:53:52+09:00"
 thumbnail: "/img/man-593333_1920.jpg"
-tags: [build environment,python]
+tags: [build environment,Python]
 ---
 Pip is a major method of installing python libraries.
 

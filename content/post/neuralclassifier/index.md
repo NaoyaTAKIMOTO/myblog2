@@ -3,7 +3,7 @@ title: '文書分類問題に対応するめちゃたくさんのモデルを提
 date: 2020-06-15T02:11:00.007+09:00
 draft: false
 aliases: [ "/2020/06/neuralclassifier.html" ]
-tags : [技術系,自然言語処理,neural classifier,技術,python,fasttext,]
+tags: [技術,自然言語処理,neural classifier,Python,fasttext,機械学習]
 ---
 
 [![](https://1.bp.blogspot.com/-YlMb8v77MN4/XurdQSzS1yI/AAAAAAAAg6Y/oSZrJ0c9yxYbzQnNNTynRvZnEp-xGE7NwCK4BGAsYHg/s320/AFE90C8A-A49C-4475-9F05-50E2D56D5B63.jpeg)](https://1.bp.blogspot.com/-YlMb8v77MN4/XurdQSzS1yI/AAAAAAAAg6Y/oSZrJ0c9yxYbzQnNNTynRvZnEp-xGE7NwCK4BGAsYHg/s1920/AFE90C8A-A49C-4475-9F05-50E2D56D5B63.jpeg)

@@ -3,7 +3,7 @@ title: "How to train a Japanese model with Sentence transformer to get a distrib
 description: ""
 date: "2021-02-03T15:58:41+09:00"
 thumbnail: ""
-tags: ["technical", "natural language processing", "BERT", "distributed representation",technology,sentence transformer]
+tags: [technology,natural language processing,BERT,distributed representation,Sentence Transformers,machine learning,Python]
 ---.
 BERT is a model that can be powerfully applied to natural language processing tasks.
 

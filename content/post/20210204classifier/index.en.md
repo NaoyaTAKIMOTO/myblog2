@@ -3,7 +3,7 @@ title: "On the use of distributed representations bagging for class classificati
 description: ""
 date: "2021-02-04T13:24:19+09:00"
 thumbnail: ""
-tags: [distributed representation,engineering,machine learning,generalization performance,technology]
+tags: [distributed representation,engineering,machine learning,generalization performance,technology,Python]
 ---
 
 After the distributed representation has been obtained, the

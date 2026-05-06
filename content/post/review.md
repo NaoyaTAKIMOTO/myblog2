@@ -3,7 +3,7 @@ title: 'Re:VIEW の始め方メモ'
 date: 2020-07-16T20:46:00.002+09:00
 draft: false
 aliases: [ "/2020/07/review.html" ]
-tags : [技術系,re:view,技術書,技術]
+tags: [技術,re:view,技術書]
 ---
 
 ## Re:VIEW の始め方メモ

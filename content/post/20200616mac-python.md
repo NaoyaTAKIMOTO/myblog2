@@ -3,7 +3,7 @@ title: 'Macでpyenvを利用したpythonの環境構築の方法'
 date: 2020-06-16T04:58:00.010+09:00
 draft: false
 aliases: [ "/2020/06/mac-python.html" ]
-tags : [技術系,mac os,python,環境構築,技術]
+tags: [技術,macOS,Python,環境構築]
 ---
 
 ## Mac でpythonの環境構築

@@ -3,7 +3,7 @@ title: "Why is fasttext so fast?"
 description: ""
 date: "2021-05-19T02:10:01+09:00"
 thumbnail: "/img/automobile-3075396_1920.jpg"
-tags: [natural language processing,distributed representation]
+tags: [natural language processing,distributed representation,machine learning,Python]
 ---
 ## Features of fasttext
 - Improved objective function

@@ -3,7 +3,7 @@ title: "キーワード検索では見つからない関連文書を発見する
 subtitle: "セマンティック検索で解決する文書検索の限界"
 date: 2025-06-20
 bigimg: [{src: "/img/student-849825_1920.jpg", desc: "Document Search"}]
-tags: ["natural-language-processing", "semantic-search", "document-similarity", "problem-solving"]
+tags: [自然言語処理,文書類似度,課題解決,機械学習,Python,技術]
 ---
 
 ## 問題：なぜキーワード検索では欲しい文書が見つからないのか

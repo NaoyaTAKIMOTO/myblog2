@@ -3,7 +3,7 @@ title: 'blogger にGoogle  AdSense のコードを追加する手順'
 date: 2020-09-29T20:35:00.003+09:00
 draft: false
 aliases: [ "/2020/09/blogger-google-adsense.html" ]
-tags : [技術系,blogger,google adsnense]
+tags: [技術,Blogger,Google AdSense]
 ---
 
 テーマ→その他（：のマーク）→htmlを編集

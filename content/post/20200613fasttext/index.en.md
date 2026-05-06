@@ -3,7 +3,7 @@ title: 'I even did a document classification problem with Fasttext'
 date: 2020-06-13T07:29:00.016+09:00
 draft: false
 aliases: [ "/2020/06/fasttext.html" ]
-tags : [technical,natural language processing,fasttext,technology,distributed representation,document classification]
+tags: [technology,natural language processing,fastText,distributed representation,document classification,machine learning,Python]
 ---
 
 ## Summary of what I've done with Fasttext to the document classification problem.

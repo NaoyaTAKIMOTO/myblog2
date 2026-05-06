@@ -3,7 +3,7 @@ title: 'Fasttextで文書分類問題までやったった'
 date: 2020-06-13T07:29:00.016+09:00
 draft: false
 aliases: [ "/2020/06/fasttext.html" ]
-tags : [技術系,自然言語処理, fasttext,技術,分散表現,文書分類]
+tags: [技術,自然言語処理,fasttext,分散表現,文書分類,機械学習,Python]
 ---
 
 ## Fasttext で文書分類問題までやったったのまとめ

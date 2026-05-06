@@ -3,7 +3,7 @@ title: "chromebookでtux guitarを使う"
 description: ""
 date: "2021-04-24T20:00:56+09:00"
 thumbnail: ""
-tags: [tab譜, tux guitar, chromebook]
+tags: [tab譜,tux guitar,chromebook]
 ---
 chromebookでtab譜を作成しようとしたら躓いたので解決方法をメモする。
 

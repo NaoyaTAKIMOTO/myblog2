@@ -3,7 +3,7 @@ title: 'tab譜の読み方使い方'
 date: 2018-11-13T16:23:00.002+09:00
 draft: false
 aliases: [ "/2018/11/tab.html" ]
-tags : [音楽,tab譜,ギター,Tux guitar]
+tags: [音楽,tab譜,ギター,Tux guitar]
 draft: false
 
 ---

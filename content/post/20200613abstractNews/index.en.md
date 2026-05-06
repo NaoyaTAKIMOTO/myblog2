@@ -3,7 +3,7 @@ title: 'I made a summary text generation AI for making short-form news'
 date: 2020-06-13T00:24:00.004+09:00
 draft: false
 aliases: [ "/2020/06/ai.html" ]
-tags : [gpu,engineering,sentence shortening,technology,sentence generation,deep learning,natural language processing]
+tags: [gpu,engineering,sentence shortening,technology,sentence generation,deep learning,natural language processing,machine learning,Python]
 --- .
 
 

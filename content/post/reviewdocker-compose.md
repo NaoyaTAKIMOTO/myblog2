@@ -3,7 +3,7 @@ title: 'Re:VIEW+docker-composeでのpdfを作成するまでの手順'
 date: 2020-12-24T14:33:00.007+09:00
 draft: false
 aliases: [ "/2020/12/reviewdocker-compose.html" ]
-tags : [技術系,re:view,技術]
+tags: [技術,re:view]
 ---
 
 ## docker composeとreview

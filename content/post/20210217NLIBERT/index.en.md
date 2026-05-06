@@ -3,7 +3,7 @@ title: "Creating data in Natural Language Inference (NLI) format for Sentence tr
 description: ""
 date: "2021-02-17T10:32:03+09:00"
 thumbnail: ""
-tags: [NLI,sentence transformer,technology,natural language processing,document classification]
+tags: [NLI,Sentence Transformers,technology,natural language processing,document classification,machine learning,Python]
 ---
 Using the Sentence Transformer to
 I'm trying to use Sentence Transformer to infer causal relationships between documents.

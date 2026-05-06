@@ -3,7 +3,7 @@ title: "Using BART (sentence summary model) with hugging face"
 description: ""
 date: "2021-01-19T03:03:11+09:00"
 thumbnail: ""
-tags: [engineering,natural language processing,python,technology,distributed representation,sentence generation]
+tags: [engineering,natural language processing,Python,technology,distributed representation,sentence generation,machine learning]
 ---
 
 - BART is a model for document summarization

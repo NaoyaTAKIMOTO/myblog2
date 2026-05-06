@@ -3,7 +3,7 @@ title: 'Procedure for obtaining a distributed representation of a Japanese sente
 date: 2020-06-22T18:29:00.006+09:00
 draft: false
 aliases: [ "/2020/06/universal-sentence-encoder.html" ]
-tags : [technology,natural language processing,universal sentence encoder,technology,python,distributed representation]
+tags: [technology,natural language processing,Universal Sentence Encoder,Python,distributed representation,machine learning]
 ---.
 
 A vector of documents can be obtained using Universal Sentence Encoder.

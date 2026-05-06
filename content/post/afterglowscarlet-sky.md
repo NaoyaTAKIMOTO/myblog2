@@ -3,7 +3,7 @@ title: '【Afterglow】Scarlet Sky【練習してみた】'
 date: 2018-11-13T00:03:00.000+09:00
 draft: false
 aliases: [ "/2018/11/afterglowscarlet-sky.html" ]
-tags : [音楽,Afterglow,バンドリ,タブ譜,tab譜]
+tags: [音楽,Afterglow,バンドリ,タブ譜,tab譜]
 draft: false
 
 ---

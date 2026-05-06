@@ -3,7 +3,7 @@ title: '学習済みUniversal Sentence Encoder を使って日本語の文章の
 date: 2020-06-22T18:29:00.006+09:00
 draft: false
 aliases: [ "/2020/06/universal-sentence-encoder.html" ]
-tags : [技術系,自然言語処理,universal sentence encoder,技術,python,分散表現]
+tags: [技術,自然言語処理,Universal Sentence Encoder,Python,分散表現,機械学習]
 ---
 
 Universal Sentence Encoder を使って文書のベクトルが得られる。

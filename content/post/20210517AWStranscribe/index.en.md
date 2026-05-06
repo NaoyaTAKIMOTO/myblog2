@@ -3,7 +3,7 @@ title: "Using Amazon Transcribe for transcription and speaker separation"
 description: ""
 date: "2021-05-17T15:07:00+09:00"
 thumbnail: "/img/man-593333_1920.jpg"
-tags: [AWS, transcription]
+tags: [AWS,transcription]
 ---
 There is a transcription service called Amazon Transcribe.
 

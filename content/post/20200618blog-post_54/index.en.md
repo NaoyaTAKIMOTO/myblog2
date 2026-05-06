@@ -3,7 +3,7 @@ title: 'Enumerating Applications of Document Classification Problems Only'
 date: 2020-06-18T06:42:00.008+09:00
 draft: false
 aliases: [ "/post/blog-post_54/" ]
-tags : [technical,natural language processing,technology,document classification]
+tags: [technology,natural language processing,document classification,machine learning,Python]
 ---
 ## Applying the Document Classification Problem
 

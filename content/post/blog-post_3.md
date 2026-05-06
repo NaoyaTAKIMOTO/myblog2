@@ -3,7 +3,7 @@ title: '高校物理復習したった'
 date: 2020-06-25T03:49:00.003+09:00
 draft: false
 aliases: [ "/2020/06/blog-post_3.html" ]
-tags : [技術系,技術,書籍]
+tags: [技術,書籍]
 ---
 
 物理って楽しいよね！
