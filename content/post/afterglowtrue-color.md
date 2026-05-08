@@ -4,7 +4,6 @@ date: 2018-11-24T09:43:00.002+09:00
 draft: false
 aliases: [ "/2018/11/afterglowtrue-color.html" ]
 tags: [音楽,Afterglow,バンドリ,タブ譜,tab譜]
-draft: false
 
 ---
 
