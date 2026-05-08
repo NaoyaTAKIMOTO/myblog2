@@ -36,11 +36,47 @@ comments: false
 
 ---
 
-## β版 先行登録
+## 利用意向の確認
 
-β版リリース時にいち早くお知らせを受け取りたい方はこちらからご登録ください。
+有料プランの利用を検討している方はこちらからご回答ください。
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?embedded=true&entry.219602922=tts" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+<form name="inquiry-tts" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="inquiry-tts" />
+  <div style="margin-bottom: 1rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">メールアドレス <span style="color: #e83929;">*</span></label>
+    <input type="email" name="email" required placeholder="your@email.com" style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;" />
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">月額いくらまでなら利用を検討できますか？ <span style="color: #e83929;">*</span></label>
+    <select name="budget" required style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+      <option value="">選択してください</option>
+      <option value="free_only">無料でなければ使わない</option>
+      <option value="under_3000">〜3,000円/月</option>
+      <option value="under_10000">〜10,000円/月</option>
+      <option value="under_30000">〜30,000円/月</option>
+      <option value="over_30000">30,000円/月以上・相談したい</option>
+    </select>
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">利用開始を検討している時期は？ <span style="color: #e83929;">*</span></label>
+    <select name="timeline" required style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+      <option value="">選択してください</option>
+      <option value="immediate">すぐにでも（1ヶ月以内）</option>
+      <option value="3months">3ヶ月以内</option>
+      <option value="6months">半年以内</option>
+      <option value="undecided">まだ未定</option>
+    </select>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">ご要望・ご質問（任意）</label>
+    <textarea name="message" rows="4" placeholder="使いたい機能、現在の課題など" style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+  </div>
+  <button type="submit" style="background-color: #e83929; color: white; padding: 14px 36px; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%;">
+    送信する →
+  </button>
+</form>
+</div>
 
 ---
 

@@ -53,20 +53,46 @@ AIが通話録音を解析し、どのフェーズで離脱が多いか、どの
 
 ---
 
-## 早期ユーザー募集中：まず無料相談から
+## 早期ユーザー募集中：導入意向のご確認
 
-現在、導入企業を先行募集しています。貴社の業種・課題をヒアリングし、AIコールセンターの導入可能性と期待効果を一緒に検討します。費用は一切かかりません。
+現在、導入企業を先行募集しています。貴社の業種・課題と予算感をお聞かせください。有料導入を前提としたヒアリングを行います。
 
-いただいた情報は、サービス改善のみに使用します。
-
-<div id="contact" style="margin: 2rem 0;">
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd0ScgHDUhUSUR7lwAhi4AhpojU81bUm5HRggjpWSBmh_p1Cw/viewform?embedded=true"
-  width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0"
-  style="border-radius: 8px;">
-  読み込んでいます…
-</iframe>
-
+<div id="contact" style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+<form name="inquiry-ai-callcenter" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="inquiry-ai-callcenter" />
+  <div style="margin-bottom: 1rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">メールアドレス <span style="color: #e83929;">*</span></label>
+    <input type="email" name="email" required placeholder="your@company.com" style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;" />
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">月額予算の目安は？ <span style="color: #e83929;">*</span></label>
+    <select name="budget" required style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+      <option value="">選択してください</option>
+      <option value="no_budget">予算なし・無料のみ</option>
+      <option value="under_50k">月額5万円未満</option>
+      <option value="50k_200k">月額5〜20万円</option>
+      <option value="over_200k">月額20万円以上</option>
+      <option value="consult">金額は相談したい</option>
+    </select>
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">導入を検討している時期は？ <span style="color: #e83929;">*</span></label>
+    <select name="timeline" required style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: white;">
+      <option value="">選択してください</option>
+      <option value="immediate">すぐにでも（1ヶ月以内）</option>
+      <option value="3months">3ヶ月以内</option>
+      <option value="6months">半年以内</option>
+      <option value="undecided">まだ未定</option>
+    </select>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <label style="display: block; font-weight: bold; margin-bottom: 0.4rem;">業種・現在の課題（任意）</label>
+    <textarea name="message" rows="4" placeholder="例：保険営業、成約率が低く原因が分からない" style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+  </div>
+  <button type="submit" style="background-color: #e83929; color: white; padding: 14px 36px; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%;">
+    送信する →
+  </button>
+</form>
 </div>
 
 ---
