@@ -41,7 +41,7 @@ twq('config','okhzr');
     --green: #00ba7c;
   }
 
-  html { scroll-snap-type: y mandatory; overflow-y: scroll; }
+  html { scroll-snap-type: y proximity; overflow-y: scroll; }
   body { background: var(--black); color: var(--white); font-family: -apple-system, "Helvetica Neue", sans-serif; }
 
   /* ── Site nav ── */
@@ -362,7 +362,175 @@ twq('config','okhzr');
   }
 
   /* ════════════════════════════════
-     SCENE 3 – 登録CTA
+     SCENE 2.5 – 使い方 (How to use)
+                 Apple 風 scroll-pinned カルーセル
+  ════════════════════════════════ */
+  #sHow {
+    background: var(--gray-900);
+    height: 400vh;
+    display: block;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-align: none;
+  }
+
+  .howto-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 88px 0 32px;
+    overflow: hidden;
+  }
+
+  .howto-layout {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .howto-header { text-align: center; }
+  .howto-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .5s, transform .5s;
+  }
+  .howto-heading {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .55s .1s, transform .55s .1s;
+  }
+  .howto-heading span { color: var(--accent); }
+  #sHow.visible .howto-label,
+  #sHow.visible .howto-heading { opacity: 1; transform: none; }
+
+  .howto-track-wrapper {
+    width: 100vw;
+    overflow: hidden;
+  }
+  .howto-track {
+    display: flex;
+    gap: 24px;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+  @media (max-width: 760px) {
+    .howto-track { gap: 16px; }
+    .howto-sticky { padding-top: 72px; }
+  }
+
+  .step-card {
+    flex: 0 0 min(720px, 84vw);
+    background: var(--gray-800);
+    border: 1px solid var(--gray-700);
+    border-radius: 18px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .step-card.is-active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-dim), 0 24px 60px rgba(0,0,0,.4);
+    transform: translateY(-2px);
+  }
+
+  .step-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--black);
+    overflow: hidden;
+  }
+  .step-card-body {
+    padding: 18px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  @media (max-width: 760px) {
+    .step-card-body { padding: 14px 16px 18px; }
+  }
+
+  .step-num {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: .12em;
+    background: rgba(29, 155, 240, .85);
+    padding: 5px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1;
+  }
+  .step-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -.01em;
+    color: var(--white);
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--gray-200);
+    line-height: 1.7;
+  }
+
+  .howto-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .howto-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gray-700);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background .25s, transform .25s, width .25s;
+  }
+  .howto-dot.active {
+    background: var(--accent);
+    width: 22px;
+    border-radius: 999px;
+  }
+  .howto-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ════════════════════════════════
+     SCENE 3 – 拡張機能インストール CTA
   ════════════════════════════════ */
   #s3 {
     background: radial-gradient(ellipse at 60% 40%, rgba(29,155,240,.08) 0%, var(--black) 65%);
@@ -482,7 +650,7 @@ twq('config','okhzr');
   <a href="/" class="site-nav-logo">サブカル科学研究会</a>
   <div class="site-nav-links">
     <a href="/post/x-fav-gellery/">技術記事</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?entry.219602922=x-fav-gellery" target="_blank" rel="noopener" class="nav-cta">β版に登録</a>
+    <a href="https://chromewebstore.google.com/detail/x-favorites-gallery/pkdgfikellllhmbkipeommabhndffmdg" target="_blank" rel="noopener" class="nav-cta" data-cta="nav_install">拡張機能を入手</a>
   </div>
 </nav>
 
@@ -491,6 +659,7 @@ twq('config','okhzr');
   <div class="dot active" data-idx="0"></div>
   <div class="dot" data-idx="1"></div>
   <div class="dot" data-idx="2"></div>
+  <div class="dot" data-idx="3"></div>
 </nav>
 
 <!-- Scroll hint -->
@@ -648,34 +817,106 @@ twq('config','okhzr');
 
 
 <!-- ═══════════════════════════════
-     SCENE 3 — β版先行登録
+     SCENE 2.5 — 使い方 (Apple 風 scroll-pinned カルーセル)
+═══════════════════════════════ -->
+<section class="scene" id="sHow">
+  <div class="howto-sticky">
+    <div class="howto-layout">
+      <div class="howto-header">
+        <div class="howto-label">How to use</div>
+        <h2 class="howto-heading">
+          <span>4 ステップ</span>で始める
+        </h2>
+      </div>
+
+      <div class="howto-track-wrapper" id="howtoWrapper" role="region" aria-label="使い方カルーセル">
+        <div class="howto-track" id="howtoTrack">
+          <div class="step-card" data-step="0">
+            <div class="step-card-media">
+              <span class="step-num">STEP 01</span>
+              <img class="step-img" src="/img/x-fav/popup-overview.png" alt="Chrome 拡張機能のポップアップ画面" loading="lazy" width="1280" height="800" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">Chrome 拡張をインストール</div>
+              <div class="step-desc">Chrome Web Store から「X Favorites Gallery」を追加。ツールバーにピン留めしておくと便利です。</div>
+            </div>
+          </div>
+
+          <div class="step-card" data-step="1">
+            <div class="step-card-media">
+              <span class="step-num">STEP 02</span>
+              <img class="step-img" src="/img/x-fav/extension-on-x-likes.png" alt="X のいいねページで拡張機能を起動" loading="lazy" width="1280" height="800" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">いいねページで起動</div>
+              <div class="step-desc">ポップアップから Google でログインし、X のいいねページで「収集開始」をクリック。あとは自動でスクロール・取得します。</div>
+            </div>
+          </div>
+
+          <div class="step-card" data-step="2">
+            <div class="step-card-media">
+              <span class="step-num">STEP 03</span>
+              <img class="step-img" src="/img/x-fav/landing.png" alt="X Favorites Gallery のログイン画面" loading="lazy" width="1280" height="800" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">アプリにログイン</div>
+              <div class="step-desc">x-fav-gellery.com に Google アカウントでログイン。拡張機能と同じアカウントを使えば、収集した画像が自動で表示されます。</div>
+            </div>
+          </div>
+
+          <div class="step-card" data-step="3">
+            <div class="step-card-media">
+              <span class="step-num">STEP 04</span>
+              <img class="step-img" src="/img/x-fav/gallery-list.png" alt="マイギャラリーの一覧表示" loading="lazy" width="1392" height="870" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">マイギャラリーで再発見</div>
+              <div class="step-desc">いいねした画像がマソンリー形式で一覧表示。タップすれば DINOv2 が視覚的に似た投稿をその場で提示します。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="howto-dots" id="howtoDots" role="tablist" aria-label="使い方ステップ選択">
+        <button type="button" class="howto-dot active" data-idx="0" aria-label="STEP 01 を表示"></button>
+        <button type="button" class="howto-dot" data-idx="1" aria-label="STEP 02 を表示"></button>
+        <button type="button" class="howto-dot" data-idx="2" aria-label="STEP 03 を表示"></button>
+        <button type="button" class="howto-dot" data-idx="3" aria-label="STEP 04 を表示"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════
+     SCENE 3 — 拡張機能インストール CTA
 ═══════════════════════════════ -->
 <section class="scene" id="s3">
   <div class="experience-layout">
-    <div class="experience-label" id="expLabel">Early Access</div>
+    <div class="experience-label" id="expLabel">Get Started</div>
     <h2 class="experience-heading" id="expHeading">
-      β版、先行登録を<br>
-      <span>受け付けています</span>
+      Chrome に追加して、<br>
+      <span>今すぐ始めよう</span>
     </h2>
 
     <p class="experience-sub" id="expSub">
-      リリース時に真っ先にお知らせします。<br>
-      無料・セルフホスト・OSSで公開予定。
+      無料・OSS・セルフホスト対応。<br>
+      クリック1回で、いいねが自動でギャラリーへ。
     </p>
 
     <div class="cta-block" id="ctaBlock">
       <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLScU91dYzxe1mBniwUabVQ83AjVNPvPAPaw5dgmVNjkRSBfz3Q/viewform?entry.219602922=x-fav-gellery"
+        href="https://chromewebstore.google.com/detail/x-favorites-gallery/pkdgfikellllhmbkipeommabhndffmdg"
         target="_blank"
         rel="noopener"
         class="cta-btn"
-        onclick="twq('event','tw-okhzr-registration',{});"
+        data-cta="hero_install"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.636 5.904-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        β版に先行登録する
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 4.97 3.028 9.232 7.343 11.04l3.66-6.34A4.5 4.5 0 0112 7.5h8.485A11.97 11.97 0 0012 0zm0 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm5.55 1.5A4.5 4.5 0 0118 13.5a4.5 4.5 0 01-2.235 3.882l-3.66 6.34c.625.116 1.27.178 1.93.178 6.627 0 12-5.373 12-12 0-1.567-.3-3.064-.844-4.434L17.55 9zM7.5 12a4.5 4.5 0 011.84-3.633l-3.661-6.34A11.985 11.985 0 00.844 7.5L9.84 13.234A4.5 4.5 0 017.5 12z"/></svg>
+        Chrome に追加する
       </a>
-      <div class="cta-sub">無料 · 自己ホスト · OSSで公開中</div>
-      <a href="/post/x-fav-gellery/" class="article-link">技術的な詳細を読む →</a>
+      <div class="cta-sub">Chrome Web Store · 無料 · OSS</div>
+      <a href="/post/x-fav-gellery/" class="article-link" data-cta="cta_tech_article">技術的な詳細を読む →</a>
     </div>
 
   </div>
@@ -724,6 +965,91 @@ twq('config','okhzr');
     });
   }, { threshold: 0.25 });
   io3.observe(document.getElementById('s3'));
+
+  const sHow = document.getElementById('sHow');
+  if (sHow) {
+    const ioHow = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) sHow.classList.add('visible');
+      });
+    }, { threshold: 0.25 });
+    ioHow.observe(sHow);
+  }
+
+  // How-to カルーセル (スクロール駆動 / Apple 風)
+  const howSection = document.getElementById('sHow');
+  const howWrapper = document.getElementById('howtoWrapper');
+  const howTrack = document.getElementById('howtoTrack');
+  const howDots = document.querySelectorAll('.howto-dot');
+  if (howSection && howWrapper && howTrack && howDots.length) {
+    const howCards = howTrack.querySelectorAll('.step-card');
+    const lastIdx = howCards.length - 1;
+    let activeIdx = 0;
+
+    const updateHow = () => {
+      const rect = howSection.getBoundingClientRect();
+      const total = howSection.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      const raw = -rect.top / total;
+      const progress = Math.max(0, Math.min(1, raw));
+
+      const cardWidth = howCards[0].offsetWidth;
+      const trackStyle = getComputedStyle(howTrack);
+      const gap = parseFloat(trackStyle.columnGap || trackStyle.gap) || 0;
+      const wrapperWidth = howWrapper.clientWidth;
+      const centerOffset = (wrapperWidth - cardWidth) / 2;
+      const stepFraction = progress * lastIdx;
+      const translateX = centerOffset - stepFraction * (cardWidth + gap);
+      howTrack.style.transform = `translate3d(${translateX}px, 0, 0)`;
+
+      const nextIdx = Math.round(stepFraction);
+      if (nextIdx !== activeIdx) {
+        activeIdx = nextIdx;
+        howDots.forEach((d, i) => d.classList.toggle('active', i === nextIdx));
+        howCards.forEach((c, i) => c.classList.toggle('is-active', i === nextIdx));
+      }
+    };
+
+    let pending = false;
+    const onScroll = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => { pending = false; updateHow(); });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateHow);
+    // 初期化（画像読み込み後にサイズが確定するため load 後にも実行）
+    updateHow();
+    window.addEventListener('load', updateHow);
+
+    howDots.forEach((d) => {
+      d.addEventListener('click', () => {
+        const idx = parseInt(d.dataset.idx, 10);
+        if (Number.isNaN(idx) || lastIdx === 0) return;
+        const total = howSection.offsetHeight - window.innerHeight;
+        const targetY = howSection.offsetTop + (idx / lastIdx) * total;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      });
+    });
+
+    // 最初のカードをアクティブに見せる
+    howCards[0].classList.add('is-active');
+  }
+
+  // CTA クリック計測 (GA4)
+  document.addEventListener('click', (ev) => {
+    const target = ev.target.closest('[data-cta]');
+    if (!target) return;
+    const label = target.getAttribute('data-cta');
+    if (typeof gtag === 'function') {
+      gtag('event', 'cta_click', {
+        cta_label: label,
+        cta_location: 'lp_x_fav',
+        link_url: target.getAttribute('href') || '',
+      });
+    }
+  });
 </script>
 </body>
 </html>
