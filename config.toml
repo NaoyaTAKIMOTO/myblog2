@@ -73,6 +73,7 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     name = "アプリ"
+    url = "lp/"
     weight = 4
 
 [[menu.main]]

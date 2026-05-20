@@ -1,0 +1,58 @@
+{{ define "main" }}
+<style>
+  .lp-card {
+    display: block;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    background-color: #fff;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .lp-card:hover,
+  .lp-card:focus {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border-color: #c8c8c8;
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: inherit;
+  }
+  .lp-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .lp-card p {
+    color: #555;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .lp-grid-item {
+    margin-bottom: 1.5rem;
+    display: flex;
+  }
+</style>
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      {{ with .Content }}
+        <div class="well">{{ . }}</div>
+      {{ end }}
+      <div class="row">
+        {{ range .Pages.ByTitle }}
+          <div class="col-md-6 lp-grid-item">
+            <a class="lp-card" href="{{ .Permalink }}">
+              <h3>{{ .Title }}</h3>
+              {{ with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
