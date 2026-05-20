@@ -631,6 +631,19 @@ twq('config','okhzr');
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── Device-targeted visibility ── */
+  .only-mobile { display: none !important; }
+  @media (hover: none) and (pointer: coarse), (max-width: 760px) {
+    .only-desktop { display: none !important; }
+    a.only-mobile.nav-cta        { display: inline-block !important; }
+    h2.only-mobile              { display: block !important; }
+    p.only-mobile               { display: block !important; }
+    div.only-mobile.cta-block   { display: flex !important; }
+    span.only-mobile.step-num   { display: inline-block !important; }
+    /* mobile では step 数が減るため scroll-pin の高さも短縮 */
+    #sHow { height: 200vh; }
+  }
+
   /* ── Palette blocks in gallery ── */
   .c1 { background: #1e3a5f; }
   .c2 { background: #2d1b4e; }
@@ -650,7 +663,8 @@ twq('config','okhzr');
   <a href="/" class="site-nav-logo">サブカル科学研究会</a>
   <div class="site-nav-links">
     <a href="/post/x-fav-gellery/">技術記事</a>
-    <a href="https://chromewebstore.google.com/detail/x-favorites-gallery/pkdgfikellllhmbkipeommabhndffmdg" target="_blank" rel="noopener" class="nav-cta" data-cta="nav_install">拡張機能を入手</a>
+    <a href="https://chromewebstore.google.com/detail/x-favorites-gallery/pkdgfikellllhmbkipeommabhndffmdg" target="_blank" rel="noopener" class="nav-cta only-desktop" data-cta="nav_install">拡張機能を入手</a>
+    <a href="https://x-fav-gellery.com/" target="_blank" rel="noopener" class="nav-cta only-mobile" data-cta="nav_open_app">アプリを開く</a>
   </div>
 </nav>
 
@@ -824,14 +838,17 @@ twq('config','okhzr');
     <div class="howto-layout">
       <div class="howto-header">
         <div class="howto-label">How to use</div>
-        <h2 class="howto-heading">
+        <h2 class="howto-heading only-desktop">
           <span>4 ステップ</span>で始める
+        </h2>
+        <h2 class="howto-heading only-mobile">
+          <span>2 ステップ</span>で始める
         </h2>
       </div>
 
       <div class="howto-track-wrapper" id="howtoWrapper" role="region" aria-label="使い方カルーセル">
         <div class="howto-track" id="howtoTrack">
-          <div class="step-card" data-step="0">
+          <div class="step-card only-desktop" data-step="0">
             <div class="step-card-media">
               <span class="step-num">STEP 01</span>
               <img class="step-img" src="/img/x-fav/popup-overview.png" alt="Chrome 拡張機能のポップアップ画面" loading="lazy" width="1280" height="800" />
@@ -842,7 +859,7 @@ twq('config','okhzr');
             </div>
           </div>
 
-          <div class="step-card" data-step="1">
+          <div class="step-card only-desktop" data-step="1">
             <div class="step-card-media">
               <span class="step-num">STEP 02</span>
               <img class="step-img" src="/img/x-fav/extension-on-x-likes.png" alt="X のいいねページで拡張機能を起動" loading="lazy" width="1280" height="800" />
@@ -855,7 +872,8 @@ twq('config','okhzr');
 
           <div class="step-card" data-step="2">
             <div class="step-card-media">
-              <span class="step-num">STEP 03</span>
+              <span class="step-num only-desktop">STEP 03</span>
+              <span class="step-num only-mobile">STEP 01</span>
               <img class="step-img" src="/img/x-fav/landing.png" alt="X Favorites Gallery のログイン画面" loading="lazy" width="1280" height="800" />
             </div>
             <div class="step-card-body">
@@ -866,7 +884,8 @@ twq('config','okhzr');
 
           <div class="step-card" data-step="3">
             <div class="step-card-media">
-              <span class="step-num">STEP 04</span>
+              <span class="step-num only-desktop">STEP 04</span>
+              <span class="step-num only-mobile">STEP 02</span>
               <img class="step-img" src="/img/x-fav/gallery-list.png" alt="マイギャラリーの一覧表示" loading="lazy" width="1392" height="870" />
             </div>
             <div class="step-card-body">
@@ -878,8 +897,8 @@ twq('config','okhzr');
       </div>
 
       <div class="howto-dots" id="howtoDots" role="tablist" aria-label="使い方ステップ選択">
-        <button type="button" class="howto-dot active" data-idx="0" aria-label="STEP 01 を表示"></button>
-        <button type="button" class="howto-dot" data-idx="1" aria-label="STEP 02 を表示"></button>
+        <button type="button" class="howto-dot active only-desktop" data-idx="0" aria-label="STEP 01 を表示"></button>
+        <button type="button" class="howto-dot only-desktop" data-idx="1" aria-label="STEP 02 を表示"></button>
         <button type="button" class="howto-dot" data-idx="2" aria-label="STEP 03 を表示"></button>
         <button type="button" class="howto-dot" data-idx="3" aria-label="STEP 04 を表示"></button>
       </div>
@@ -894,17 +913,26 @@ twq('config','okhzr');
 <section class="scene" id="s3">
   <div class="experience-layout">
     <div class="experience-label" id="expLabel">Get Started</div>
-    <h2 class="experience-heading" id="expHeading">
+
+    <h2 class="experience-heading only-desktop" id="expHeading">
       Chrome に追加して、<br>
       <span>今すぐ始めよう</span>
     </h2>
+    <h2 class="experience-heading only-mobile" id="expHeadingMobile">
+      ブラウザで開いて、<br>
+      <span>今すぐ始めよう</span>
+    </h2>
 
-    <p class="experience-sub" id="expSub">
-      無料・OSS・セルフホスト対応。<br>
-      クリック1回で、いいねが自動でギャラリーへ。
+    <p class="experience-sub only-desktop" id="expSub">
+      流れて消えていた「いいね」が、また会える場所に。<br>
+      お気に入りの作品が、いつでも見返せる自分だけのギャラリーへ。
+    </p>
+    <p class="experience-sub only-mobile" id="expSubMobile">
+      流れて消えていた「いいね」が、また会える場所に。<br>
+      お気に入りの作品が、いつでも見返せる自分だけのギャラリーへ。
     </p>
 
-    <div class="cta-block" id="ctaBlock">
+    <div class="cta-block only-desktop" id="ctaBlock">
       <a
         href="https://chromewebstore.google.com/detail/x-favorites-gallery/pkdgfikellllhmbkipeommabhndffmdg"
         target="_blank"
@@ -915,7 +943,22 @@ twq('config','okhzr');
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 4.97 3.028 9.232 7.343 11.04l3.66-6.34A4.5 4.5 0 0112 7.5h8.485A11.97 11.97 0 0012 0zm0 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm5.55 1.5A4.5 4.5 0 0118 13.5a4.5 4.5 0 01-2.235 3.882l-3.66 6.34c.625.116 1.27.178 1.93.178 6.627 0 12-5.373 12-12 0-1.567-.3-3.064-.844-4.434L17.55 9zM7.5 12a4.5 4.5 0 011.84-3.633l-3.661-6.34A11.985 11.985 0 00.844 7.5L9.84 13.234A4.5 4.5 0 017.5 12z"/></svg>
         Chrome に追加する
       </a>
-      <div class="cta-sub">Chrome Web Store · 無料 · OSS</div>
+      <div class="cta-sub">似た作品も AI が連れてきてくれる</div>
+      <a href="/post/x-fav-gellery/" class="article-link" data-cta="cta_tech_article">技術的な詳細を読む →</a>
+    </div>
+
+    <div class="cta-block only-mobile" id="ctaBlockMobile">
+      <a
+        href="https://x-fav-gellery.com/"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn"
+        data-cta="hero_open_app"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+        アプリを開く
+      </a>
+      <div class="cta-sub">Googleログインだけで、すぐ会えます</div>
       <a href="/post/x-fav-gellery/" class="article-link" data-cta="cta_tech_article">技術的な詳細を読む →</a>
     </div>
 
@@ -958,10 +1001,9 @@ twq('config','okhzr');
   const io3 = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      document.getElementById('expLabel')?.classList.add('visible');
-      document.getElementById('expHeading')?.classList.add('visible');
-      document.getElementById('expSub')?.classList.add('visible');
-      document.getElementById('ctaBlock')?.classList.add('visible');
+      document
+        .querySelectorAll('#s3 .experience-label, #s3 .experience-heading, #s3 .experience-sub, #s3 .cta-block')
+        .forEach((el) => el.classList.add('visible'));
     });
   }, { threshold: 0.25 });
   io3.observe(document.getElementById('s3'));
@@ -980,33 +1022,45 @@ twq('config','okhzr');
   const howSection = document.getElementById('sHow');
   const howWrapper = document.getElementById('howtoWrapper');
   const howTrack = document.getElementById('howtoTrack');
-  const howDots = document.querySelectorAll('.howto-dot');
-  if (howSection && howWrapper && howTrack && howDots.length) {
-    const howCards = howTrack.querySelectorAll('.step-card');
-    const lastIdx = howCards.length - 1;
+  const allDots = Array.from(document.querySelectorAll('.howto-dot'));
+  const allCards = howTrack ? Array.from(howTrack.querySelectorAll('.step-card')) : [];
+  if (howSection && howWrapper && howTrack && allCards.length) {
+    let visibleCards = [];
+    let visibleDots = [];
+    let lastIdx = 0;
     let activeIdx = 0;
 
+    const isVisible = (el) => el.offsetParent !== null;
+
+    const refreshVisible = () => {
+      visibleCards = allCards.filter(isVisible);
+      visibleDots = allDots.filter(isVisible);
+      lastIdx = Math.max(0, visibleCards.length - 1);
+      if (activeIdx > lastIdx) activeIdx = 0;
+    };
+
     const updateHow = () => {
+      if (!visibleCards.length) return;
       const rect = howSection.getBoundingClientRect();
       const total = howSection.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       const raw = -rect.top / total;
       const progress = Math.max(0, Math.min(1, raw));
 
-      const cardWidth = howCards[0].offsetWidth;
+      const cardWidth = visibleCards[0].offsetWidth;
       const trackStyle = getComputedStyle(howTrack);
       const gap = parseFloat(trackStyle.columnGap || trackStyle.gap) || 0;
       const wrapperWidth = howWrapper.clientWidth;
       const centerOffset = (wrapperWidth - cardWidth) / 2;
-      const stepFraction = progress * lastIdx;
+      const stepFraction = lastIdx === 0 ? 0 : progress * lastIdx;
       const translateX = centerOffset - stepFraction * (cardWidth + gap);
       howTrack.style.transform = `translate3d(${translateX}px, 0, 0)`;
 
       const nextIdx = Math.round(stepFraction);
       if (nextIdx !== activeIdx) {
         activeIdx = nextIdx;
-        howDots.forEach((d, i) => d.classList.toggle('active', i === nextIdx));
-        howCards.forEach((c, i) => c.classList.toggle('is-active', i === nextIdx));
+        visibleDots.forEach((d, i) => d.classList.toggle('active', i === nextIdx));
+        visibleCards.forEach((c, i) => c.classList.toggle('is-active', i === nextIdx));
       }
     };
 
@@ -1017,24 +1071,31 @@ twq('config','okhzr');
       requestAnimationFrame(() => { pending = false; updateHow(); });
     };
 
+    const onResize = () => {
+      refreshVisible();
+      updateHow();
+    };
+
+    refreshVisible();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', updateHow);
+    window.addEventListener('resize', onResize);
     // 初期化（画像読み込み後にサイズが確定するため load 後にも実行）
     updateHow();
-    window.addEventListener('load', updateHow);
+    window.addEventListener('load', onResize);
 
-    howDots.forEach((d) => {
+    allDots.forEach((d) => {
       d.addEventListener('click', () => {
-        const idx = parseInt(d.dataset.idx, 10);
-        if (Number.isNaN(idx) || lastIdx === 0) return;
+        const visIdx = visibleDots.indexOf(d);
+        if (visIdx < 0 || lastIdx === 0) return;
         const total = howSection.offsetHeight - window.innerHeight;
-        const targetY = howSection.offsetTop + (idx / lastIdx) * total;
+        const targetY = howSection.offsetTop + (visIdx / lastIdx) * total;
         window.scrollTo({ top: targetY, behavior: 'smooth' });
       });
     });
 
-    // 最初のカードをアクティブに見せる
-    howCards[0].classList.add('is-active');
+    // 最初の可視カードをアクティブに
+    if (visibleCards[0]) visibleCards[0].classList.add('is-active');
+    if (visibleDots[0]) visibleDots.forEach((d, i) => d.classList.toggle('active', i === 0));
   }
 
   // CTA クリック計測 (GA4)
