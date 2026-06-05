@@ -78,7 +78,7 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     name = "X Favorites Gallery"
-    url = "lp/x-fav-lp/"
+    url = "lp/x-fav-rich/"
     parent = "アプリ"
     weight = 1
 

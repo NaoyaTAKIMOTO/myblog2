@@ -12,7 +12,7 @@ tags: [制作物,ポートフォリオ,自然言語処理,画像処理,python,R]
 
 #### フルスタックWebアプリケーション
 - **X Favorites Gallery** - X(Twitter)いいねギャラリー + AIレコメンド
-  - [X Favorites Gallery LP]({{< ref "lp/x-fav-lp" >}}) / [アプリを開く](https://x-fav-gellery.com/)
+  - [X Favorites Gallery LP](/lp/x-fav-rich/) / [アプリを開く](https://x-fav-gellery.com/)
   - 技術スタック: Next.js + React + PostgreSQL + pgvector, Chrome拡張, Docker
   - 成果: いいねしたコンテンツをAI（DINOv2）が自動レコメンド、NSFW自動フィルタリング対応
 
