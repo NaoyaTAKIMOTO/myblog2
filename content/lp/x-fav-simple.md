@@ -133,7 +133,14 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
 ═══════════════════════════════ -->
 <script>
 (function() {
-  const LP_LOCATION = 'lp_x_fav_simple';
+  // variant_id を 全 event に含めることで、Round 2 以降の simple 系 variant
+  // (例: simple-v2) を 同じ event 構造で比較できる。
+  const EXPERIMENT_PROPS = {
+    experiment_id: 'lp_design_2026_06',
+    variant_id: 'simple',
+    variant_version: 'v1',
+    cta_location: 'lp_x_fav_simple',
+  };
   const SECTIONS = [
     { id: 'sIntro', label: 'intro' },
     { id: 'sWhy', label: 'why' },
@@ -172,7 +179,7 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
           scene_label: SECTIONS[prevIdx].label,
           scene_index: prevIdx,
           duration_ms: duration,
-          cta_location: LP_LOCATION,
+          ...EXPERIMENT_PROPS,
         });
       }
     }
@@ -187,7 +194,7 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
           scene_id: currentSection,
           scene_label: activeSection.label,
           scene_index: activeIdx,
-          cta_location: LP_LOCATION,
+          ...EXPERIMENT_PROPS,
         });
       }
     }
@@ -217,7 +224,7 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     gtag('event', 'lp_exit', {
       exit_scene: currentSection,
       exit_scene_index: idx,
-      cta_location: LP_LOCATION,
+      ...EXPERIMENT_PROPS,
       transport_type: 'beacon',
     });
   };
@@ -238,7 +245,7 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
         if (typeof gtag === 'function') {
           gtag('event', 'scroll_milestone', {
             milestone_pct: m,
-            cta_location: LP_LOCATION,
+            ...EXPERIMENT_PROPS,
           });
         }
       }
@@ -262,7 +269,7 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     if (typeof gtag === 'function') {
       gtag('event', 'cta_click', {
         cta_label: label,
-        cta_location: LP_LOCATION,
+        ...EXPERIMENT_PROPS,
         link_url: target.getAttribute('href') || '',
       });
     }

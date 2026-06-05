@@ -1100,6 +1100,14 @@ twq('config','okhzr');
 
   // === 離脱位置 / funnel 計測 (2026-06-05 追加) ===
   // 既存 cta_click と組み合わせて、どの scene で詰まっているか data-driven に判定する。
+  // variant_id を 全 event に含めることで、Round 2 以降の rich 系 variant
+  // (例: rich-v2) を 同じ event 構造で比較できる。
+  const EXPERIMENT_PROPS = {
+    experiment_id: 'lp_design_2026_06',
+    variant_id: 'rich',
+    variant_version: 'v1',
+    ...EXPERIMENT_PROPS,
+  };
 
   const SCENE_IDS = ['s1', 's2', 'sHow', 's3'];
   const sceneEnterTimes = {};
@@ -1121,7 +1129,7 @@ twq('config','okhzr');
               gtag('event', 'scene_view', {
                 scene_id: id,
                 scene_index: idx,
-                cta_location: 'lp_x_fav_rich',
+                ...EXPERIMENT_PROPS,
               });
             }
           }
@@ -1133,7 +1141,7 @@ twq('config','okhzr');
               scene_id: id,
               scene_index: idx,
               duration_ms: duration,
-              cta_location: 'lp_x_fav_rich',
+              ...EXPERIMENT_PROPS,
             });
           }
         }
@@ -1152,7 +1160,7 @@ twq('config','okhzr');
     gtag('event', 'lp_exit', {
       exit_scene: currentVisibleScene,
       exit_scene_index: SCENE_IDS.indexOf(currentVisibleScene),
-      cta_location: 'lp_x_fav_rich',
+      ...EXPERIMENT_PROPS,
       transport_type: 'beacon',
     });
   };
@@ -1172,7 +1180,7 @@ twq('config','okhzr');
             gtag('event', 'howto_step_view', {
               step_index: idx,
               step_label: stepNum,
-              cta_location: 'lp_x_fav_rich',
+              ...EXPERIMENT_PROPS,
             });
           }
         }
@@ -1193,7 +1201,7 @@ twq('config','okhzr');
         if (typeof gtag === 'function') {
           gtag('event', 'scroll_milestone', {
             milestone_pct: m,
-            cta_location: 'lp_x_fav_rich',
+            ...EXPERIMENT_PROPS,
           });
         }
       }
@@ -1217,7 +1225,7 @@ twq('config','okhzr');
     if (typeof gtag === 'function') {
       gtag('event', 'cta_click', {
         cta_label: label,
-        cta_location: 'lp_x_fav_rich',
+        ...EXPERIMENT_PROPS,
         link_url: target.getAttribute('href') || '',
       });
     }
