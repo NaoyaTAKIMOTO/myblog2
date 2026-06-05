@@ -17,3 +17,6 @@ report/
 link-candidates.md
 sozai/
 tsudukan-lp.html
+node_modules/
+.netlify/
+deno.lock

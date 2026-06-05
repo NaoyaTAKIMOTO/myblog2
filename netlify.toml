@@ -5,6 +5,12 @@
 [build.environment]
   HUGO_VERSION = "0.142.0"
 
+[dev]
+  command = "hugo server -w --bind 0.0.0.0 -p 1313"
+  targetPort = 1313
+  port = 8888
+  framework = "#custom"
+
 # === LP rename redirects (2026-06-05) ===
 # 旧 ad のリンク先 → シンプル LP に統合
 [[redirects]]
@@ -19,3 +25,8 @@
   to = "/lp/x-fav-rich/"
   status = 301
   force = true
+
+# === A/B test (2026-06-05) ===
+# /x-fav-ab/ は Edge Function (netlify/edge-functions/x-fav-ab.ts) が
+# /lp/x-fav-simple/ または /lp/x-fav-rich/ に 50/50 で 302 リダイレクトする。
+# UTM クエリは保持される。各 LP 側の cta_location で GA4 計測を分離。

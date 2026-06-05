@@ -1,0 +1,11 @@
+{
+  "name": "subcul-science-blog",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "hugo"
+  },
+  "devDependencies": {
+    "netlify-cli": "^26.1.0"
+  }
+}
