@@ -78,7 +78,9 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     name = "X Favorites Gallery"
-    url = "lp/x-fav-rich/"
+    # AB テスト中 (2026-06-19 まで) は /x-fav-ab/ 経由で sticky cookie に従って
+    # simple / rich を出し分け。simple LP から rich への直リンクで AB 汚染するのを防ぐ。
+    url = "x-fav-ab/"
     parent = "アプリ"
     weight = 1
 
