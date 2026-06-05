@@ -4,3 +4,18 @@
 
 [build.environment]
   HUGO_VERSION = "0.142.0"
+
+# === LP rename redirects (2026-06-05) ===
+# 旧 ad のリンク先 → シンプル LP に統合
+[[redirects]]
+  from = "/lp/x-fav-lp/"
+  to = "/lp/x-fav-simple/"
+  status = 301
+  force = true
+
+# 現 ad のリンク先 → 凝った LP に統合
+[[redirects]]
+  from = "/x-fav/"
+  to = "/lp/x-fav-rich/"
+  status = 301
+  force = true

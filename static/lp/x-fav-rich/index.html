@@ -664,7 +664,7 @@ twq('config','okhzr');
   <div class="site-nav-links">
     <a href="/post/x-fav-gellery/">技術記事</a>
     <a href="https://chromewebstore.google.com/detail/x-favorites-gallery/pkdgfikellllhmbkipeommabhndffmdg" target="_blank" rel="noopener" class="nav-cta only-desktop" data-cta="nav_install">拡張機能を入手</a>
-    <a href="https://x-fav-gellery.com/?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-static&amp;utm_content=nav" target="_blank" rel="noopener" class="nav-cta only-mobile" data-cta="nav_open_app">アプリを開く</a>
+    <a href="https://x-fav-gellery.com/?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=nav" target="_blank" rel="noopener" class="nav-cta only-mobile" data-cta="nav_open_app">アプリを開く</a>
   </div>
 </nav>
 
@@ -949,7 +949,7 @@ twq('config','okhzr');
 
     <div class="cta-block only-mobile" id="ctaBlockMobile">
       <a
-        href="https://x-fav-gellery.com/?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-static&amp;utm_content=hero"
+        href="https://x-fav-gellery.com/?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero"
         target="_blank"
         rel="noopener"
         class="cta-btn"
@@ -1098,6 +1098,117 @@ twq('config','okhzr');
     if (visibleDots[0]) visibleDots.forEach((d, i) => d.classList.toggle('active', i === 0));
   }
 
+  // === 離脱位置 / funnel 計測 (2026-06-05 追加) ===
+  // 既存 cta_click と組み合わせて、どの scene で詰まっているか data-driven に判定する。
+
+  const SCENE_IDS = ['s1', 's2', 'sHow', 's3'];
+  const sceneEnterTimes = {};
+  let currentVisibleScene = null;
+
+  // scene_view: 各 scene が 50% viewport に入った瞬間 (各 1 回のみ)
+  // scene_exit: scene から出た瞬間 / 滞在時間
+  SCENE_IDS.forEach((id, idx) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          currentVisibleScene = id;
+          sceneEnterTimes[id] = Date.now();
+          if (!el.dataset.gaViewed) {
+            el.dataset.gaViewed = '1';
+            if (typeof gtag === 'function') {
+              gtag('event', 'scene_view', {
+                scene_id: id,
+                scene_index: idx,
+                cta_location: 'lp_x_fav_rich',
+              });
+            }
+          }
+        } else if (sceneEnterTimes[id]) {
+          const duration = Date.now() - sceneEnterTimes[id];
+          sceneEnterTimes[id] = null;
+          if (duration >= 500 && typeof gtag === 'function') {
+            gtag('event', 'scene_exit', {
+              scene_id: id,
+              scene_index: idx,
+              duration_ms: duration,
+              cta_location: 'lp_x_fav_rich',
+            });
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
+
+  // lp_exit: ページを閉じる / タブ切替の瞬間に「最後に見ていた scene」を送信
+  // ※ 二重送信防止 (pagehide と visibilitychange の両方を受けるため)
+  const sendLpExit = () => {
+    if (window.__lpExitSent) return;
+    if (!currentVisibleScene) return;
+    if (typeof gtag !== 'function') return;
+    window.__lpExitSent = true;
+    gtag('event', 'lp_exit', {
+      exit_scene: currentVisibleScene,
+      exit_scene_index: SCENE_IDS.indexOf(currentVisibleScene),
+      cta_location: 'lp_x_fav_rich',
+      transport_type: 'beacon',
+    });
+  };
+  window.addEventListener('pagehide', sendLpExit);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendLpExit();
+  });
+
+  // howto_step_view: カルーセル内の各 STEP カードの view (各 1 回のみ)
+  document.querySelectorAll('.step-card').forEach((card, idx) => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !card.dataset.gaViewed) {
+          card.dataset.gaViewed = '1';
+          const stepNum = card.querySelector('.step-num')?.textContent?.trim() || '';
+          if (typeof gtag === 'function') {
+            gtag('event', 'howto_step_view', {
+              step_index: idx,
+              step_label: stepNum,
+              cta_location: 'lp_x_fav_rich',
+            });
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(card);
+  });
+
+  // scroll_milestone: 25 / 50 / 75 / 100% (各 1 回のみ)
+  const scrollMilestones = new Set();
+  const checkScrollMilestone = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    const scrollPct = Math.round((window.scrollY / docHeight) * 100);
+    [25, 50, 75, 100].forEach((m) => {
+      if (scrollPct >= m && !scrollMilestones.has(m)) {
+        scrollMilestones.add(m);
+        if (typeof gtag === 'function') {
+          gtag('event', 'scroll_milestone', {
+            milestone_pct: m,
+            cta_location: 'lp_x_fav_rich',
+          });
+        }
+      }
+    });
+  };
+  let scrollMilestonePending = false;
+  window.addEventListener('scroll', () => {
+    if (scrollMilestonePending) return;
+    scrollMilestonePending = true;
+    requestAnimationFrame(() => {
+      scrollMilestonePending = false;
+      checkScrollMilestone();
+    });
+  }, { passive: true });
+
   // CTA クリック計測 (GA4)
   document.addEventListener('click', (ev) => {
     const target = ev.target.closest('[data-cta]');
@@ -1106,7 +1217,7 @@ twq('config','okhzr');
     if (typeof gtag === 'function') {
       gtag('event', 'cta_click', {
         cta_label: label,
-        cta_location: 'lp_x_fav',
+        cta_location: 'lp_x_fav_rich',
         link_url: target.getAttribute('href') || '',
       });
     }
