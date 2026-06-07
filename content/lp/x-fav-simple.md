@@ -141,6 +141,52 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     variant_version: 'v1',
     cta_location: 'lp_x_fav_simple',
   };
+
+  // === app DB mirror (2026-06-07 追加) ===
+  // GA4 と並行で app analytics_events テーブルに格納し、Claude から SQL で
+  // 直接 LP→signup→checkout の funnel を query できるようにする。
+  // 詳細: x-fav-gellery docs/implementation-plans/lp-event-mirror-to-app-db.md
+  const APP_DB_ENDPOINT = 'https://x-fav-gellery.com/api/analytics/lp-event';
+  function ensureAnonId() {
+    try {
+      let id = localStorage.getItem('xfg_lp_anon');
+      if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem('xfg_lp_anon', id);
+      }
+      return id;
+    } catch (e) {
+      return null;
+    }
+  }
+  function mirrorToAppDb(eventName, gtagProps) {
+    const anonId = ensureAnonId();
+    if (!anonId) return;
+    if (!gtagProps || !gtagProps.variant_id || !gtagProps.experiment_id) return;
+    const props = {
+      variant_id: gtagProps.variant_id,
+      experiment_id: gtagProps.experiment_id,
+      page_path: location.pathname,
+    };
+    if (gtagProps.scene_id !== undefined) props.scene_id = String(gtagProps.scene_id);
+    if (gtagProps.exit_scene !== undefined) props.scene_id = String(gtagProps.exit_scene);
+    if (gtagProps.scene_index !== undefined) props.scene_index = Number(gtagProps.scene_index);
+    if (gtagProps.exit_scene_index !== undefined) props.scene_index = Number(gtagProps.exit_scene_index);
+    if (gtagProps.milestone_pct !== undefined) props.scroll_depth = Number(gtagProps.milestone_pct);
+    if (gtagProps.cta_label !== undefined) props.cta_location = String(gtagProps.cta_label);
+    try {
+      const body = JSON.stringify({
+        event: eventName,
+        anonId: anonId,
+        occurredAt: new Date().toISOString(),
+        props: props,
+      });
+      const blob = new Blob([body], { type: 'application/json' });
+      navigator.sendBeacon(APP_DB_ENDPOINT, blob);
+    } catch (e) {
+      // 静かに諦める (GA4 側で計測されてれば良い)
+    }
+  }
   const SECTIONS = [
     { id: 'sIntro', label: 'intro' },
     { id: 'sWhy', label: 'why' },
@@ -173,14 +219,16 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
       const prevIdx = SECTIONS.findIndex(s => s.id === currentSection);
       const duration = Date.now() - sectionEnterTimes[currentSection];
       sectionEnterTimes[currentSection] = null;
-      if (duration >= 500 && typeof gtag === 'function') {
-        gtag('event', 'scene_exit', {
+      if (duration >= 500) {
+        const sceneExitProps = {
           scene_id: currentSection,
           scene_label: SECTIONS[prevIdx].label,
           scene_index: prevIdx,
           duration_ms: duration,
           ...EXPERIMENT_PROPS,
-        });
+        };
+        if (typeof gtag === 'function') gtag('event', 'scene_exit', sceneExitProps);
+        mirrorToAppDb('scene_exit', sceneExitProps);
       }
     }
 
@@ -189,14 +237,14 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     const el = document.getElementById(currentSection);
     if (el && !el.dataset.gaViewed) {
       el.dataset.gaViewed = '1';
-      if (typeof gtag === 'function') {
-        gtag('event', 'scene_view', {
-          scene_id: currentSection,
-          scene_label: activeSection.label,
-          scene_index: activeIdx,
-          ...EXPERIMENT_PROPS,
-        });
-      }
+      const sceneViewProps = {
+        scene_id: currentSection,
+        scene_label: activeSection.label,
+        scene_index: activeIdx,
+        ...EXPERIMENT_PROPS,
+      };
+      if (typeof gtag === 'function') gtag('event', 'scene_view', sceneViewProps);
+      mirrorToAppDb('scene_view', sceneViewProps);
     }
   };
 
@@ -218,15 +266,16 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
   const sendLpExit = () => {
     if (window.__lpExitSent) return;
     if (!currentSection) return;
-    if (typeof gtag !== 'function') return;
     window.__lpExitSent = true;
     const idx = SECTIONS.findIndex(s => s.id === currentSection);
-    gtag('event', 'lp_exit', {
+    const lpExitProps = {
       exit_scene: currentSection,
       exit_scene_index: idx,
       ...EXPERIMENT_PROPS,
       transport_type: 'beacon',
-    });
+    };
+    if (typeof gtag === 'function') gtag('event', 'lp_exit', lpExitProps);
+    mirrorToAppDb('lp_exit', lpExitProps);
   };
   window.addEventListener('pagehide', sendLpExit);
   document.addEventListener('visibilitychange', () => {
@@ -242,12 +291,12 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     [25, 50, 75, 100].forEach((m) => {
       if (scrollPct >= m && !scrollMilestones.has(m)) {
         scrollMilestones.add(m);
-        if (typeof gtag === 'function') {
-          gtag('event', 'scroll_milestone', {
-            milestone_pct: m,
-            ...EXPERIMENT_PROPS,
-          });
-        }
+        const scrollProps = {
+          milestone_pct: m,
+          ...EXPERIMENT_PROPS,
+        };
+        if (typeof gtag === 'function') gtag('event', 'scroll_milestone', scrollProps);
+        mirrorToAppDb('scroll_milestone', scrollProps);
       }
     });
   };
@@ -261,18 +310,18 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     });
   }, { passive: true });
 
-  // cta_click: data-cta 属性ベース
+  // cta_click: data-cta 属性ベース (GA4 + app DB mirror)
   document.addEventListener('click', (ev) => {
     const target = ev.target.closest('[data-cta]');
     if (!target) return;
     const label = target.getAttribute('data-cta');
-    if (typeof gtag === 'function') {
-      gtag('event', 'cta_click', {
-        cta_label: label,
-        ...EXPERIMENT_PROPS,
-        link_url: target.getAttribute('href') || '',
-      });
-    }
+    const ctaProps = {
+      cta_label: label,
+      ...EXPERIMENT_PROPS,
+      link_url: target.getAttribute('href') || '',
+    };
+    if (typeof gtag === 'function') gtag('event', 'cta_click', ctaProps);
+    mirrorToAppDb('cta_click', ctaProps);
   });
 })();
 </script>
