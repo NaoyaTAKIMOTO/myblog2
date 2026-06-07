@@ -8,6 +8,7 @@
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL5G30FP5R"></script>
+<script defer src="/js/xfg-lp-tracking.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -1109,51 +1110,11 @@ twq('config','okhzr');
     cta_location: 'lp_x_fav_rich',
   };
 
-  // === app DB mirror (2026-06-07 追加) ===
-  // GA4 と並行で app analytics_events テーブルに格納し、Claude から SQL で
-  // 直接 LP→signup→checkout の funnel を query できるようにする。
-  // 詳細: x-fav-gellery docs/implementation-plans/lp-event-mirror-to-app-db.md
-  const APP_DB_ENDPOINT = 'https://x-fav-gellery.com/api/analytics/lp-event';
-  function ensureAnonId() {
-    try {
-      let id = localStorage.getItem('xfg_lp_anon');
-      if (!id) {
-        id = crypto.randomUUID();
-        localStorage.setItem('xfg_lp_anon', id);
-      }
-      return id;
-    } catch (e) {
-      return null;
-    }
-  }
-  function mirrorToAppDb(eventName, gtagProps) {
-    const anonId = ensureAnonId();
-    if (!anonId) return;
-    if (!gtagProps || !gtagProps.variant_id || !gtagProps.experiment_id) return;
-    const props = {
-      variant_id: gtagProps.variant_id,
-      experiment_id: gtagProps.experiment_id,
-      page_path: location.pathname,
-    };
-    if (gtagProps.scene_id !== undefined) props.scene_id = String(gtagProps.scene_id);
-    if (gtagProps.exit_scene !== undefined) props.scene_id = String(gtagProps.exit_scene);
-    if (gtagProps.scene_index !== undefined) props.scene_index = Number(gtagProps.scene_index);
-    if (gtagProps.exit_scene_index !== undefined) props.scene_index = Number(gtagProps.exit_scene_index);
-    if (gtagProps.milestone_pct !== undefined) props.scroll_depth = Number(gtagProps.milestone_pct);
-    if (gtagProps.cta_label !== undefined) props.cta_location = String(gtagProps.cta_label);
-    try {
-      const body = JSON.stringify({
-        event: eventName,
-        anonId: anonId,
-        occurredAt: new Date().toISOString(),
-        props: props,
-      });
-      const blob = new Blob([body], { type: 'application/json' });
-      navigator.sendBeacon(APP_DB_ENDPOINT, blob);
-    } catch (e) {
-      // 静かに諦める (GA4 側で計測されてれば良い)
-    }
-  }
+  // app DB mirror は /js/xfg-lp-tracking.js で共通化。
+  // window.xfgLpTracking?.mirror(eventName, props) で送信する (rich/simple 共通)。
+  const mirrorToAppDb = (eventName, props) => {
+    if (window.xfgLpTracking) window.xfgLpTracking.mirror(eventName, props);
+  };
 
   const SCENE_IDS = ['s1', 's2', 'sHow', 's3'];
   const sceneEnterTimes = {};
