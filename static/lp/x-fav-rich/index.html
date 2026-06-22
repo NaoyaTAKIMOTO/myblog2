@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="X（Twitter）のいいねを自動収集し、DINOv2 AIで類似画像をレコメンド。Chrome拡張 + セルフホスト型ギャラリーアプリ。">
+<meta name="description" content="X（Twitter）のいいねした画像・動画を集めて、AIで似た画像をレコメンド。あなただけのギャラリーで、いつでも見返せます。">
 <title>x-fav-gallery — いいねした画像を、ずっと手元に</title>
 
 <!-- Google Analytics -->
@@ -641,6 +641,7 @@ twq('config','okhzr');
     p.only-mobile               { display: block !important; }
     div.only-mobile.cta-block   { display: flex !important; }
     span.only-mobile.step-num   { display: inline-block !important; }
+    .step-card-body .only-mobile { display: block !important; }
     /* mobile では step 数が減るため scroll-pin の高さも短縮 */
     #sHow { height: 200vh; }
   }
@@ -789,14 +790,14 @@ twq('config','okhzr');
         <span>あなたのギャラリーへ</span>
       </h2>
       <p class="solution-desc">
-        Chrome拡張が自動でいいねを収集。<br>
-        画像・動画・テキストを一括保存し、<br>
-        いつでも手元のギャラリーで閲覧できます。
+        いいねした画像・動画・テキストを自動で集めて、<br>
+        流れて消える前にまるごと保存。<br>
+        いつでも見返せる、あなただけのギャラリーへ。
       </p>
       <div class="feature-list">
         <div class="feature-item">
           <div class="feature-icon">⚡</div>
-          <span>Chrome拡張で自動収集・即時保存</span>
+          <span>いいねを自動で集めて、すぐギャラリーへ</span>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🖼</div>
@@ -808,7 +809,7 @@ twq('config','okhzr');
         </div>
         <div class="feature-item">
           <div class="feature-icon">🔒</div>
-          <span>完全プライベート — 自分のサーバーに保存</span>
+          <span>自分専用の、プライベートなギャラリー</span>
         </div>
       </div>
     </div>
@@ -878,8 +879,10 @@ twq('config','okhzr');
               <img class="step-img" src="/img/x-fav/landing.png" alt="X Favorites Gallery のログイン画面" loading="lazy" width="1280" height="800" />
             </div>
             <div class="step-card-body">
-              <div class="step-title">アプリにログイン</div>
-              <div class="step-desc">x-fav-gellery.com に X でログイン。拡張機能と同じアカウントを使えば、収集した画像が自動で表示されます。（Google ログインにも対応）</div>
+              <div class="step-title only-desktop">アプリにログイン</div>
+              <div class="step-desc only-desktop">x-fav-gellery.com に X でログイン。拡張機能と同じアカウントで、収集した画像が自動で表示されます。（Google ログインにも対応）</div>
+              <div class="step-title only-mobile">気になる投稿を保存</div>
+              <div class="step-desc only-mobile">X で気に入った投稿を、共有ボタンから x-fav へ。ワンタップでギャラリーに追加されます。（Android＝共有シート／iPhone＝ショートカット）</div>
             </div>
           </div>
 
@@ -959,7 +962,7 @@ twq('config','okhzr');
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
         アプリを開く
       </a>
-      <div class="cta-sub">Xログインだけで、すぐ会えます</div>
+      <div class="cta-sub">気に入った投稿を、共有ボタンからすぐ保存</div>
       <a href="/post/x-fav-gellery/" class="article-link" data-cta="cta_tech_article">技術的な詳細を読む →</a>
     </div>
 
