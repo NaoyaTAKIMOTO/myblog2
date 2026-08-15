@@ -12,10 +12,11 @@
   framework = "#custom"
 
 # === LP rename redirects (2026-06-05) ===
-# 旧 ad のリンク先 → シンプル LP に統合
+# 旧 ad のリンク先。2026-08-15 に simple → rich 統合したので **rich に直結**させる
+# (simple 経由にすると 301 が 2 段になる)
 [[redirects]]
   from = "/lp/x-fav-lp/"
-  to = "/lp/x-fav-simple/"
+  to = "/lp/x-fav-rich/"
   status = 301
   force = true
 
@@ -26,7 +27,21 @@
   status = 301
   force = true
 
-# === A/B test (2026-06-05) ===
+# === LP 統合 (2026-08-15) ===
+# A/B は 2026-06-20 に **rich 勝者**と判定済み (x-fav-gellery docs:
+# lp-engagement-improvement-2026-06)。広告リンク先は 07-27 に /x-fav/ (rich 固定) へ
+# 変更済みなので、ここで拾うのは**オーガニック流入と既存リンクの取りこぼし**。
+# content/lp/x-fav-simple.md は残すが、force = true でこの 301 が勝つ。
+[[redirects]]
+  from = "/lp/x-fav-simple/"
+  to = "/lp/x-fav-rich/"
+  status = 301
+  force = true
+
+# === A/B test (2026-06-05 / 2026-08-15 に実質終了) ===
 # /x-fav-ab/ は Edge Function (netlify/edge-functions/x-fav-ab.ts) が
 # /lp/x-fav-simple/ または /lp/x-fav-rich/ に 50/50 で 302 リダイレクトする。
 # UTM クエリは保持される。各 LP 側の cta_location で GA4 計測を分離。
+#
+# **simple を引いた訪問者は上の 301 で rich に着く**ので、実質 100% rich になった。
+# Edge Function 自体は cookie sticky を壊さないために残す (既存訪問者が 404 にならない)。

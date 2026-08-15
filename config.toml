@@ -78,9 +78,10 @@ pygmentsCodefencesGuessSyntax = true
 
 [[menu.main]]
     name = "X Favorites Gallery"
-    # AB テスト中 (2026-06-19 まで) は /x-fav-ab/ 経由で sticky cookie に従って
-    # simple / rich を出し分け。simple LP から rich への直リンクで AB 汚染するのを防ぐ。
-    url = "x-fav-ab/"
+    # AB は 2026-06-20 に rich 勝者と判定済み。2026-08-15 に simple → rich を 301 で
+    # 統合したので、メニューは splitter (/x-fav-ab/) を経由せず rich に直リンクする
+    # (splitter 経由だと 302 → 301 の 2 段になる)。
+    url = "lp/x-fav-rich/"
     parent = "アプリ"
     weight = 1
 

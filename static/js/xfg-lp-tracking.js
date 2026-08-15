@@ -52,7 +52,13 @@
         occurredAt: new Date().toISOString(),
         props: props,
       });
-      var blob = new Blob([body], { type: 'application/json' });
+      // Content-Type は text/plain でなければならない。**application/json は CORS
+      // safelisted ではないので preflight (OPTIONS) が必要になるが、sendBeacon は
+      // preflight を送れない**ため、ブラウザがリクエストを黙って捨てる (エラーも出ない)。
+      // これで 2026-07-13 の設置から source='lp' が 1 行も入らなかった。
+      // 受け側 (/api/analytics/lp-event) は Content-Type を見ずに本文を JSON として
+      // 読むので、text/plain のままで正しく解釈される。戻してはいけない。
+      var blob = new Blob([body], { type: 'text/plain;charset=UTF-8' });
       navigator.sendBeacon(APP_DB_ENDPOINT, blob);
     } catch (e) {
       // 静かに諦める (GA4 側で計測されてれば良い)
