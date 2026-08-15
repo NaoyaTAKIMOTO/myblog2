@@ -31,13 +31,14 @@ X（Twitter）でいいねした投稿が、流れていくだけになってい
 AIレコメンドで新たな発見ができるパーソナルギャラリーアプリです。
 
 <div style="text-align: center; margin: 2rem 0;">
-  <!-- iOS のみ表示: iPhone アプリ (TestFlight)。末尾 JS で iOS 判定して表示 -->
-  <a href="https://testflight.apple.com/join/MmgzFdqM" target="_blank" rel="noopener noreferrer"
-     id="ctaTestflightHero" data-cta="hero_ios_testflight"
+  <!-- iOS のみ表示: iPhone アプリ (App Store)。末尾 JS で iOS 判定して表示。
+       href は /install/ios 経由 (302) でクリック実数をサーバに残す -->
+  <a href="https://x-fav-gellery.com/install/ios?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-simple&utm_content=hero_ios" target="_blank" rel="noopener noreferrer"
+     id="ctaIosInstallHero" data-cta="hero_ios_appstore"
      style="background-color: #1DA1F2; color: white; padding: 14px 36px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; text-decoration: none; display: none;">
     iPhoneアプリを入手 →
   </a>
-  <div id="ctaTestflightHeroSub" style="display: none; color: #888; font-size: 0.85rem; margin: 0.6rem 0 1rem;">初回は無料の「TestFlight」アプリが必要です（ベータ版）</div>
+  <div id="ctaIosInstallHeroSub" style="display: none; color: #888; font-size: 0.85rem; margin: 0.6rem 0 1rem;">App Store から無料でインストール</div>
   <a href="https://x-fav-gellery.com/?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-simple&utm_content=hero" target="_blank" rel="noopener noreferrer"
      id="ctaOpenAppHero" data-cta="hero_main"
      style="background-color: #1DA1F2; color: white; padding: 14px 36px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; text-decoration: none; display: inline-block;">
@@ -129,12 +130,12 @@ X公式の「データのダウンロード」で取得したZIPファイルを�
 AIレコメンドが、好みに合った新たな出会いを届けます。
 
 <div style="text-align: center; margin: 2rem 0;">
-  <a href="https://testflight.apple.com/join/MmgzFdqM" target="_blank" rel="noopener noreferrer"
-     id="ctaTestflightClosing" data-cta="closing_ios_testflight"
+  <a href="https://x-fav-gellery.com/install/ios?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-simple&utm_content=closing_ios" target="_blank" rel="noopener noreferrer"
+     id="ctaIosInstallClosing" data-cta="closing_ios_appstore"
      style="background-color: #1DA1F2; color: white; padding: 14px 36px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; text-decoration: none; display: none;">
     iPhoneアプリを入手 →
   </a>
-  <div id="ctaTestflightClosingSub" style="display: none; color: #888; font-size: 0.85rem; margin: 0.6rem 0 1rem;">初回は無料の「TestFlight」アプリが必要です（ベータ版）</div>
+  <div id="ctaIosInstallClosingSub" style="display: none; color: #888; font-size: 0.85rem; margin: 0.6rem 0 1rem;">App Store から無料でインストール</div>
   <a href="https://x-fav-gellery.com/?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-simple&utm_content=footer" target="_blank" rel="noopener noreferrer"
      id="ctaOpenAppClosing" data-cta="closing_main"
      style="background-color: #1DA1F2; color: white; padding: 14px 36px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; text-decoration: none; display: inline-block;">
@@ -298,8 +299,8 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
     mirrorToAppDb('cta_click', ctaProps);
   });
 
-  // iOS 端末では iPhone アプリ (TestFlight) CTA を表示し、web「ギャラリーをつくる」を副次スタイルに。
-  // 非 iOS (Android 等) では TestFlight は非表示のまま、web CTA が主。
+  // iOS 端末では iPhone アプリ (App Store) CTA を表示し、web「ギャラリーをつくる」を副次スタイルに。
+  // 非 iOS (Android 等) では iOS CTA は非表示のまま、web CTA が主。
   (function () {
     var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -309,8 +310,8 @@ AIレコメンドが、好みに合った新たな出会いを届けます。
       var el = document.getElementById(id);
       if (el) { el.style.backgroundColor = 'transparent'; el.style.color = '#1DA1F2'; el.style.border = '1px solid #1DA1F2'; }
     };
-    show('ctaTestflightHero', 'inline-block'); show('ctaTestflightHeroSub', 'block'); secondary('ctaOpenAppHero');
-    show('ctaTestflightClosing', 'inline-block'); show('ctaTestflightClosingSub', 'block'); secondary('ctaOpenAppClosing');
+    show('ctaIosInstallHero', 'inline-block'); show('ctaIosInstallHeroSub', 'block'); secondary('ctaOpenAppHero');
+    show('ctaIosInstallClosing', 'inline-block'); show('ctaIosInstallClosingSub', 'block'); secondary('ctaOpenAppClosing');
   })();
 })();
 </script>
