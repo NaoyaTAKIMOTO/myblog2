@@ -21,6 +21,17 @@
   force = true
 
 # 現 ad のリンク先 → 凝った LP に統合
+#
+# 広告 (X Ads) のリンク先は apex ドメインで、公開済みの広告では変更できない。
+# 素直に書くと apex → www (Netlify のドメイン正規化) → /lp/x-fav-rich/ で 301 が
+# 2 段になるので、**apex を含む絶対 URL の from** で 1 段に潰す。
+# クエリ文字列 (utm_*) は to 側にクエリが無いので Netlify が引き継ぐ。
+[[redirects]]
+  from = "https://subcul-science.com/x-fav/*"
+  to = "https://www.subcul-science.com/lp/x-fav-rich/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/x-fav/"
   to = "/lp/x-fav-rich/"
