@@ -77,7 +77,7 @@ pygmentsCodefencesGuessSyntax = true
     weight = 4
 
 [[menu.main]]
-    name = "X Favorites Gallery"
+    name = "Refav Gallery"
     # AB は 2026-06-20 に rich 勝者と判定済み。2026-08-15 に simple → rich を 301 で
     # 統合したので、メニューは splitter (/x-fav-ab/) を経由せず rich に直リンクする
     # (splitter 経由だと 302 → 301 の 2 段になる)。
