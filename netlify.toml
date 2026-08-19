@@ -22,16 +22,12 @@
 
 # 現 ad のリンク先 → 凝った LP に統合
 #
-# 広告 (X Ads) のリンク先は apex ドメインで、公開済みの広告では変更できない。
-# 素直に書くと apex → www (Netlify のドメイン正規化) → /lp/x-fav-rich/ で 301 が
-# 2 段になるので、**apex を含む絶対 URL の from** で 1 段に潰す。
-# クエリ文字列 (utm_*) は to 側にクエリが無いので Netlify が引き継ぐ。
-[[redirects]]
-  from = "https://subcul-science.com/x-fav/*"
-  to = "https://www.subcul-science.com/lp/x-fav-rich/"
-  status = 301
-  force = true
-
+# ⚠️ apex → www (Netlify のドメイン正規化) → /lp/x-fav-rich/ で 301 が 2 段になるが、
+# **これは解消できない**。apex を含む絶対 URL の from
+# (`https://subcul-science.com/x-fav/*`) を先に置いて 1 段に潰す案を 2026-08-19 に
+# 本番で試したが、ドメイン正規化がカスタムルールより先に走るため効かなかった
+# (10 回計測して全て 2 hops)。広告のリンク先自体も公開済み広告では変更できないので、
+# 0.25 秒ぶんは受け入れる。
 [[redirects]]
   from = "/x-fav/"
   to = "/lp/x-fav-rich/"
