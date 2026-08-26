@@ -28,23 +28,24 @@ twq('config','okhzr');
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --black: #000000;
-    --white: #ffffff;
-    --gray-900: #0f0f0f;
-    --gray-800: #1a1a1a;
-    --gray-700: #2a2a2a;
-    --gray-400: #6e7681;
-    --gray-200: #b0b8c4;
+    /* ライトテーマ。トークン名は「役割」で持つ (色名で持つと反転したとき嘘になる) */
+    --bg: #ffffff;          /* ページ地 */
+    --fg: #0f1419;          /* 見出し / 主テキスト */
+    --surface: #f7f9f9;     /* 1 段沈んだ面 */
+    --surface-2: #eff3f4;   /* カード面 */
+    --border: #cfd9de;      /* 罫 / ドット */
+    --muted: #536471;       /* 補助テキスト */
+    --body: #3d4b56;        /* 本文テキスト */
     --accent: #1d9bf0;
-    --accent-dim: rgba(29,155,240,0.15);
-    --accent-glow: rgba(29,155,240,0.4);
+    --accent-dim: rgba(29,155,240,0.10);
+    --accent-glow: rgba(29,155,240,0.35);
     --red: #f4212e;
     --green: #00ba7c;
   }
 
   /* scroll-snap は X アプリ内 WebView でスワイプが重くなるため使わない (自然スクロール) */
   html { overflow-y: scroll; }
-  body { background: var(--black); color: var(--white); font-family: -apple-system, "Helvetica Neue", sans-serif; }
+  body { background: var(--bg); color: var(--fg); font-family: -apple-system, "Helvetica Neue", sans-serif; }
 
   /* ── Site nav ── */
   .site-nav {
@@ -57,15 +58,15 @@ twq('config','okhzr');
     align-items: center;
     justify-content: space-between;
     padding: 14px 24px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(255,255,255,0.72);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
   }
   .site-nav-logo {
     font-size: 13px;
     font-weight: 700;
-    color: var(--white);
+    color: var(--fg);
     text-decoration: none;
     letter-spacing: -.01em;
     opacity: .7;
@@ -79,12 +80,12 @@ twq('config','okhzr');
   }
   .site-nav-links a {
     font-size: 12px;
-    color: var(--gray-400);
+    color: var(--muted);
     text-decoration: none;
     letter-spacing: .04em;
     transition: color .2s;
   }
-  .site-nav-links a:hover { color: var(--white); }
+  .site-nav-links a:hover { color: var(--fg); }
   .nav-cta {
     font-size: 12px !important;
     color: var(--accent) !important;
@@ -121,7 +122,7 @@ twq('config','okhzr');
     opacity: 0.5;
     font-size: 11px;
     letter-spacing: .08em;
-    color: var(--gray-400);
+    color: var(--muted);
     z-index: 100;
     transition: opacity .4s;
   }
@@ -144,7 +145,7 @@ twq('config','okhzr');
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--gray-700);
+    background: var(--border);
     transition: background .3s, transform .3s;
     cursor: pointer;
   }
@@ -156,7 +157,8 @@ twq('config','okhzr');
      表示遅延のあるアニメーションは置かない。
   ════════════════════════════════ */
   #s1 {
-    background: var(--black);
+    /* 純黒 + 暗いサムネで沈むため、#s3 と同じ radial accent で地を持ち上げる */
+    background: radial-gradient(ellipse at 50% 32%, rgba(29,155,240,.10) 0%, var(--surface) 45%, var(--bg) 78%);
     height: auto;
     min-height: 100svh;
     justify-content: center;
@@ -182,7 +184,7 @@ twq('config','okhzr');
   .hero-sub {
     font-size: 15px;
     line-height: 1.7;
-    color: var(--gray-200);
+    color: var(--body);
   }
   .hero-cta {
     display: flex;
@@ -190,18 +192,29 @@ twq('config','okhzr');
     align-items: center;
     gap: 8px;
   }
-  .hero-cta-sub { font-size: 12px; color: var(--gray-400); }
+  .hero-cta-sub { font-size: 12px; color: var(--muted); }
   /* only-mobile の再表示ルールが !important なため、JS からの非表示は class で行う */
   .is-hidden { display: none !important; }
 
   .hero-shot {
     width: 100%;
+    /* モザイクは縦長 (940x620) なので、ファーストビューに CTA が残るよう高さを縛る。
+       iOS の 1 人あたり滞在は約 3 秒 = スクロールされない前提 (#s1 のコメント参照) */
+    aspect-ratio: 940 / 620;
+    max-height: 34svh;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid var(--gray-700);
-    background: var(--gray-900);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    box-shadow: 0 8px 32px rgba(15,20,25,.10);
   }
-  .hero-shot img { display: block; width: 100%; height: auto; }
+  .hero-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
 
   .hero-points {
     list-style: none;
@@ -210,7 +223,7 @@ twq('config','okhzr');
     justify-content: center;
     gap: 6px 16px;
     font-size: 12.5px;
-    color: var(--gray-200);
+    color: var(--body);
   }
   .hero-points li::before {
     content: "✓";
@@ -227,7 +240,7 @@ twq('config','okhzr');
   /* ════════════════════════════════
      SCENE 2 – 解決策
   ════════════════════════════════ */
-  #s2 { background: var(--gray-900); }
+  #s2 { background: var(--surface); }
 
   .solution-layout {
     display: grid;
@@ -260,7 +273,7 @@ twq('config','okhzr');
   .solution-heading span { color: var(--accent); }
   .solution-desc {
     font-size: 14px;
-    color: var(--gray-200);
+    color: var(--body);
     line-height: 1.7;
     margin-top: 14px;
   }
@@ -275,7 +288,7 @@ twq('config','okhzr');
     align-items: center;
     gap: 10px;
     font-size: 13px;
-    color: var(--gray-200);
+    color: var(--body);
   }
   .feature-icon {
     width: 28px;
@@ -302,15 +315,16 @@ twq('config','okhzr');
     gap: 4px;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 0 0 1px var(--gray-700), 0 24px 60px rgba(0,0,0,.6);
+    box-shadow: 0 0 0 1px var(--border), 0 20px 48px rgba(15,20,25,.12);
   }
   .gallery-cell {
     aspect-ratio: 1;
-    background: var(--gray-700);
+    background: var(--border);
     position: relative;
     overflow: hidden;
   }
   .gallery-cell svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .gallery-cell img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .gallery-cell.has-label::after {
     content: attr(data-label);
     position: absolute;
@@ -318,7 +332,7 @@ twq('config','okhzr');
     left: 6px;
     font-size: 9px;
     background: rgba(0,0,0,.7);
-    color: var(--white);
+    color: #fff;
     padding: 2px 5px;
     border-radius: 4px;
     letter-spacing: .03em;
@@ -329,7 +343,7 @@ twq('config','okhzr');
                  Apple 風 scroll-pinned カルーセル
   ════════════════════════════════ */
   #sHow {
-    background: var(--gray-900);
+    background: var(--surface);
     height: 400vh;
     display: block;
     padding: 0;
@@ -398,8 +412,8 @@ twq('config','okhzr');
 
   .step-card {
     flex: 0 0 min(720px, 84vw);
-    background: var(--gray-800);
-    border: 1px solid var(--gray-700);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 18px;
     padding: 0;
     overflow: hidden;
@@ -410,7 +424,7 @@ twq('config','okhzr');
   }
   .step-card.is-active {
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent-dim), 0 24px 60px rgba(0,0,0,.4);
+    box-shadow: 0 0 0 1px var(--accent-dim), 0 20px 48px rgba(15,20,25,.10);
     transform: translateY(-2px);
   }
 
@@ -418,7 +432,7 @@ twq('config','okhzr');
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 10;
-    background: var(--black);
+    background: var(--surface-2);
     overflow: hidden;
   }
   .step-card-body {
@@ -437,7 +451,7 @@ twq('config','okhzr');
     left: 12px;
     font-size: 11px;
     font-weight: 800;
-    color: var(--white);
+    color: #fff;
     letter-spacing: .12em;
     background: rgba(29, 155, 240, .85);
     padding: 5px 10px;
@@ -458,11 +472,11 @@ twq('config','okhzr');
     font-weight: 700;
     line-height: 1.45;
     letter-spacing: -.01em;
-    color: var(--white);
+    color: var(--fg);
   }
   .step-desc {
     font-size: 13px;
-    color: var(--gray-200);
+    color: var(--body);
     line-height: 1.7;
   }
 
@@ -476,7 +490,7 @@ twq('config','okhzr');
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--gray-700);
+    background: var(--border);
     border: 0;
     padding: 0;
     cursor: pointer;
@@ -496,7 +510,7 @@ twq('config','okhzr');
      SCENE 3 – 拡張機能インストール CTA
   ════════════════════════════════ */
   #s3 {
-    background: radial-gradient(ellipse at 60% 40%, rgba(29,155,240,.08) 0%, var(--black) 65%);
+    background: radial-gradient(ellipse at 60% 40%, rgba(29,155,240,.10) 0%, var(--bg) 62%);
   }
 
   .experience-layout {
@@ -534,7 +548,7 @@ twq('config','okhzr');
 
   .experience-sub {
     font-size: 14px;
-    color: var(--gray-200);
+    color: var(--body);
     line-height: 1.7;
     opacity: 0;
     transform: translateY(16px);
@@ -558,7 +572,7 @@ twq('config','okhzr');
     align-items: center;
     gap: 8px;
     background: var(--accent);
-    color: var(--white);
+    color: #fff;
     font-size: 15px;
     font-weight: 700;
     padding: 14px 32px;
@@ -574,7 +588,7 @@ twq('config','okhzr');
     background: #1a8cd8;
     transform: scale(1.04);
     box-shadow: 0 0 40px var(--accent-glow);
-    color: var(--white);
+    color: #fff;
   }
   /* iOS 時に web「アプリを開く」を副次ボタン化 (App Store の iOS CTA を主にする) */
   .cta-btn.cta-btn-secondary {
@@ -589,17 +603,17 @@ twq('config','okhzr');
     box-shadow: none;
     transform: none;
   }
-  .cta-sub { font-size: 12px; color: var(--gray-400); }
+  .cta-sub { font-size: 12px; color: var(--muted); }
 
   .article-link {
     font-size: 12px;
-    color: var(--gray-400);
+    color: var(--muted);
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(0,0,0,0.18);
     padding-bottom: 1px;
     transition: color .2s, border-color .2s;
   }
-  .article-link:hover { color: var(--gray-200); border-color: var(--gray-400); }
+  .article-link:hover { color: var(--body); border-color: var(--muted); }
 
   /* ── Device-targeted visibility ── */
   .only-mobile { display: none !important; }
@@ -619,17 +633,6 @@ twq('config','okhzr');
     /* 主 CTA (s3) までのスクロール量を削るため短縮 */
     #sHow { height: 140vh; }
   }
-
-  /* ── Palette blocks in gallery ── */
-  .c1 { background: #1e3a5f; }
-  .c2 { background: #2d1b4e; }
-  .c3 { background: #1a3d2b; }
-  .c4 { background: #3d1f1f; }
-  .c5 { background: #1a2a3a; }
-  .c6 { background: #2a1a3a; }
-  .c7 { background: #1a3a3a; }
-  .c8 { background: #3a2a1a; }
-  .c9 { background: #2a3a1a; }
 </style>
 </head>
 <body>
@@ -721,10 +724,10 @@ twq('config','okhzr');
 
     <div class="hero-shot">
       <img
-        src="/img/x-fav/hero-gallery-strip.jpg"
+        src="/img/x-fav/hero-gallery-mosaic.jpg"
         alt="取り込んだいいねが並ぶ Refav Gallery のギャラリー画面"
         width="940"
-        height="320"
+        height="620"
         fetchpriority="high"
         decoding="async"
       />
@@ -778,15 +781,15 @@ twq('config','okhzr');
 
     <div class="gallery-mock" id="solGallery">
       <div class="gallery-grid">
-        <div class="gallery-cell c1 has-label" data-label="写真"></div>
-        <div class="gallery-cell c2 has-label" data-label="イラスト"></div>
-        <div class="gallery-cell c3 has-label" data-label="AI Art"></div>
-        <div class="gallery-cell c4"></div>
-        <div class="gallery-cell c5"></div>
-        <div class="gallery-cell c6"></div>
-        <div class="gallery-cell c7"></div>
-        <div class="gallery-cell c8 has-label" data-label="動画"></div>
-        <div class="gallery-cell c9"></div>
+        <div class="gallery-cell has-label" data-label="写真"><img src="/img/x-fav/gallery-cell-1.jpg" alt="駅前のクリスマスツリー" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-2.jpg" alt="葉にとまるカメレオン" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-3.jpg" alt="ソファでくつろぐ猫" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-4.jpg" alt="雪が積もった駐車場" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-5.jpg" alt="満開の桜並木" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-6.jpg" alt="箱をのぞきこむ犬" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-7.jpg" alt="水槽を泳ぐアザラシ" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-8.jpg" alt="水中を泳ぐアザラシ 2 頭" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-9.jpg" alt="岩壁を登るトカゲ" loading="lazy" width="300" height="300" /></div>
       </div>
     </div>
 
@@ -853,7 +856,7 @@ twq('config','okhzr');
             <div class="step-card-media">
               <span class="step-num only-desktop">STEP 04</span>
               <span class="step-num only-mobile">STEP 02</span>
-              <img class="step-img" src="/img/x-fav/hero-gallery-strip.jpg" alt="マイギャラリーの一覧表示" loading="lazy" width="940" height="320" />
+              <img class="step-img" src="/img/x-fav/hero-gallery-mosaic.jpg" alt="マイギャラリーの一覧表示" loading="lazy" width="940" height="620" />
             </div>
             <div class="step-card-body">
               <div class="step-title">マイギャラリーで再発見</div>
