@@ -1,0 +1,168 @@
+/**
+ * 2026-09 の creative x LP 2x2 A/B で使う LP 共通のスタイル。
+ *
+ * **両アームで同じファイルを読む。** レイアウトが非対称だと「文言の差」を
+ * 測っているつもりで「組みの差」を測ることになるので、
+ * HTML 側で変えるのは <html data-arm> と文言だけにする。
+ *
+ * 1 画面完結。実測で 110 端末中 92 (84%) が 1 画面目から動かず、
+ * s2 / sHow / s3 はどの cohort でも 1 件も転換させていないため、
+ * 2 画面目以降を作らない。
+ *   → x-fav-gellery docs/implementation-plans/ad-ab-creative-lp-2026-09.md
+ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* トークンは「役割」で持つ (色名で持つとテーマを反転したとき嘘になる) */
+:root {
+  --bg: #ffffff;
+  --fg: #0f1419;
+  --body: #3d4b56;
+  --muted: #536471;
+  --border: #cfd9de;
+  --accent: #1d9bf0;
+  --accent-fg: #ffffff;
+  --shadow: 0 12px 32px rgba(15, 20, 25, 0.12);
+}
+
+/* 痛みアームはダーク。「流れて消えていく」を地の色でも言わせる */
+[data-arm="pain"] {
+  --bg: #0a0d11;
+  --fg: #ffffff;
+  --body: #b6bec8;
+  --muted: #8d97a3;
+  --border: #263039;
+  --accent: #1d9bf0;
+  --accent-fg: #ffffff;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+    "Noto Sans JP", "Segoe UI", sans-serif;
+  line-height: 1.7;
+  /* svh を使う。iOS の Safari はアドレスバーの伸縮で vh が跳ねる */
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+.hero {
+  width: 100%;
+  max-width: 560px;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+/* 痛みアームの eyebrow だけは警告色にする (アクセントでは弱い) */
+[data-arm="pain"] .hero-eyebrow { color: #e53950; }
+
+.hero-heading {
+  font-size: clamp(28px, 7.5vw, 40px);
+  line-height: 1.3;
+  font-weight: 800;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.hero-heading .accent { color: var(--accent); }
+[data-arm="pain"] .hero-heading .accent { color: #e53950; }
+
+.hero-sub {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--body);
+}
+
+.hero-cta { margin-top: 22px; }
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 30px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+
+.cta-btn:active { transform: translateY(1px); }
+
+.cta-sub {
+  margin-top: 9px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hero-shot {
+  margin-top: 24px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.hero-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* 1 画面に収めるための上限。CTA を画面外に押し出さないことが最優先 */
+  max-height: 34svh;
+  object-fit: cover;
+}
+
+.hero-points {
+  margin-top: 18px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hero-points li::before {
+  content: "・";
+  color: var(--accent);
+}
+
+.hero-foot {
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.hero-foot a { color: var(--muted); }
+
+/* 横長の画面では 2 カラムにして、画像を大きく見せつつ CTA を上に保つ */
+@media (min-width: 900px) {
+  .hero {
+    max-width: 1020px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    text-align: left;
+  }
+  .hero-shot { margin-top: 0; }
+  .hero-shot img { max-height: none; }
+  .hero-points { justify-content: flex-start; }
+}

@@ -45,10 +45,15 @@
   status = 301
   force = true
 
-# === A/B test (2026-06-05 / 2026-08-15 に実質終了) ===
-# /x-fav-ab/ は Edge Function (netlify/edge-functions/x-fav-ab.ts) が
-# /lp/x-fav-simple/ または /lp/x-fav-rich/ に 50/50 で 302 リダイレクトする。
-# UTM クエリは保持される。各 LP 側の cta_location で GA4 計測を分離。
+# === A/B test ===
+# 2026-06 の rich/simple は 2026-08-15 に rich 勝者で終了。
+# **2026-09 から creative x LP の 2x2 A/B に転用している**:
+# /x-fav-ab/ の Edge Function (netlify/edge-functions/x-fav-ab.ts) が
+# /lp/x-fav-pain/ または /lp/x-fav-gain/ に 50/50 で 302 リダイレクトする。
+# UTM クエリは保持される (広告リンクの utm_content = creative アームが
+# 振り分け先まで届かないとセルが割れない)。
 #
-# **simple を引いた訪問者は上の 301 で rich に着く**ので、実質 100% rich になった。
-# Edge Function 自体は cookie sticky を壊さないために残す (既存訪問者が 404 にならない)。
+# ⚠️ 新アームの 2 パスには **redirect ルールを足さないこと**。上の
+# /lp/x-fav-simple/ のような force = true の 301 を当てると 302 の後に
+# さらに 1 段増え、着地率が落ちる。
+#   → x-fav-gellery docs/implementation-plans/ad-ab-creative-lp-2026-09.md

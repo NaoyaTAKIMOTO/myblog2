@@ -1,17 +1,25 @@
 import type { Context } from "https://edge.netlify.com";
 
 /**
- * /x-fav-ab/ への流入を /lp/x-fav-simple/ または /lp/x-fav-rich/ に
- * 50/50 で 302 リダイレクトする AB スプリッタ。
+ * /x-fav-ab/ への流入を 50/50 で 302 リダイレクトする AB スプリッタ。
  *
  * session-sticky: 初回 visit で lp_variant cookie を発行し、以降の
  * visit は同じ variant に固定する。これで「同一 user が両 LP を見て
  * conversion 帰属が曖昧になる」AB 汚染を防ぐ。
  *
  * cookie 有効期限: 30 日 (Round 1 観察期間 2 週間より十分長い)。
+ *
+ * **2026-09: 振り分け先を creative x LP 2x2 A/B のアームに差し替えた。**
+ * 旧アーム (x-fav-simple / x-fav-rich) は 2026-06-20 に rich 勝者で決着済み。
+ * 値を変えたことで、旧 cohort が持っている lp_variant cookie は
+ * readCookieVariant が null を返して引き直されるため、自動的に無効化される。
+ *   → x-fav-gellery docs/implementation-plans/ad-ab-creative-lp-2026-09.md
+ *
+ * query string は target.search で透過する。**広告リンクの utm_content
+ * (creative アーム) が振り分け先まで届かないとセルが割れない。**
  */
 
-const VARIANTS = ["x-fav-simple", "x-fav-rich"] as const;
+const VARIANTS = ["x-fav-pain", "x-fav-gain"] as const;
 type Variant = (typeof VARIANTS)[number];
 
 const COOKIE_NAME = "lp_variant";
