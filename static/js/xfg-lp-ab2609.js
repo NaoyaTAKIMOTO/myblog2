@@ -99,25 +99,31 @@
   };
 
   // ── iOS 出し分け ──────────────────────────────────────────
-  // 広告は iOS のみに配信するが、organic とデスクトップの受け皿は残す。
-  // iOS の web 導線は未ログインだとログイン画面に落ちるので hero には出さない。
-  var applyIos = function () {
+  // **既定 (HTML) は App Store CTA で、非 iOS のときだけ web CTA に差し替える。**
+  // 広告流入の 94% が iOS なので、JS が落ちても多数派には正しいボタンが残る。
+  // iOS の web 導線は未ログインだとログイン画面に落ちるため、iOS に web CTA を
+  // 出してしまうのがいちばん高くつく壊れ方になる。
+  //   → x-fav-gellery docs/implementation-plans/archive/ad-platform-cta-analysis-2026-07.md
+  //
+  // desktop では App Store CTA が一瞬見えてから web CTA に入れ替わるが、
+  // desktop は流入の数 % なので、iOS 側の確実性と引き換えに受け入れる。
+  var applyPlatformCta = function () {
     var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (!isIOS) return;
+    if (isIOS) return;
     var ios = document.getElementById('heroTopIos');
     var iosSub = document.getElementById('heroTopIosSub');
     var web = document.getElementById('heroTopWeb');
-    if (ios) ios.style.display = 'inline-flex';
-    if (iosSub) iosSub.style.display = 'block';
-    if (web) web.style.display = 'none';
+    if (ios) ios.style.display = 'none';
+    if (iosSub) iosSub.style.display = 'none';
+    if (web) web.style.display = 'inline-flex';
   };
 
   var init = function () {
     // UTM の引き継ぎは **クリック計測より先**に済ませる。
     // cta_click の link_url を、実際に飛ぶ URL と一致させるため。
     forwardUtm();
-    applyIos();
+    applyPlatformCta();
     document.addEventListener('click', onClick);
     window.addEventListener('pagehide', sendLpExit);
     document.addEventListener('visibilitychange', function () {
