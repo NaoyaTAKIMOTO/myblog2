@@ -114,10 +114,18 @@
     var ios = document.getElementById('heroTopIos');
     var iosSub = document.getElementById('heroTopIosSub');
     var web = document.getElementById('heroTopWeb');
+    var platformSub = document.getElementById('heroTopPlatformSub');
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    if (platformSub) {
+      platformSub.textContent = isAndroid
+        ? 'いいねの取り込みにはPCのChrome拡張機能が必要です。Androidでは、取り込んだいいねをWeb版で閲覧できます。'
+        : 'PCではChrome拡張機能を使って、Xのいいねを取り込みます。';
+      platformSub.style.display = 'block';
+    }
     if (ios) ios.style.display = 'none';
     if (iosSub) iosSub.style.display = 'none';
     if (web) {
-      if (!/Android/i.test(navigator.userAgent)) {
+      if (!isAndroid) {
         web.href = 'https://chromewebstore.google.com/detail/refav-gallery/pkdgfikellllhmbkipeommabhndffmdg';
         web.textContent = 'Chrome拡張機能を入手';
         web.setAttribute('data-cta', 'hero_top_install');
