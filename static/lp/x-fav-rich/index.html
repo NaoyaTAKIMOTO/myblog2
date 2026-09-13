@@ -708,7 +708,7 @@ twq('config','okhzr');
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 4.97 3.028 9.232 7.343 11.04l3.66-6.34A4.5 4.5 0 0112 7.5h8.485A11.97 11.97 0 0012 0zm0 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm5.55 1.5A4.5 4.5 0 0118 13.5a4.5 4.5 0 01-2.235 3.882l-3.66 6.34c.625.116 1.27.178 1.93.178 6.627 0 12-5.373 12-12 0-1.567-.3-3.064-.844-4.434L17.55 9zM7.5 12a4.5 4.5 0 011.84-3.633l-3.661-6.34A11.985 11.985 0 00.844 7.5L9.84 13.234A4.5 4.5 0 017.5 12z"/></svg>
         Chrome に追加する
       </a>
-      <div class="hero-cta-sub only-desktop">無料。X を見ている間に、いいねを自動で集めます</div>
+      <div class="hero-cta-sub only-desktop">PCではChrome拡張機能を使って、Xのいいねを取り込みます。無料で利用できます。</div>
 
       <!-- 非 iOS モバイル (Android 等) の受け皿。既定は非表示で、末尾 JS が出す。
            .only-mobile の !important に勝つ必要があるのでインライン style ではなく
@@ -723,6 +723,7 @@ twq('config','okhzr');
       >
         Web版を開く
       </a>
+      <div class="hero-cta-sub" id="heroTopAndroidSub" style="display:none">いいねの取り込みにはPCのChrome拡張機能が必要です。Androidでは、取り込んだいいねをWeb版で閲覧できます。</div>
     </div>
 
     <div class="hero-shot">
@@ -1246,6 +1247,14 @@ twq('config','okhzr');
     hide('heroTopIosSub');
     var heroWeb = document.getElementById('heroTopWeb');
     if (heroWeb) heroWeb.classList.remove('is-hidden');
+    if (/Android/i.test(navigator.userAgent)) {
+      var androidSub = document.getElementById('heroTopAndroidSub');
+      if (androidSub) androidSub.style.display = 'block';
+      var openAppSub = document.getElementById('ctaOpenAppSub');
+      if (openAppSub) openAppSub.textContent = 'いいねの取り込みにはPCのChrome拡張機能が必要です。Androidでは、取り込んだいいねをWeb版で閲覧できます。';
+      var webButton = document.getElementById('ctaOpenApp');
+      if (webButton) webButton.textContent = 'Web版を開く';
+    }
     // s3 の CTA ブロックも同じ向きに戻す
     hide('ctaIosInstall');
     hide('ctaIosInstallSub');
@@ -1255,7 +1264,7 @@ twq('config','okhzr');
     var navCta = document.getElementById('navCtaMobile');
     if (navCta) {
       navCta.href = 'https://x-fav-gellery.com/?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-rich&utm_content=nav';
-      navCta.textContent = 'アプリを開く';
+      navCta.textContent = 'Web版を開く';
       navCta.setAttribute('data-cta', 'nav_open_app');
     }
   })();
