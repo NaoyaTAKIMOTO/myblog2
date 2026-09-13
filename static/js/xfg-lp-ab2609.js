@@ -116,7 +116,14 @@
     var web = document.getElementById('heroTopWeb');
     if (ios) ios.style.display = 'none';
     if (iosSub) iosSub.style.display = 'none';
-    if (web) web.style.display = 'inline-flex';
+    if (web) {
+      if (!/Android/i.test(navigator.userAgent)) {
+        web.href = 'https://chromewebstore.google.com/detail/refav-gallery/pkdgfikellllhmbkipeommabhndffmdg';
+        web.textContent = 'Chrome拡張機能を入手';
+        web.setAttribute('data-cta', 'hero_top_install');
+      }
+      web.style.display = 'inline-flex';
+    }
   };
 
   var init = function () {
