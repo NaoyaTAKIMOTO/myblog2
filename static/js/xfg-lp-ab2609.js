@@ -126,7 +126,7 @@
     if (iosSub) iosSub.style.display = 'none';
     if (web) {
       if (!isAndroid) {
-        web.href = 'https://chromewebstore.google.com/detail/refav-gallery/pkdgfikellllhmbkipeommabhndffmdg';
+        web.href = 'https://x-fav-gellery.com/install/cws?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-ab2609&utm_content=hero_top_install';
         web.textContent = 'Chrome拡張機能を入手';
         web.setAttribute('data-cta', 'hero_top_install');
       }
@@ -137,8 +137,8 @@
   var init = function () {
     // UTM の引き継ぎは **クリック計測より先**に済ませる。
     // cta_click の link_url を、実際に飛ぶ URL と一致させるため。
-    forwardUtm();
     applyPlatformCta();
+    forwardUtm();
     document.addEventListener('click', onClick);
     window.addEventListener('pagehide', sendLpExit);
     document.addEventListener('visibilitychange', function () {
