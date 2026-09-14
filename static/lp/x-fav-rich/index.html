@@ -708,7 +708,7 @@ twq('config','okhzr');
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 4.97 3.028 9.232 7.343 11.04l3.66-6.34A4.5 4.5 0 0112 7.5h8.485A11.97 11.97 0 0012 0zm0 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm5.55 1.5A4.5 4.5 0 0118 13.5a4.5 4.5 0 01-2.235 3.882l-3.66 6.34c.625.116 1.27.178 1.93.178 6.627 0 12-5.373 12-12 0-1.567-.3-3.064-.844-4.434L17.55 9zM7.5 12a4.5 4.5 0 011.84-3.633l-3.661-6.34A11.985 11.985 0 00.844 7.5L9.84 13.234A4.5 4.5 0 017.5 12z"/></svg>
         Chrome に追加する
       </a>
-      <div class="hero-cta-sub only-desktop">PCではChrome拡張機能を使って、Xのいいねを取り込みます。無料で利用できます。</div>
+      <div class="hero-cta-sub only-desktop" id="heroTopInstallSub">PCではChrome拡張機能を使って、Xのいいねを取り込みます。無料で利用できます。</div>
 
       <!-- 非 iOS モバイル (Android 等) の受け皿。既定は非表示で、末尾 JS が出す。
            .only-mobile の !important に勝つ必要があるのでインライン style ではなく
@@ -1228,21 +1228,50 @@ twq('config','okhzr');
     mirrorToAppDb('cta_click', ctaProps);
   });
 
-  // **既定 (HTML) は App Store CTA で、非 iOS のときだけ web CTA に差し替える。**
+  // **既定 (HTML) は App Store CTA で、デバイス別に差し替える。**
   // 広告流入の 94% が iOS なので、JS が走る前 / 走らなかった場合でも多数派には
-  // 正しいボタンが出ている状態にしておく。iOS の web 導線は未ログインだとログイン
-  // 画面に落ちるため、iOS に web CTA を出してしまうのがいちばん高くつく壊れ方になる。
-  // pain / gain アーム (xfg-lp-ab2609.js) は 2026-08-28 の a89ddbb で同じ反転を
-  // 入れているが、本 LP だけ旧来の既定が残っていた。
+  // 正しいボタンが出ている状態にしておく。
   //
-  // desktop では App Store CTA が一瞬見えてから入れ替わるが、desktop は流入の
-  // 数 % なので iOS 側の確実性と引き換えに受け入れる。
+  // 判定はサーバ側 resolveVisitorPlatform と同じ順序 (Android → iOS →
+  // Chromium → other)。幅ベースの CSS (.only-desktop) だけだと iPad 横向き・
+  // デスクトップ表示要求等で拡張 CTA が iOS に見えてしまう
+  // (cws送客の 22% が iOS だった。2026-09-14 実測)。UA で明示的に隠す。
+  //
+  // 行き先の対応表:
+  //   iOS              → App Store (拡張 CTA を隠す)
+  //   Android          → web (拡張 CTA を隠す。拡張は入らない)
+  //   desktop Chromium → 拡張直行 (web CTA を隠す。hero_top_web の click が
+  //                        全て desktop-chromium だったため)
+  //   desktop other    → 従来どおり (web + 拡張の併記。web 先にアーカイブ経路あり)
+  //
+  // pain / gain アーム (xfg-lp-ab2609.js) には触らない。2x2 実験中のため。
   (function () {
-    var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    var ua = navigator.userAgent || '';
+    var isAndroid = ua.indexOf('Android') !== -1;
+    var isIOS = /iPhone|iPad|iPod/.test(ua) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (isIOS) return;
+    var isChromium = !isAndroid && !isIOS &&
+      (/Chrome\/|Chromium\/|Edg\//.test(ua));
+    // 狭いウィンドウでは CSS が mobile レイアウト (拡張ボタン非表示) になる。
+    // その状態で web まで隠すと CTA がゼロになるので、出し分けは広い画面に限る。
+    var isNarrow = window.matchMedia &&
+      window.matchMedia('(max-width: 760px)').matches;
     var hide = function (id) { var el = document.getElementById(id); if (el) el.style.display = 'none'; };
-    // Hero (ファーストビュー): App Store CTA を下げ、web CTA を出す
+    var hideCta = function (label) {
+      var els = document.querySelectorAll('a[data-cta="' + label + '"]');
+      for (var i = 0; i < els.length; i++) els[i].style.display = 'none';
+    };
+
+    // 1. 拡張が入らない端末 (iOS / Android) には拡張 CTA を出さない
+    if (isIOS || isAndroid) {
+      hideCta('nav_install');
+      hideCta('hero_top_install');
+      hideCta('hero_install');
+      hide('heroTopInstallSub');
+    }
+    // 2. iOS は App Store 既定のまま (拡張を隠した上で return)
+    if (isIOS) return;
+    // 3. 非 iOS: App Store hero / s3 を隠す (従来どおり)
     hide('heroTopIos');
     hide('heroTopIosSub');
     var heroWeb = document.getElementById('heroTopWeb');
@@ -1258,15 +1287,24 @@ twq('config','okhzr');
     // s3 の CTA ブロックも同じ向きに戻す
     hide('ctaIosInstall');
     hide('ctaIosInstallSub');
-    var openApp = document.getElementById('ctaOpenApp');
-    if (openApp) openApp.classList.remove('cta-btn-secondary');
-    // ナビ (ヘッダー) の mobile CTA を web 動線に戻す
+    // ナビ (ヘッダー) の mobile CTA を web 動線に戻す (mobile layout でのみ見える)
     var navCta = document.getElementById('navCtaMobile');
     if (navCta) {
       navCta.href = 'https://x-fav-gellery.com/?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-rich&utm_content=nav';
       navCta.textContent = 'Web版を開く';
       navCta.setAttribute('data-cta', 'nav_open_app');
     }
+    // 4. web CTA は Chromium 以外に出す。Chromium (広い画面) は拡張直行。
+    // Android は mobile layout なので heroTopWeb の class 解除が必要。
+    if (isChromium && !isNarrow) {
+      hide('heroTopWeb');
+      hide('heroTopAndroidSub');
+      hide('ctaOpenApp');
+      hide('ctaOpenAppSub');
+      return;
+    }
+    var openApp = document.getElementById('ctaOpenApp');
+    if (openApp) openApp.classList.remove('cta-btn-secondary');
   })();
 
   // 端末別リンクを確定してから、流入広告の識別情報を引き継ぐ。
