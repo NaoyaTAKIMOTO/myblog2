@@ -1308,10 +1308,16 @@ twq('config','okhzr');
   })();
 
   // 端末別リンクを確定してから、流入広告の識別情報を引き継ぐ。
-  // utm_content はボタン位置を維持し、広告クリエイティブは utm_term に渡す。
+  // utm_content はボタン位置を維持し、utm_term には帰属ラベルを渡す。
+  //
+  // **広告リンクは出稿後に変更できない**ため、現行 campaign 42028610 は utm_content を
+  // 持たない。その場合に `direct` へ落とすと canonical な 302 (analytics_install_redirects)
+  // を LP 別に割れないので、**LP variant を utm_term に載せる**。creative 帰属は
+  // 新しいリンクを持つ新規ポストを足すまで取れない。
   (function () {
+    var LP_VARIANT = 'rich'; // 新しい hero variant を作るときは variant_id / LP_VARIANT_IDS と揃える
     var incoming = new URLSearchParams(location.search);
-    var creative = incoming.get('utm_content') || 'direct';
+    var creative = incoming.get('utm_content') || LP_VARIANT;
     var campaign = incoming.get('utm_campaign');
     document.querySelectorAll('a[data-cta][href]').forEach(function (link) {
       try {
