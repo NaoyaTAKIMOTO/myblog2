@@ -60,5 +60,9 @@ export default async (
 };
 
 export const config = {
-  path: ["/x-fav-ab", "/x-fav-ab/"],
+  // 2026-09-16: ヒーロー訴求 A/B (WS-3) のため **現行 ad 着地 `/x-fav/` も拾う**。
+  // 広告リンクを変えずに main campaign を splitter に通すため。
+  // `/x-fav/` の netlify.toml 301 (→ rich) はこの Edge Function が先に処理する想定
+  // (デプロイ後に本番で 302 を確認する)。
+  path: ["/x-fav-ab", "/x-fav-ab/", "/x-fav", "/x-fav/"],
 };

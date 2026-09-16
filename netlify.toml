@@ -20,17 +20,17 @@
   status = 301
   force = true
 
-# 現 ad のリンク先 → 凝った LP に統合
+# 現 ad のリンク先。**2026-09-16: ヒーロー訴求 A/B (WS-3) で splitter に向ける。**
 #
-# ⚠️ apex → www (Netlify のドメイン正規化) → /lp/x-fav-rich/ で 301 が 2 段になるが、
-# **これは解消できない**。apex を含む絶対 URL の from
-# (`https://subcul-science.com/x-fav/*`) を先に置いて 1 段に潰す案を 2026-08-19 に
-# 本番で試したが、ドメイン正規化がカスタムルールより先に走るため効かなかった
-# (10 回計測して全て 2 hops)。広告のリンク先自体も公開済み広告では変更できないので、
-# 0.25 秒ぶんは受け入れる。
+# まず Edge Function (x-fav-ab.ts) が `/x-fav/` を拾って 302 で pain/gain に割る。
+# ここは **precedence が不確実なときの fallback** で、redirect が勝っても
+# `/x-fav-ab/` (splitter) に着くので A/B は成立する (その場合は 301 + 302 の 2 hop)。
+# **テスト終了後は `/lp/x-fav-rich/` に戻す。**
+#
+# ⚠️ apex → www (Netlify のドメイン正規化) の 1 hop は解消できない (2026-08-19 実測)。
 [[redirects]]
   from = "/x-fav/"
-  to = "/lp/x-fav-rich/"
+  to = "/x-fav-ab/"
   status = 301
   force = true
 
