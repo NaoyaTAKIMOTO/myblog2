@@ -41,7 +41,15 @@
   // そのままだと /install/ios に着いた時点で creative ラベルが上書きされて消え、
   // サーバ側 (ios_install_redirect) を creative 別に割れなくなる。
   // → creative は utm_term に載せ替えて渡す。utm_campaign は流入時の値を優先する。
+  //
+  // 広告リンクは出稿後に変えられず現行 campaign は utm_content を持たないため、
+  // CREATIVE の fallback ('direct') をそのまま渡すと 302 を LP アームで割れなかった
+  // (A/B 後の lp 面 302 の 23/27 件が utm_term=direct / 2026-09-19)。rich と同じく
+  // **utm_content が無ければ LP variant を載せる**。creative 値は cr_pain / cr_gain なので
+  // variant (pain / gain) と衝突しない。beacon の experiment_id は CREATIVE のまま (A/B 判定の定義を変えない)。
+  // → x-fav-gellery docs/implementation-plans/acquisition-lp-conversion-2026-09.md WS-6
   var INCOMING_CAMPAIGN = params.get('utm_campaign');
+  var TERM = params.get('utm_content') || VARIANT;
 
   var forwardUtm = function () {
     var links = document.querySelectorAll('a[data-cta][href]');
@@ -50,7 +58,7 @@
       if (href.indexOf('http') !== 0) continue;
       try {
         var url = new URL(href);
-        url.searchParams.set('utm_term', CREATIVE);
+        url.searchParams.set('utm_term', TERM);
         if (INCOMING_CAMPAIGN) url.searchParams.set('utm_campaign', INCOMING_CAMPAIGN);
         links[i].setAttribute('href', url.toString());
       } catch (e) {
