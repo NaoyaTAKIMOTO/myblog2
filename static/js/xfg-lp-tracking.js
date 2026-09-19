@@ -27,6 +27,17 @@
   var APP_DB_ENDPOINT = 'https://x-fav-gellery.com/api/analytics/lp-event';
   var HEARTBEAT_SECONDS = [3, 10];
 
+  // X (Twitter) ピクセルのコンバージョンイベント ID。**CTA (ストアへ送るボタン) の押下**を
+  // 表す。広告の Objective は Website clicks のままで、まずは件数を観測するために入れる
+  // (最適化対象に据えるかは件数を見てから判断する)。
+  //
+  // ⚠️ **金額 (value / currency) は渡さない。** 実際の課金はアプリ内課金で web からは
+  // 観測できず、渡すと実在しない売上で入札が歪む。
+  // ⚠️ イベント種別は購入ではなく「購入手前の意思表示」で作ってある。X の管理画面で
+  // Purchase として数えないこと。
+  //   → x-fav-gellery docs/implementation-plans/acquisition-lp-conversion-2026-09.md
+  var X_PIXEL_CTA_EVENT_ID = 'tw-okhzr-rfhj1';
+
   // head の stub が溜めた呼び出し ([eventName, props, occurredAt])。
   var pending = (window.xfgLpTracking && window.xfgLpTracking._q) || [];
 
@@ -44,6 +55,16 @@
   }
 
   function mirror(eventName, gtagProps, occurredAt) {
+    // **ピクセルは app DB 側の gate より前に撃つ。** localStorage が使えない端末では
+    // anonId が null で以降を諦めるが、X 側の計測はそれとは独立に成立させたい。
+    if (eventName === 'cta_click' && typeof window.twq === 'function') {
+      try {
+        window.twq('event', X_PIXEL_CTA_EVENT_ID, {});
+      } catch (e) {
+        // ピクセルが落ちていても LP の計測は続ける
+      }
+    }
+
     var anonId = ensureAnonId();
     if (!anonId) return;
     if (!gtagProps || !gtagProps.variant_id || !gtagProps.experiment_id) return;
