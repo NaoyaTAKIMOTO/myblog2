@@ -181,7 +181,7 @@ twq('config','okhzr');
     line-height: 1.25;
     letter-spacing: -.02em;
   }
-  .hero-heading span { color: var(--accent); }
+  .hero-heading .accent { color: var(--accent); }
   .hero-sub {
     font-size: 15px;
     line-height: 1.7;
@@ -629,6 +629,10 @@ twq('config','okhzr');
     p.only-mobile               { display: block !important; }
     div.only-mobile.cta-block   { display: flex !important; }
     span.only-mobile.step-num   { display: inline-block !important; }
+    /* ヒーローの文言をスマホ (= 広告流入の iOS) だけ差し替える。
+       広告 creative (cr_iphone2610) の約束「iPhone で / スクロールするだけ」と揃える */
+    .hero-heading .only-mobile,
+    .hero-sub .only-mobile       { display: inline !important; }
     .step-card-body .only-mobile { display: block !important; }
     /* mobile では step 数が減るため scroll-pin の高さも短縮 */
     /* 主 CTA (s3) までのスクロール量を削るため短縮 */
@@ -672,12 +676,18 @@ twq('config','okhzr');
 ═══════════════════════════════ -->
 <section class="scene" id="s1">
   <div class="hero">
+    <!-- スマホは広告 creative (cr_iphone2610) と同じ約束に揃える。
+         iOS の取り込みは手でスクロールなので「自動」とは言わない。
+         PC は Chrome 拡張が本当に自動収集するので従来の文言のまま -->
     <h1 class="hero-heading">
-      いいねした X の画像・動画を、<br>
-      <span>ぜんぶ自分のギャラリーに。</span>
+      <span class="only-desktop">いいねした X の画像・動画を、<br>
+      <span class="accent">ぜんぶ自分のギャラリーに。</span></span>
+      <span class="only-mobile">X のいいねを、iPhone で<br>
+      <span class="accent">自分だけのギャラリーに。</span></span>
     </h1>
     <p class="hero-sub">
-      流れて見失ういいねを自動で集めて、いつでも見返す。<br>
+      <span class="only-desktop">流れて見失ういいねを自動で集めて、いつでも見返す。</span>
+      <span class="only-mobile">いいね欄をスクロールするだけで取り込み。</span><br>
       AI が「これに似た画像」も連れてきます。
     </p>
 
@@ -739,7 +749,7 @@ twq('config','okhzr');
     </div>
 
     <ul class="hero-points">
-      <li>いいねを自動で集めてギャラリーへ</li>
+      <li>いいねをまとめて取り込んで、すぐギャラリーへ</li>
       <li>画像・動画・テキストを一元管理</li>
       <li>AI が似た作品をレコメンド</li>
     </ul>
@@ -761,13 +771,13 @@ twq('config','okhzr');
       </h2>
       <p class="solution-desc">
         ビジュアルなギャラリーでいいねを一覧。<br>
-        「あの画像どこだっけ」が無くなって、<br>
+        忘れていたいいねが、また目に入って、<br>
         AI が似たテイストの作品まで連れてきます。
       </p>
       <div class="feature-list">
         <div class="feature-item">
           <div class="feature-icon">⚡</div>
-          <span>いいねを自動で集めて、すぐギャラリーへ</span>
+          <span>いいねをまとめて取り込んで、すぐギャラリーへ</span>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🖼</div>
