@@ -9,8 +9,8 @@ import type { Context } from "https://edge.netlify.com";
  *
  * cookie 有効期限: 30 日 (Round 1 観察期間 2 週間より十分長い)。
  *
- * **2026-09: 振り分け先を creative x LP 2x2 A/B のアームに差し替えた。**
- * 旧アーム (x-fav-simple / x-fav-rich) は 2026-06-20 に rich 勝者で決着済み。
+ * **2026-09: rich 対 rich-visual の冒頭実画面 A/B。**
+ * rich は同時対照として維持し、旧 pain / gain cookie は無効化する。
  * 値を変えたことで、旧 cohort が持っている lp_variant cookie は
  * readCookieVariant が null を返して引き直されるため、自動的に無効化される。
  *   → x-fav-gellery docs/implementation-plans/ad-ab-creative-lp-2026-09.md
@@ -19,7 +19,7 @@ import type { Context } from "https://edge.netlify.com";
  * (creative アーム) が振り分け先まで届かないとセルが割れない。**
  */
 
-const VARIANTS = ["x-fav-pain", "x-fav-gain"] as const;
+const VARIANTS = ["x-fav-rich", "x-fav-rich-visual"] as const;
 type Variant = (typeof VARIANTS)[number];
 
 const COOKIE_NAME = "lp_variant";
@@ -60,7 +60,7 @@ export default async (
 };
 
 export const config = {
-  // 2026-09-16〜09-19 のヒーロー訴求 A/B では広告着地 `/x-fav/` もここで拾っていた。
-  // A/B 終了で外した (`/x-fav/` は netlify.toml の 301 で rich へ)。
-  path: ["/x-fav-ab", "/x-fav-ab/"],
+  // 広告着地 `/x-fav/` を 50/50 に分ける。Netlify の 301 より Edge が先に処理されることは
+  // 2026-09-16 の実験で確認済み。edge 無効時の 301 は rich への fallback。
+  path: ["/x-fav/", "/x-fav-ab", "/x-fav-ab/"],
 };

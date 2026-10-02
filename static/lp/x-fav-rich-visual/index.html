@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="X（Twitter）のいいねした画像・動画を集めて、AIで似た画像をレコメンド。あなただけのギャラリーで、いつでも見返せます。">
+<title>Refav Gallery — いいねした画像を、ずっと手元に</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL5G30FP5R"></script>
+<script>window.xfgLpTracking=window.xfgLpTracking||{_q:[],mirror:function(e,p){this._q.push([e,p,new Date().toISOString()])}};</script>
+<script defer src="/js/xfg-lp-tracking.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XL5G30FP5R');
+</script>
+
+<!-- X conversion tracking -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','okhzr');
+</script>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    /* ライトテーマ。トークン名は「役割」で持つ (色名で持つと反転したとき嘘になる) */
+    --bg: #ffffff;          /* ページ地 */
+    --fg: #0f1419;          /* 見出し / 主テキスト */
+    --surface: #f7f9f9;     /* 1 段沈んだ面 */
+    --surface-2: #eff3f4;   /* カード面 */
+    --border: #cfd9de;      /* 罫 / ドット */
+    --muted: #536471;       /* 補助テキスト */
+    --body: #3d4b56;        /* 本文テキスト */
+    --accent: #1d9bf0;
+    --accent-dim: rgba(29,155,240,0.10);
+    --accent-glow: rgba(29,155,240,0.35);
+    --red: #f4212e;
+    --green: #00ba7c;
+  }
+
+  /* scroll-snap は X アプリ内 WebView でスワイプが重くなるため使わない (自然スクロール) */
+  html { overflow-y: scroll; }
+  body { background: var(--bg); color: var(--fg); font-family: -apple-system, "Helvetica Neue", sans-serif; }
+
+  /* ── Site nav ── */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .site-nav-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fg);
+    text-decoration: none;
+    letter-spacing: -.01em;
+    opacity: .7;
+    transition: opacity .2s;
+  }
+  .site-nav-logo:hover { opacity: 1; }
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .site-nav-links a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: .04em;
+    transition: color .2s;
+  }
+  .site-nav-links a:hover { color: var(--fg); }
+  .nav-cta {
+    font-size: 12px !important;
+    color: var(--accent) !important;
+    font-weight: 700;
+    border: 1px solid rgba(29,155,240,.4);
+    padding: 5px 12px;
+    border-radius: 999px;
+    transition: background .2s, color .2s !important;
+  }
+  .nav-cta:hover { background: var(--accent-dim); color: var(--accent) !important; }
+
+  /* ── Section Base ── */
+  .scene {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 24px;
+  }
+
+  /* ── Scroll hint ── */
+  .scroll-hint {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.5;
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--muted);
+    z-index: 100;
+    transition: opacity .4s;
+  }
+  .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+  .scroll-hint svg { animation: bounce 1.6s ease-in-out infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+  /* ── Dot nav ── */
+  .dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background .3s, transform .3s;
+    cursor: pointer;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.5); }
+
+  /* ════════════════════════════════
+     SCENE 1 – Hero (価値 + 実画面 + 主 CTA)
+     iOS の 1 人あたり滞在は約 3 秒なので、
+     表示遅延のあるアニメーションは置かない。
+  ════════════════════════════════ */
+  #s1 {
+    /* 純黒 + 暗いサムネで沈むため、#s3 と同じ radial accent で地を持ち上げる */
+    background: radial-gradient(ellipse at 50% 32%, rgba(29,155,240,.10) 0%, var(--surface) 45%, var(--bg) 78%);
+    height: auto;
+    min-height: 100svh;
+    justify-content: center;
+    padding: 92px 20px 56px;
+  }
+
+  .hero {
+    width: 100%;
+    max-width: 660px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+  .hero-heading {
+    font-size: clamp(26px, 5.6vw, 44px);
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+  }
+  .hero-heading span { color: var(--accent); }
+  .hero-sub {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+  }
+  .hero-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-cta-sub { font-size: 12px; color: var(--muted); }
+  /* only-mobile の再表示ルールが !important なため、JS からの非表示は class で行う */
+  .is-hidden { display: none !important; }
+
+  .hero-shot {
+    width: 100%;
+    /* モザイクは縦長 (940x620) なので、ファーストビューに CTA が残るよう高さを縛る。
+       iOS の 1 人あたり滞在は約 3 秒 = スクロールされない前提 (#s1 のコメント参照) */
+    aspect-ratio: 940 / 620;
+    max-height: 34svh;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    box-shadow: 0 8px 32px rgba(15,20,25,.10);
+  }
+  .hero-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-points {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+    font-size: 12.5px;
+    color: var(--body);
+  }
+  .hero-points li::before {
+    content: "✓";
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  @media (max-width: 760px) {
+    #s1 { padding: 74px 18px 28px; }
+    .hero { gap: 14px; }
+    .hero-sub { font-size: 14px; }
+  }
+
+  /* ════════════════════════════════
+     SCENE 2 – 解決策
+  ════════════════════════════════ */
+  #s2 { background: var(--surface); }
+
+  .solution-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 840px;
+    width: 100%;
+    align-items: center;
+  }
+  @media (max-width: 640px) {
+    .solution-layout { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  .solution-text { opacity: 0; transform: translateX(-30px); transition: all .7s cubic-bezier(.22,1,.36,1); }
+  .solution-text.visible { opacity: 1; transform: none; }
+
+  .solution-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .solution-heading {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+  }
+  .solution-heading span { color: var(--accent); }
+  .solution-desc {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.7;
+    margin-top: 14px;
+  }
+  .feature-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--body);
+  }
+  .feature-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  .gallery-mock {
+    opacity: 0;
+    transform: translateX(30px) scale(.96);
+    transition: all .7s .15s cubic-bezier(.22,1,.36,1);
+  }
+  .gallery-mock.visible { opacity: 1; transform: none; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--border), 0 20px 48px rgba(15,20,25,.12);
+  }
+  .gallery-cell {
+    aspect-ratio: 1;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-cell svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .gallery-cell img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .gallery-cell.has-label::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    font-size: 9px;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 4px;
+    letter-spacing: .03em;
+  }
+
+  /* ════════════════════════════════
+     SCENE 2.5 – 使い方 (How to use)
+                 Apple 風 scroll-pinned カルーセル
+  ════════════════════════════════ */
+  #sHow {
+    background: var(--surface);
+    height: 400vh;
+    display: block;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-align: none;
+  }
+
+  .howto-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 88px 0 32px;
+    overflow: hidden;
+  }
+
+  .howto-layout {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .howto-header { text-align: center; }
+  .howto-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .5s, transform .5s;
+  }
+  .howto-heading {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .55s .1s, transform .55s .1s;
+  }
+  .howto-heading span { color: var(--accent); }
+  #sHow.visible .howto-label,
+  #sHow.visible .howto-heading { opacity: 1; transform: none; }
+
+  .howto-track-wrapper {
+    width: 100vw;
+    overflow: hidden;
+  }
+  .howto-track {
+    display: flex;
+    gap: 24px;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+  @media (max-width: 760px) {
+    .howto-track { gap: 16px; }
+    .howto-sticky { padding-top: 72px; }
+  }
+
+  .step-card {
+    flex: 0 0 min(720px, 84vw);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .step-card.is-active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-dim), 0 20px 48px rgba(15,20,25,.10);
+    transform: translateY(-2px);
+  }
+
+  .step-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+  .step-card-body {
+    padding: 18px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  @media (max-width: 760px) {
+    .step-card-body { padding: 14px 16px 18px; }
+  }
+
+  .step-num {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: .12em;
+    background: rgba(29, 155, 240, .85);
+    padding: 5px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1;
+  }
+  .step-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -.01em;
+    color: var(--fg);
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.7;
+  }
+
+  .howto-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .howto-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background .25s, transform .25s, width .25s;
+  }
+  .howto-dot.active {
+    background: var(--accent);
+    width: 22px;
+    border-radius: 999px;
+  }
+  .howto-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ════════════════════════════════
+     SCENE 3 – 拡張機能インストール CTA
+  ════════════════════════════════ */
+  #s3 {
+    background: radial-gradient(ellipse at 60% 40%, rgba(29,155,240,.10) 0%, var(--bg) 62%);
+  }
+
+  .experience-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .experience-label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--green);
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all .6s .1s cubic-bezier(.22,1,.36,1);
+  }
+  .experience-label.visible { opacity: 1; transform: none; }
+
+  .experience-heading {
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .6s .25s cubic-bezier(.22,1,.36,1);
+  }
+  .experience-heading.visible { opacity: 1; transform: none; }
+  .experience-heading span { color: var(--accent); }
+
+  .experience-sub {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all .6s .35s cubic-bezier(.22,1,.36,1);
+  }
+  .experience-sub.visible { opacity: 1; transform: none; }
+
+  .cta-block {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all .6s .5s cubic-bezier(.22,1,.36,1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .cta-block.visible { opacity: 1; transform: none; }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s, transform .2s, box-shadow .2s;
+    box-shadow: 0 0 24px var(--accent-glow);
+    letter-spacing: -.01em;
+  }
+  .cta-btn:hover {
+    background: #1a8cd8;
+    transform: scale(1.04);
+    box-shadow: 0 0 40px var(--accent-glow);
+    color: #fff;
+  }
+  /* iOS 時に web「アプリを開く」を副次ボタン化 (App Store の iOS CTA を主にする) */
+  .cta-btn.cta-btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: none;
+    border: 1px solid var(--accent-dim);
+  }
+  .cta-btn.cta-btn-secondary:hover {
+    background: var(--accent-dim);
+    color: var(--accent);
+    box-shadow: none;
+    transform: none;
+  }
+  .cta-sub { font-size: 12px; color: var(--muted); }
+
+  .article-link {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.18);
+    padding-bottom: 1px;
+    transition: color .2s, border-color .2s;
+  }
+  .article-link:hover { color: var(--body); border-color: var(--muted); }
+
+  /* rich-visual: 実際のギャラリーを CTA と同じ初画面に置く。コピーと行き先は rich と共通。 */
+  #s1 .hero-shot { order: 1; width: min(100%, 480px); max-height: 28svh; }
+  #s1 .hero-cta { order: 2; }
+  #s1 .hero-points { order: 3; }
+  @media (max-width: 760px) {
+    #s1 { padding: 70px 16px 20px; }
+    #s1 .hero { gap: 10px; }
+    #s1 .hero-shot { width: min(100%, 420px); max-height: 19svh; }
+  }
+
+  /* ── Device-targeted visibility ── */
+  .only-mobile { display: none !important; }
+  @media (hover: none) and (pointer: coarse), (max-width: 760px) {
+    .only-desktop { display: none !important; }
+    a.only-mobile.nav-cta        { display: inline-block !important; }
+    a.only-mobile.cta-btn        { display: inline-flex !important; }
+    /* is-hidden は only-mobile の再表示より詳細度を高くしないと勝てない */
+    a.only-mobile.cta-btn.is-hidden { display: none !important; }
+    img.only-mobile.step-img     { display: block !important; }
+    h2.only-mobile              { display: block !important; }
+    p.only-mobile               { display: block !important; }
+    div.only-mobile.cta-block   { display: flex !important; }
+    span.only-mobile.step-num   { display: inline-block !important; }
+    .step-card-body .only-mobile { display: block !important; }
+    /* mobile では step 数が減るため scroll-pin の高さも短縮 */
+    /* 主 CTA (s3) までのスクロール量を削るため短縮 */
+    #sHow { height: 140vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Site nav -->
+<nav class="site-nav">
+  <a href="/" class="site-nav-logo">サブカル科学研究会</a>
+  <div class="site-nav-links">
+    <a href="/post/x-fav-gellery/">技術記事</a>
+    <a href="https://x-fav-gellery.com/install/cws?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=nav_install" target="_blank" rel="noopener" class="nav-cta only-desktop" data-cta="nav_install">拡張機能を入手</a>
+    <a href="https://x-fav-gellery.com/install/ios?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=nav_ios" target="_blank" rel="noopener" class="nav-cta only-mobile" id="navCtaMobile" data-cta="nav_ios_appstore">アプリ入手</a>
+  </div>
+</nav>
+
+<!-- Dot nav -->
+<nav class="dots" id="dots">
+  <div class="dot active" data-idx="0"></div>
+  <div class="dot" data-idx="1"></div>
+  <div class="dot" data-idx="2"></div>
+  <div class="dot" data-idx="3"></div>
+</nav>
+
+<!-- Scroll hint -->
+<div class="scroll-hint" id="scrollHint">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  SCROLL
+</div>
+
+
+<!-- ═══════════════════════════════
+     SCENE 1 — Hero (価値 + 実画面 + 主 CTA)
+     iOS の滞在は約 3 秒。ここだけ見て離脱する人にも
+     CTA が届くよう、ファーストビュー内で完結させる。
+═══════════════════════════════ -->
+<section class="scene" id="s1">
+  <div class="hero">
+    <h1 class="hero-heading">
+      いいねした X の画像・動画を、<br>
+      <span>ぜんぶ自分のギャラリーに。</span>
+    </h1>
+    <p class="hero-sub">
+      流れて見失ういいねを自動で集めて、いつでも見返す。<br>
+      AI が「これに似た画像」も連れてきます。
+    </p>
+
+    <div class="hero-cta">
+      <!-- **既定は App Store CTA**。広告流入の 94% が iOS なので、JS が走る前 /
+           走らなかった場合でも多数派には正しいボタンが出ている状態にしておく。
+           非 iOS では末尾 JS がこれを隠して web CTA を出す -->
+      <a
+        href="https://x-fav-gellery.com/install/ios?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero_top_ios"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn"
+        id="heroTopIos"
+        data-cta="hero_top_ios"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        App Store で入手
+      </a>
+      <div class="hero-cta-sub" id="heroTopIosSub">App Store から無料でインストール</div>
+
+      <!-- desktop: Chrome 拡張 -->
+      <a
+        href="https://x-fav-gellery.com/install/cws?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero_top_install"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn only-desktop"
+        data-cta="hero_top_install"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 4.97 3.028 9.232 7.343 11.04l3.66-6.34A4.5 4.5 0 0112 7.5h8.485A11.97 11.97 0 0012 0zm0 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm5.55 1.5A4.5 4.5 0 0118 13.5a4.5 4.5 0 01-2.235 3.882l-3.66 6.34c.625.116 1.27.178 1.93.178 6.627 0 12-5.373 12-12 0-1.567-.3-3.064-.844-4.434L17.55 9zM7.5 12a4.5 4.5 0 011.84-3.633l-3.661-6.34A11.985 11.985 0 00.844 7.5L9.84 13.234A4.5 4.5 0 017.5 12z"/></svg>
+        Chrome に追加する
+      </a>
+      <div class="hero-cta-sub only-desktop" id="heroTopInstallSub">PCではChrome拡張機能を使って、Xのいいねを取り込みます。無料で利用できます。</div>
+
+      <!-- 非 iOS モバイル (Android 等) の受け皿。既定は非表示で、末尾 JS が出す。
+           .only-mobile の !important に勝つ必要があるのでインライン style ではなく
+           is-hidden クラスで消す -->
+      <a
+        href="https://x-fav-gellery.com/?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero_top_web"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn only-mobile is-hidden"
+        id="heroTopWeb"
+        data-cta="hero_top_web"
+      >
+        Web版を開く
+      </a>
+      <div class="hero-cta-sub" id="heroTopAndroidSub" style="display:none">いいねの取り込みにはPCのChrome拡張機能が必要です。Androidでは、取り込んだいいねをWeb版で閲覧できます。</div>
+    </div>
+
+    <div class="hero-shot">
+      <img
+        src="/img/x-fav/hero-gallery-mosaic.jpg"
+        alt="取り込んだいいねが並ぶ Refav Gallery のギャラリー画面"
+        width="940"
+        height="620"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+
+    <ul class="hero-points">
+      <li>いいねを自動で集めてギャラリーへ</li>
+      <li>画像・動画・テキストを一元管理</li>
+      <li>AI が似た作品をレコメンド</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════
+     SCENE 2 — 解決策
+═══════════════════════════════ -->
+<section class="scene" id="s2">
+  <div class="solution-layout">
+
+    <div class="solution-text" id="solText">
+      <div class="solution-label">できること</div>
+      <h2 class="solution-heading">
+        いいねは、<br>
+        <span>消える前に集めておく。</span>
+      </h2>
+      <p class="solution-desc">
+        ビジュアルなギャラリーでいいねを一覧。<br>
+        「あの画像どこだっけ」が無くなって、<br>
+        AI が似たテイストの作品まで連れてきます。
+      </p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <span>いいねを自動で集めて、すぐギャラリーへ</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🖼</div>
+          <span>画像・動画・テキストを一元管理</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔍</div>
+          <span>AI が「これに似た画像」をレコメンド</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <span>自分専用の、プライベートなギャラリー</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-mock" id="solGallery">
+      <div class="gallery-grid">
+        <div class="gallery-cell has-label" data-label="写真"><img src="/img/x-fav/gallery-cell-1.jpg" alt="駅前のクリスマスツリー" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-2.jpg" alt="葉にとまるカメレオン" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-3.jpg" alt="ソファでくつろぐ猫" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-4.jpg" alt="雪が積もった駐車場" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-5.jpg" alt="満開の桜並木" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-6.jpg" alt="箱をのぞきこむ犬" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-7.jpg" alt="水槽を泳ぐアザラシ" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-8.jpg" alt="水中を泳ぐアザラシ 2 頭" loading="lazy" width="300" height="300" /></div>
+        <div class="gallery-cell"><img src="/img/x-fav/gallery-cell-9.jpg" alt="岩壁を登るトカゲ" loading="lazy" width="300" height="300" /></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════
+     SCENE 2.5 — 使い方 (Apple 風 scroll-pinned カルーセル)
+═══════════════════════════════ -->
+<section class="scene" id="sHow">
+  <div class="howto-sticky">
+    <div class="howto-layout">
+      <div class="howto-header">
+        <div class="howto-label">使い方</div>
+        <h2 class="howto-heading only-desktop">
+          <span>4 ステップ</span>で始める
+        </h2>
+        <h2 class="howto-heading only-mobile">
+          <span>2 ステップ</span>で始める
+        </h2>
+      </div>
+
+      <div class="howto-track-wrapper" id="howtoWrapper" role="region" aria-label="使い方カルーセル">
+        <div class="howto-track" id="howtoTrack">
+          <div class="step-card only-desktop" data-step="0">
+            <div class="step-card-media">
+              <span class="step-num">STEP 01</span>
+              <img class="step-img" src="/img/x-fav/popup-overview.png" alt="Chrome 拡張機能のポップアップ画面" loading="lazy" width="1280" height="800" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">Chrome 拡張をインストール</div>
+              <div class="step-desc">Chrome Web Store から「Refav Gallery」を追加。ツールバーにピン留めしておくと便利です。</div>
+            </div>
+          </div>
+
+          <div class="step-card only-desktop" data-step="1">
+            <div class="step-card-media">
+              <span class="step-num">STEP 02</span>
+              <img class="step-img" src="/img/x-fav/extension-on-x-likes.png" alt="X のいいねページで拡張機能を起動" loading="lazy" width="1280" height="800" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">いいねページで起動</div>
+              <div class="step-desc">ポップアップから X でログインし、X のいいねページで「収集開始」をクリック。あとは自動でスクロール・取得します。（Google ログインにも対応）</div>
+            </div>
+          </div>
+
+          <div class="step-card" data-step="2">
+            <div class="step-card-media">
+              <span class="step-num only-desktop">STEP 03</span>
+              <span class="step-num only-mobile">STEP 01</span>
+              <img class="step-img only-desktop" src="/img/x-fav/landing.png" alt="Refav Gallery のログイン画面" loading="lazy" width="1280" height="800" />
+              <img class="step-img only-mobile" src="/img/x-fav/ios-ingest.jpg" alt="アプリの取り込み画面。X のいいねを上からスクロールして取り込む" loading="lazy" width="900" height="652" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title only-desktop">アプリにログイン</div>
+              <div class="step-desc only-desktop">Refav Gallery に X でログイン。拡張機能と同じアカウントで、収集した画像が自動で表示されます。（Google ログインにも対応）</div>
+              <div class="step-title only-mobile">いいねを開いてスクロール</div>
+              <div class="step-desc only-mobile">アプリで X にログインし、「いいね」または「ブックマーク」を上から手でスクロール。表示されたぶんが自動で取り込まれます。</div>
+            </div>
+          </div>
+
+          <div class="step-card" data-step="3">
+            <div class="step-card-media">
+              <span class="step-num only-desktop">STEP 04</span>
+              <span class="step-num only-mobile">STEP 02</span>
+              <img class="step-img" src="/img/x-fav/hero-gallery-mosaic.jpg" alt="マイギャラリーの一覧表示" loading="lazy" width="940" height="620" />
+            </div>
+            <div class="step-card-body">
+              <div class="step-title">マイギャラリーで再発見</div>
+              <div class="step-desc">いいねした画像がマソンリー形式で一覧表示。タップすれば AI が視覚的に似た投稿をその場で提示します。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="howto-dots" id="howtoDots" role="tablist" aria-label="使い方ステップ選択">
+        <button type="button" class="howto-dot active only-desktop" data-idx="0" aria-label="STEP 01 を表示"></button>
+        <button type="button" class="howto-dot only-desktop" data-idx="1" aria-label="STEP 02 を表示"></button>
+        <button type="button" class="howto-dot" data-idx="2" aria-label="STEP 03 を表示"></button>
+        <button type="button" class="howto-dot" data-idx="3" aria-label="STEP 04 を表示"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════
+     SCENE 3 — 拡張機能インストール CTA
+═══════════════════════════════ -->
+<section class="scene" id="s3">
+  <div class="experience-layout">
+    <div class="experience-label" id="expLabel">無料ではじめる</div>
+
+    <h2 class="experience-heading only-desktop" id="expHeading">
+      いまのいいねから、<br>
+      <span>はじめよう。</span>
+    </h2>
+    <h2 class="experience-heading only-mobile" id="expHeadingMobile">
+      いまのいいねから、<br>
+      <span>はじめよう。</span>
+    </h2>
+
+    <p class="experience-sub only-desktop" id="expSub">
+      登録は無料。まずは手元のいいねをギャラリーに。
+    </p>
+    <p class="experience-sub only-mobile" id="expSubMobile">
+      登録は無料。まずは手元のいいねをギャラリーに。
+    </p>
+
+    <div class="cta-block only-desktop" id="ctaBlock">
+      <a
+        href="https://x-fav-gellery.com/install/cws?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero_install"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn"
+        data-cta="hero_install"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 4.97 3.028 9.232 7.343 11.04l3.66-6.34A4.5 4.5 0 0112 7.5h8.485A11.97 11.97 0 0012 0zm0 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm5.55 1.5A4.5 4.5 0 0118 13.5a4.5 4.5 0 01-2.235 3.882l-3.66 6.34c.625.116 1.27.178 1.93.178 6.627 0 12-5.373 12-12 0-1.567-.3-3.064-.844-4.434L17.55 9zM7.5 12a4.5 4.5 0 011.84-3.633l-3.661-6.34A11.985 11.985 0 00.844 7.5L9.84 13.234A4.5 4.5 0 017.5 12z"/></svg>
+        Chrome に追加する
+      </a>
+      <div class="cta-sub">似た作品も AI が連れてきてくれる</div>
+      <a href="/post/x-fav-gellery/" class="article-link" data-cta="cta_tech_article">技術的な詳細を読む →</a>
+    </div>
+
+    <div class="cta-block only-mobile" id="ctaBlockMobile">
+      <!-- 既定表示: iPhone アプリ (App Store)。非 iOS のときだけ末尾 JS が隠す。
+           href はストアへの直リンクではなく /install/ios を経由させる。302 を挟むことで
+           クリック実数 (ios_install_redirect) がサーバに残る。向き先の変更も env だけで済む -->
+      <a
+        href="https://x-fav-gellery.com/install/ios?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero_ios"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn"
+        id="ctaIosInstall"
+        data-cta="hero_ios_appstore"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        iPhoneアプリを入手
+      </a>
+      <div class="cta-sub" id="ctaIosInstallSub">App Store から無料でインストール</div>
+      <a
+        href="https://x-fav-gellery.com/?utm_source=subcul-science&amp;utm_medium=lp&amp;utm_campaign=x-fav-rich&amp;utm_content=hero"
+        target="_blank"
+        rel="noopener"
+        class="cta-btn cta-btn-secondary"
+        id="ctaOpenApp"
+        data-cta="hero_open_app"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+        アプリを開く
+      </a>
+      <div class="cta-sub" id="ctaOpenAppSub">気に入った投稿を、共有ボタンからすぐ保存</div>
+      <a href="/post/x-fav-gellery/" class="article-link" data-cta="cta_tech_article">技術的な詳細を読む →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const dots = document.querySelectorAll('.dot');
+  const scrollHint = document.getElementById('scrollHint');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = Array.from(scenes).indexOf(e.target);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      if (idx === scenes.length - 1) scrollHint.classList.add('hidden');
+      else scrollHint.classList.remove('hidden');
+    });
+  }, { threshold: 0.55 });
+
+  scenes.forEach(s => io.observe(s));
+
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      scenes[+d.dataset.idx].scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const io2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.getElementById('solText')?.classList.add('visible');
+      document.getElementById('solGallery')?.classList.add('visible');
+    });
+  }, { threshold: 0.35 });
+  io2.observe(document.getElementById('s2'));
+
+  const io3 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document
+        .querySelectorAll('#s3 .experience-label, #s3 .experience-heading, #s3 .experience-sub, #s3 .cta-block')
+        .forEach((el) => el.classList.add('visible'));
+    });
+  }, { threshold: 0.25 });
+  io3.observe(document.getElementById('s3'));
+
+  const sHow = document.getElementById('sHow');
+  if (sHow) {
+    const ioHow = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) sHow.classList.add('visible');
+      });
+    }, { threshold: 0.25 });
+    ioHow.observe(sHow);
+  }
+
+  // How-to カルーセル (スクロール駆動 / Apple 風)
+  const howSection = document.getElementById('sHow');
+  const howWrapper = document.getElementById('howtoWrapper');
+  const howTrack = document.getElementById('howtoTrack');
+  const allDots = Array.from(document.querySelectorAll('.howto-dot'));
+  const allCards = howTrack ? Array.from(howTrack.querySelectorAll('.step-card')) : [];
+  if (howSection && howWrapper && howTrack && allCards.length) {
+    let visibleCards = [];
+    let visibleDots = [];
+    let lastIdx = 0;
+    let activeIdx = 0;
+
+    const isVisible = (el) => el.offsetParent !== null;
+
+    const refreshVisible = () => {
+      visibleCards = allCards.filter(isVisible);
+      visibleDots = allDots.filter(isVisible);
+      lastIdx = Math.max(0, visibleCards.length - 1);
+      if (activeIdx > lastIdx) activeIdx = 0;
+    };
+
+    const updateHow = () => {
+      if (!visibleCards.length) return;
+      const rect = howSection.getBoundingClientRect();
+      const total = howSection.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      const raw = -rect.top / total;
+      const progress = Math.max(0, Math.min(1, raw));
+
+      const cardWidth = visibleCards[0].offsetWidth;
+      const trackStyle = getComputedStyle(howTrack);
+      const gap = parseFloat(trackStyle.columnGap || trackStyle.gap) || 0;
+      const wrapperWidth = howWrapper.clientWidth;
+      const centerOffset = (wrapperWidth - cardWidth) / 2;
+      const stepFraction = lastIdx === 0 ? 0 : progress * lastIdx;
+      const translateX = centerOffset - stepFraction * (cardWidth + gap);
+      howTrack.style.transform = `translate3d(${translateX}px, 0, 0)`;
+
+      const nextIdx = Math.round(stepFraction);
+      if (nextIdx !== activeIdx) {
+        activeIdx = nextIdx;
+        visibleDots.forEach((d, i) => d.classList.toggle('active', i === nextIdx));
+        visibleCards.forEach((c, i) => c.classList.toggle('is-active', i === nextIdx));
+      }
+    };
+
+    let pending = false;
+    const onScroll = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => { pending = false; updateHow(); });
+    };
+
+    const onResize = () => {
+      refreshVisible();
+      updateHow();
+    };
+
+    refreshVisible();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+    // 初期化（画像読み込み後にサイズが確定するため load 後にも実行）
+    updateHow();
+    window.addEventListener('load', onResize);
+
+    allDots.forEach((d) => {
+      d.addEventListener('click', () => {
+        const visIdx = visibleDots.indexOf(d);
+        if (visIdx < 0 || lastIdx === 0) return;
+        const total = howSection.offsetHeight - window.innerHeight;
+        const targetY = howSection.offsetTop + (visIdx / lastIdx) * total;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      });
+    });
+
+    // 最初の可視カードをアクティブに
+    if (visibleCards[0]) visibleCards[0].classList.add('is-active');
+    if (visibleDots[0]) visibleDots.forEach((d, i) => d.classList.toggle('active', i === 0));
+  }
+
+  // === 離脱位置 / funnel 計測 (2026-06-05 追加) ===
+  // 既存 cta_click と組み合わせて、どの scene で詰まっているか data-driven に判定する。
+  // variant_id を 全 event に含めることで、Round 2 以降の rich 系 variant
+  // (例: rich-v2) を 同じ event 構造で比較できる。
+  const EXPERIMENT_PROPS = {
+    experiment_id: 'lp_design_2026_06',
+    variant_id: 'rich-visual',
+    variant_version: 'visual-v1',
+    cta_location: 'lp_x_fav_rich',
+  };
+
+  // app DB mirror は /js/xfg-lp-tracking.js で共通化。
+  // window.xfgLpTracking?.mirror(eventName, props) で送信する (rich/simple 共通)。
+  const mirrorToAppDb = (eventName, props) => {
+    if (window.xfgLpTracking) window.xfgLpTracking.mirror(eventName, props);
+  };
+
+  const SCENE_IDS = ['s1', 's2', 'sHow', 's3'];
+  const sceneEnterTimes = {};
+  let currentVisibleScene = null;
+
+  // scene_view: 各 scene が 50% viewport に入った瞬間 (各 1 回のみ)
+  // scene_exit: scene から出た瞬間 / 滞在時間
+  SCENE_IDS.forEach((id, idx) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          currentVisibleScene = id;
+          sceneEnterTimes[id] = Date.now();
+          if (!el.dataset.gaViewed) {
+            el.dataset.gaViewed = '1';
+            const sceneViewProps = {
+              scene_id: id,
+              scene_index: idx,
+              ...EXPERIMENT_PROPS,
+            };
+            if (typeof gtag === 'function') gtag('event', 'scene_view', sceneViewProps);
+            mirrorToAppDb('scene_view', sceneViewProps);
+          }
+        } else if (sceneEnterTimes[id]) {
+          const duration = Date.now() - sceneEnterTimes[id];
+          sceneEnterTimes[id] = null;
+          if (duration >= 500) {
+            const sceneExitProps = {
+              scene_id: id,
+              scene_index: idx,
+              duration_ms: duration,
+              ...EXPERIMENT_PROPS,
+            };
+            if (typeof gtag === 'function') gtag('event', 'scene_exit', sceneExitProps);
+            mirrorToAppDb('scene_exit', sceneExitProps);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
+
+  // lp_exit: ページを閉じる / タブ切替の瞬間に「最後に見ていた scene」を送信
+  // ※ 二重送信防止 (pagehide と visibilitychange の両方を受けるため)
+  const sendLpExit = () => {
+    if (window.__lpExitSent) return;
+    if (!currentVisibleScene) return;
+    window.__lpExitSent = true;
+    const lpExitProps = {
+      exit_scene: currentVisibleScene,
+      exit_scene_index: SCENE_IDS.indexOf(currentVisibleScene),
+      ...EXPERIMENT_PROPS,
+      transport_type: 'beacon',
+    };
+    if (typeof gtag === 'function') gtag('event', 'lp_exit', lpExitProps);
+    mirrorToAppDb('lp_exit', lpExitProps);
+  };
+  window.addEventListener('pagehide', sendLpExit);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendLpExit();
+  });
+
+  // howto_step_view: カルーセル内の各 STEP カードの view (各 1 回のみ)
+  document.querySelectorAll('.step-card').forEach((card, idx) => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !card.dataset.gaViewed) {
+          card.dataset.gaViewed = '1';
+          const stepNum = card.querySelector('.step-num')?.textContent?.trim() || '';
+          const howtoProps = {
+            step_index: idx,
+            step_label: stepNum,
+            ...EXPERIMENT_PROPS,
+          };
+          if (typeof gtag === 'function') gtag('event', 'howto_step_view', howtoProps);
+          mirrorToAppDb('howto_step_view', howtoProps);
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(card);
+  });
+
+  // scroll_milestone: 25 / 50 / 75 / 100% (各 1 回のみ)
+  const scrollMilestones = new Set();
+  const checkScrollMilestone = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    const scrollPct = Math.round((window.scrollY / docHeight) * 100);
+    [25, 50, 75, 100].forEach((m) => {
+      if (scrollPct >= m && !scrollMilestones.has(m)) {
+        scrollMilestones.add(m);
+        const scrollProps = {
+          milestone_pct: m,
+          ...EXPERIMENT_PROPS,
+        };
+        if (typeof gtag === 'function') gtag('event', 'scroll_milestone', scrollProps);
+        mirrorToAppDb('scroll_milestone', scrollProps);
+      }
+    });
+  };
+  let scrollMilestonePending = false;
+  window.addEventListener('scroll', () => {
+    if (scrollMilestonePending) return;
+    scrollMilestonePending = true;
+    requestAnimationFrame(() => {
+      scrollMilestonePending = false;
+      checkScrollMilestone();
+    });
+  }, { passive: true });
+
+  // CTA クリック計測 (GA4 + app DB mirror)
+  document.addEventListener('click', (ev) => {
+    const target = ev.target.closest('[data-cta]');
+    if (!target) return;
+    const label = target.getAttribute('data-cta');
+    const ctaProps = {
+      cta_label: label,
+      ...EXPERIMENT_PROPS,
+      link_url: target.getAttribute('href') || '',
+    };
+    if (typeof gtag === 'function') gtag('event', 'cta_click', ctaProps);
+    mirrorToAppDb('cta_click', ctaProps);
+  });
+
+  // **既定 (HTML) は App Store CTA で、デバイス別に差し替える。**
+  // 広告流入の 94% が iOS なので、JS が走る前 / 走らなかった場合でも多数派には
+  // 正しいボタンが出ている状態にしておく。
+  //
+  // 判定はサーバ側 resolveVisitorPlatform と同じ順序 (Android → iOS →
+  // Chromium → other)。幅ベースの CSS (.only-desktop) だけだと iPad 横向き・
+  // デスクトップ表示要求等で拡張 CTA が iOS に見えてしまう
+  // (cws送客の 22% が iOS だった。2026-09-14 実測)。UA で明示的に隠す。
+  //
+  // 行き先の対応表:
+  //   iOS              → App Store (拡張 CTA を隠す)
+  //   Android          → web (拡張 CTA を隠す。拡張は入らない)
+  //   desktop Chromium → 拡張直行 (web CTA を隠す。hero_top_web の click が
+  //                        全て desktop-chromium だったため)
+  //   desktop other    → 従来どおり (web + 拡張の併記。web 先にアーカイブ経路あり)
+  //
+  // pain / gain アーム (xfg-lp-ab2609.js) には触らない。2x2 実験中のため。
+  (function () {
+    var ua = navigator.userAgent || '';
+    var isAndroid = ua.indexOf('Android') !== -1;
+    var isIOS = /iPhone|iPad|iPod/.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var isChromium = !isAndroid && !isIOS &&
+      (/Chrome\/|Chromium\/|Edg\//.test(ua));
+    // 狭いウィンドウでは CSS が mobile レイアウト (拡張ボタン非表示) になる。
+    // その状態で web まで隠すと CTA がゼロになるので、出し分けは広い画面に限る。
+    var isNarrow = window.matchMedia &&
+      window.matchMedia('(max-width: 760px)').matches;
+    var hide = function (id) { var el = document.getElementById(id); if (el) el.style.display = 'none'; };
+    var hideCta = function (label) {
+      var els = document.querySelectorAll('a[data-cta="' + label + '"]');
+      for (var i = 0; i < els.length; i++) els[i].style.display = 'none';
+    };
+
+    // 1. 拡張が入らない端末 (iOS / Android) には拡張 CTA を出さない
+    if (isIOS || isAndroid) {
+      hideCta('nav_install');
+      hideCta('hero_top_install');
+      hideCta('hero_install');
+      hide('heroTopInstallSub');
+    }
+    // 2. iOS は App Store 既定のまま (拡張を隠した上で return)
+    if (isIOS) return;
+    // 3. 非 iOS: App Store hero / s3 を隠す (従来どおり)
+    hide('heroTopIos');
+    hide('heroTopIosSub');
+    var heroWeb = document.getElementById('heroTopWeb');
+    if (heroWeb) heroWeb.classList.remove('is-hidden');
+    if (/Android/i.test(navigator.userAgent)) {
+      var androidSub = document.getElementById('heroTopAndroidSub');
+      if (androidSub) androidSub.style.display = 'block';
+      var openAppSub = document.getElementById('ctaOpenAppSub');
+      if (openAppSub) openAppSub.textContent = 'いいねの取り込みにはPCのChrome拡張機能が必要です。Androidでは、取り込んだいいねをWeb版で閲覧できます。';
+      var webButton = document.getElementById('ctaOpenApp');
+      if (webButton) webButton.textContent = 'Web版を開く';
+    }
+    // s3 の CTA ブロックも同じ向きに戻す
+    hide('ctaIosInstall');
+    hide('ctaIosInstallSub');
+    // ナビ (ヘッダー) の mobile CTA を web 動線に戻す (mobile layout でのみ見える)
+    var navCta = document.getElementById('navCtaMobile');
+    if (navCta) {
+      navCta.href = 'https://x-fav-gellery.com/?utm_source=subcul-science&utm_medium=lp&utm_campaign=x-fav-rich&utm_content=nav';
+      navCta.textContent = 'Web版を開く';
+      navCta.setAttribute('data-cta', 'nav_open_app');
+    }
+    // 4. web CTA は Chromium 以外に出す。Chromium (広い画面) は拡張直行。
+    // Android は mobile layout なので heroTopWeb の class 解除が必要。
+    if (isChromium && !isNarrow) {
+      hide('heroTopWeb');
+      hide('heroTopAndroidSub');
+      hide('ctaOpenApp');
+      hide('ctaOpenAppSub');
+      return;
+    }
+    var openApp = document.getElementById('ctaOpenApp');
+    if (openApp) openApp.classList.remove('cta-btn-secondary');
+  })();
+
+  // 端末別リンクを確定してから、流入広告の識別情報を引き継ぐ。
+  // utm_content はボタン位置を維持し、utm_term には帰属ラベルを渡す。
+  //
+  // **広告リンクは出稿後に変更できない**ため、現行 campaign 42028610 は utm_content を
+  // 持たない。その場合に `direct` へ落とすと canonical な 302 (analytics_install_redirects)
+  // を LP 別に割れないので、**LP variant を utm_term に載せる**。creative 帰属は
+  // 新しいリンクを持つ新規ポストを足すまで取れない。
+  (function () {
+    var LP_VARIANT = 'rich-visual'; // 新しい hero variant を作るときは variant_id / LP_VARIANT_IDS と揃える
+    var incoming = new URLSearchParams(location.search);
+    var creative = incoming.get('utm_content') || LP_VARIANT;
+    var campaign = incoming.get('utm_campaign');
+    document.querySelectorAll('a[data-cta][href]').forEach(function (link) {
+      try {
+        var url = new URL(link.getAttribute('href'), location.origin);
+        if (url.origin !== 'https://x-fav-gellery.com') return;
+        url.searchParams.set('utm_term', creative);
+        if (campaign) url.searchParams.set('utm_campaign', campaign);
+        link.setAttribute('href', url.toString());
+      } catch (e) {
+        // 計測パラメータの不備でリンクを壊さない。
+      }
+    });
+  })();
+</script>
+</body>
+</html>
