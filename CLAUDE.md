@@ -108,3 +108,10 @@ This is a Hugo-based static site blog built with the Beautiful Hugo theme. The s
   - 出張管理の自動化WebアプリとしてGoogle Calendar API統合、Go+React実装
   - OAuth認証部分に課題があるが主要機能は実装済み
   - 移動時間自動計算、スケジュール分析機能など価値ある機能を紹介
+
+## Refav LP の画像素材
+
+- コスプレ写真、およびNSFWのぼかしが入ったギャラリー画像は、権利関係に配慮してLPに使用しない（ユーザー指定、2026-10-19）。
+- `static/img/x-fav/gallery-list.png` は該当するため、LP本文・OGP・背景画像等で参照しない。
+- スクリーンショットは、小さなサムネイルも含めて内容を目視確認する。
+- サンプル画像をHTMLで構成した表示例は「表示イメージ（サンプル画像）」とし、アプリの実画面とは区別する。
