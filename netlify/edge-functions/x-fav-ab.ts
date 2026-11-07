@@ -22,6 +22,21 @@ import type { Context } from "https://edge.netlify.com";
 const VARIANTS = ["x-fav-pain", "x-fav-gain"] as const;
 type Variant = (typeof VARIANTS)[number];
 
+/**
+ * アーム識別子と Apple の Campaign Token (`ct`)。
+ * アーム別の実 DL を ASC の Campaigns で読むため、LP の CTA が
+ * /install/ios に `arm` と `ct` を引き回す (x-fav-gellery 側で検証して
+ * App Store URL の ct を差し替える)。
+ */
+const ARM_BY_VARIANT: Record<Variant, string> = {
+  "x-fav-pain": "lp-pain",
+  "x-fav-gain": "lp-gain",
+};
+const CAMPAIGN_TOKEN_BY_VARIANT: Record<Variant, string> = {
+  "x-fav-pain": "xfg-lppain",
+  "x-fav-gain": "xfg-lpgain",
+};
+
 const COOKIE_NAME = "lp_variant";
 const COOKIE_MAX_AGE_SEC = 60 * 60 * 24 * 30; // 30 日
 
@@ -48,6 +63,9 @@ export default async (
 
   const target = new URL(`/lp/${variant}/`, url.origin);
   target.search = url.search;
+  // アーム別の計測用。LP の CTA が /install/ios にそのまま引き回す。
+  target.searchParams.set("arm", ARM_BY_VARIANT[variant]);
+  target.searchParams.set("ct", CAMPAIGN_TOKEN_BY_VARIANT[variant]);
 
   const headers = new Headers({ Location: target.toString() });
   if (!sticky) {

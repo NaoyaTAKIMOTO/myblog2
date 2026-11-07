@@ -50,6 +50,11 @@
   // → x-fav-gellery docs/implementation-plans/acquisition-lp-conversion-2026-09.md WS-6
   var INCOMING_CAMPAIGN = params.get('utm_campaign');
   var TERM = params.get('utm_content') || VARIANT;
+  // アーム識別子と Apple の Campaign Token。Edge Function (/x-fav-ab/) が付ける。
+  // /install/ios が ct を App Store URL に載せ替え、ASC の Campaigns で
+  // アーム別の DL が読める (x-fav-gellery の install/ios/route.ts)。
+  var ARM = params.get('arm');
+  var CT = params.get('ct');
 
   var forwardUtm = function () {
     var links = document.querySelectorAll('a[data-cta][href]');
@@ -60,6 +65,8 @@
         var url = new URL(href);
         url.searchParams.set('utm_term', TERM);
         if (INCOMING_CAMPAIGN) url.searchParams.set('utm_campaign', INCOMING_CAMPAIGN);
+        if (ARM) url.searchParams.set('arm', ARM);
+        if (CT) url.searchParams.set('ct', CT);
         links[i].setAttribute('href', url.toString());
       } catch (e) {
         // 壊れた href は触らない (CTA を殺すより計測を諦める)
