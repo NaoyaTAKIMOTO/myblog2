@@ -52,13 +52,14 @@
 
 # === A/B test ===
 # 2026-06 の rich/simple は 2026-08-15 に rich 勝者で終了。
-# **2026-09 から creative x LP の 2x2 A/B に転用している**:
+# **2026-11 から「実画面を最初に見せる」構造の比較に転用している**:
 # /x-fav-ab/ の Edge Function (netlify/edge-functions/x-fav-ab.ts) が
-# /lp/x-fav-pain/ または /lp/x-fav-gain/ に 50/50 で 302 リダイレクトする。
-# UTM クエリは保持される (広告リンクの utm_content = creative アームが
+# /lp/x-fav-rich/ または /lp/x-fav-browse/ に 50/50 で 302 リダイレクトする。
+# pain / gain (コピー) は 2 コホートで差が出ず 2026-11-09 に終了した。
+# UTM クエリは保持される (広告リンクの utm_content が
 # 振り分け先まで届かないとセルが割れない)。
 #
 # ⚠️ 新アームの 2 パスには **redirect ルールを足さないこと**。上の
 # /lp/x-fav-simple/ のような force = true の 301 を当てると 302 の後に
 # さらに 1 段増え、着地率が落ちる。
-#   → x-fav-gellery docs/implementation-plans/ad-ab-creative-lp-2026-09.md
+#   → x-fav-gellery docs/implementation-plans/lp-rich-vs-browse-2026-11.md
