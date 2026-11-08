@@ -15,11 +15,20 @@ import type { Context } from "https://edge.netlify.com";
  * readCookieVariant が null を返して引き直されるため、自動的に無効化される。
  *   → x-fav-gellery docs/implementation-plans/ad-ab-creative-lp-2026-09.md
  *
+ * **2026-11-09: アームを rich / browse に差し替えた。**
+ * pain / gain (ヒーローのコピー) は 2 コホートで 3 秒到達率に差が出ず
+ * (n=1,031/1,028 で 18.1% vs 17.1%、2026-11 の再測でも 18.0% vs 17.0%)、
+ * コピー探索を打ち切った。次に試すのは「実画面を最初に見せる」構造で、
+ * rich を同時対照、browse を挑戦者にする。
+ * 主指標は LP の 3 秒到達率 (iOS)。判定は x-fav-gellery の
+ * lp-arm-ab-monitor.yml (各アーム 200 着地 / 10 日 / 1.5 倍)。
+ *   → x-fav-gellery docs/implementation-plans/lp-rich-vs-browse-2026-11.md
+ *
  * query string は target.search で透過する。**広告リンクの utm_content
  * (creative アーム) が振り分け先まで届かないとセルが割れない。**
  */
 
-const VARIANTS = ["x-fav-pain", "x-fav-gain"] as const;
+const VARIANTS = ["x-fav-rich", "x-fav-browse"] as const;
 type Variant = (typeof VARIANTS)[number];
 
 /**
@@ -29,12 +38,12 @@ type Variant = (typeof VARIANTS)[number];
  * App Store URL の ct を差し替える)。
  */
 const ARM_BY_VARIANT: Record<Variant, string> = {
-  "x-fav-pain": "lp-pain",
-  "x-fav-gain": "lp-gain",
+  "x-fav-rich": "lp-rich",
+  "x-fav-browse": "lp-browse",
 };
 const CAMPAIGN_TOKEN_BY_VARIANT: Record<Variant, string> = {
-  "x-fav-pain": "xfg-lppain",
-  "x-fav-gain": "xfg-lpgain",
+  "x-fav-rich": "xfg-lprich",
+  "x-fav-browse": "xfg-lpbrowse",
 };
 
 const COOKIE_NAME = "lp_variant";
