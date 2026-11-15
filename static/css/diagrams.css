@@ -1,0 +1,145 @@
+/* 図（Mermaid / HTML）の共通スタイル */
+
+.mermaid {
+  margin: 1.6em 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram {
+  margin: 1.6em 0;
+}
+
+.diagram-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.diagram-col {
+  flex: 1 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: #fafafa;
+}
+
+.diagram-col--before {
+  border-color: #e0b4b4;
+  background: #fdf6f6;
+}
+
+.diagram-col--after {
+  border-color: #b4d4b4;
+  background: #f6fdf6;
+}
+
+.diagram-box {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  background: #fff;
+  flex: 1 1 auto;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.diagram-box strong {
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.diagram-arrow {
+  align-self: center;
+  color: #777;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.diagram-caption {
+  margin-top: 0.4em;
+  color: #666;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.lang-switch {
+  margin: 0 0 1.2em;
+}
+
+.lang-switch ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.6em;
+  font-size: 0.9em;
+}
+
+.lang-switch .lang-current {
+  color: #888;
+}
+
+@media (max-width: 480px) {
+  .diagram-col {
+    flex-basis: 100%;
+  }
+}
+
+/* ダークモード（テーマの prefers-color-scheme に合わせる） */
+@media (prefers-color-scheme: dark) {
+  .diagram-col {
+    border-color: #444;
+    background: #1f1f1f;
+  }
+
+  .diagram-col--before {
+    border-color: #6b4a4a;
+    background: #241a1a;
+  }
+
+  .diagram-col--after {
+    border-color: #4a6b4a;
+    background: #1a241a;
+  }
+
+  .diagram-box {
+    border-color: #555;
+    background: #2a2a2a;
+  }
+
+  .diagram-arrow {
+    color: #aaa;
+  }
+
+  .diagram-caption {
+    color: #aaa;
+  }
+
+  .lang-switch .lang-current {
+    color: #aaa;
+  }
+}
+
+/* Mermaid は明るいパネル上に描く（ダークモードでも可読性を優先） */
+.mermaid {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  padding: 14px 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mermaid {
+    border-color: #4a4a4a;
+  }
+}

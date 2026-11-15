@@ -1,5 +1,6 @@
 baseurl = "https://www.subcul-science.com"
-DefaultContentLanguage = "en"
+DefaultContentLanguage = "ja"
+defaultContentLanguageInSubdir = false
 title = "サブカル科学研究会のブログ"
 theme = "beautifulhugo"
 hasCJKLanguage = true
@@ -12,9 +13,25 @@ pygmentsCodefencesGuessSyntax = true
 #disqusShortname = "XXX"
 #googleAnalytics = "XXX"
 
+[languages]
+  [languages.ja]
+    languageName = "日本語"
+    languageCode = "ja-JP"
+    weight = 1
+    title = "サブカル科学研究会のブログ"
+    [languages.ja.params]
+      subtitle = "数理最適化、自然言語処理、雑記"
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en-US"
+    weight = 2
+    title = "Subculture Science Research Group's Blog"
+    [languages.en.params]
+      subtitle = "Mathematical optimization, natural language processing, and more"
+
 [Params]
 #  homeTitle = "Beautiful Hugo Theme" # Set a different text for the header on the home page
-  subtitle = "数理最適化、自然言語処理、雑記"
   mainSections = ["post","posts"]
   logo = "img/logo.png" # Expecting square dimensions
   favicon = "img/favicon.ico"
@@ -51,51 +68,82 @@ pygmentsCodefencesGuessSyntax = true
   soundcloud = "username"
   discord = "invite code (https://discord.gg/XXXXXXX)"
 
-[[menu.main]]
+# 日本語メニュー
+[[languages.ja.menu.main]]
     name = "Blog"
+    identifier = "blog"
     url = ""
     weight = 1
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "About us"
+    identifier = "about"
     url = "page/about/"
     weight = 3
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "Portfolio"
+    identifier = "portfolio"
     url = "portfolio"
     weight = 2
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "Tags"
+    identifier = "tags"
     url = "tags"
     weight = 3
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "アプリ"
+    identifier = "apps"
     url = "lp/"
     weight = 4
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "Refav Gallery"
     # AB は 2026-06-20 に rich 勝者と判定済み。2026-08-15 に simple → rich を 301 で
     # 統合したので、メニューは splitter (/x-fav-ab/) を経由せず rich に直リンクする
     # (splitter 経由だと 302 → 301 の 2 段になる)。
     url = "lp/x-fav-rich/"
-    parent = "アプリ"
+    parent = "apps"
     weight = 1
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "tsuzukan（続刊）"
     url = "lp/tsuzukan-lp/"
-    parent = "アプリ"
+    parent = "apps"
     weight = 2
 
-[[menu.main]]
+[[languages.ja.menu.main]]
     name = "AIコールセンター"
     url = "lp/ai-callcenter/"
-    parent = "アプリ"
+    parent = "apps"
     weight = 3
+
+# 英語メニュー（LP は日本語のみのため、アプリ配下は英語メニューには出さない）
+[[languages.en.menu.main]]
+    name = "Blog"
+    identifier = "blog"
+    url = ""
+    weight = 1
+
+[[languages.en.menu.main]]
+    name = "Portfolio"
+    identifier = "portfolio"
+    url = "portfolio"
+    weight = 2
+
+[[languages.en.menu.main]]
+    name = "About us"
+    identifier = "about"
+    url = "page/about/"
+    weight = 3
+
+[[languages.en.menu.main]]
+    name = "Tags"
+    identifier = "tags"
+    url = "tags"
+    weight = 4
 
 [markup]
     [markup.tableOfContents]

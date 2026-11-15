@@ -36,4 +36,10 @@ twq('config','okhzr');
 <!-- link switch-->
 <script type="text/javascript" language="javascript">
   var vc_pid = "887679350";
-</script><script type="text/javascript" src="//aml.valuecommerce.com/vcdal.js" async></script>
+</script><script type="text/javascript" src="//aml.valuecommerce.com/vcdal.js" async></script><!-- 多言語: hreflang と図のスタイル -->
+{{- if .IsTranslated }}
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">
+{{- end }}
+{{- end }}
+<link rel="stylesheet" href="{{ "css/diagrams.css" | relURL }}">

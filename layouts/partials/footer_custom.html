@@ -1,7 +1,6 @@
-<!--
-If you want to include any custom html just before </body>, put it in this file.
-Or you can delete these file if you don't need it.
--->
-<!-- for example, you could include some js libraries:
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.js" integrity="sha256-HdIuWBZj4eftihsoDCJoMYjZi6aNVaw7YlUpzKT3ZxI=" crossorigin="anonymous"></script>
--->
+<!-- 言語切替（一覧ページでも出す） -->
+{{- partial "lang-switch.html" . }}
+{{- if strings.Contains .Content "class=\"mermaid\"" }}
+<script src="{{ "vendor/mermaid/mermaid.min.js" | relURL }}" defer></script>
+<script src="{{ "js/diagram-init.js" | relURL }}" defer></script>
+{{- end }}

@@ -1,0 +1,21 @@
+{{- $current := . -}}
+<nav class="lang-switch" aria-label="言語 / Language">
+  <ul>
+  {{- range .Site.Home.AllTranslations }}
+    {{- $home := . -}}
+    {{- $lang := $home.Language.Lang -}}
+    {{- $target := "" -}}
+    {{- range $current.AllTranslations -}}
+      {{- if eq .Language.Lang $lang -}}{{- $target = .RelPermalink -}}{{- end -}}
+    {{- end -}}
+    {{- if not $target -}}{{- $target = $home.RelPermalink -}}{{- end -}}
+    <li>
+    {{- if eq $lang $current.Language.Lang -}}
+      <span class="lang-current">{{ $home.Language.LanguageName }}</span>
+    {{- else -}}
+      <a href="{{ $target }}" hreflang="{{ $home.Language.LanguageCode }}">{{ $home.Language.LanguageName }}</a>
+    {{- end -}}
+    </li>
+  {{- end }}
+  </ul>
+</nav>
