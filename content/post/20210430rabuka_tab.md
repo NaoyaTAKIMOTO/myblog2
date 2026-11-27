@@ -32,9 +32,7 @@ draft: false
 ## boothにてtab譜の頒布
 シンプルなソロギターアレンジの譜面に仕上げました。
 
-gp5とpdf形式でtab譜をboothにて頒布しています。
 
-[ラブカ？(feat. Ado) guitar cover [tab譜]](https://subcul-science.booth.pm/items/2928910)
 ---
 
 **関連書籍**
