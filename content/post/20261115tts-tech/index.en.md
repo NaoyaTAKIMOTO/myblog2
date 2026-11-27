@@ -186,4 +186,4 @@ The shape is not specific to TADA. "Register offline and heavily, generate onlin
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)

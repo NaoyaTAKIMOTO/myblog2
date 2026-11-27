@@ -148,4 +148,4 @@ No special analytics stack is required. A few API calls and one division change 
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)

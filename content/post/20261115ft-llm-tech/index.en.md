@@ -228,4 +228,4 @@ The 1.2B result is left in place as it is. Numbers are what let you tell later w
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)

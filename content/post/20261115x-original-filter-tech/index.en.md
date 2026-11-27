@@ -182,4 +182,4 @@ The same shape applies to any site that rebuilds its DOM constantly and needs du
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)

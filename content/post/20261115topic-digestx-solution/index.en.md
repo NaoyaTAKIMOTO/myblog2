@@ -151,4 +151,4 @@ Today the container is there and the digest is empty. The shape — decide what 
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)

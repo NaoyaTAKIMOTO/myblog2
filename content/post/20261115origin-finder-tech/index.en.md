@@ -165,4 +165,4 @@ The same shape applies to any task that combines several external APIs into one 
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)
