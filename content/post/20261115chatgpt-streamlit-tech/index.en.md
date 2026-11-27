@@ -198,4 +198,4 @@ The skeleton of a search-enabled chat fits in a handful of files. Adding a reque
 
 I take on technical consulting and development support.
 
-[Hire me on Coconala](https://coconala.com/users/1993863)
+[Hire me on Coconala](https://coconala.com/users/1117897)

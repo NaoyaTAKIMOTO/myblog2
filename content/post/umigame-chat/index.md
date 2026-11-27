@@ -213,7 +213,7 @@ Gradio + Hugging Face Spaces でのAIゲームアプリ開発で学んだポイ�
 
 技術相談や開発サポートを承っています。お気軽にご相談ください。
 
-[ココナラで開発相談を依頼する](https://coconala.com/users/1993863)
+[ココナラで開発相談を依頼する](https://coconala.com/users/1117897)
 
 ---
 

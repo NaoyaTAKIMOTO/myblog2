@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - トラブルが発生した時には原因の追及と解決に努める。
 - その際に考えうる原因をあらかじめ列挙しておく。
 - hugo new post/yyyymmdd:title/index.md
-- 記事の最後にココナラの依頼ページへのリンクを貼る。
+- 記事の最後にココナラの依頼ページへのリンクを貼る（正しいURL: https://coconala.com/users/1117897 。users/1993863 は別人のプロフィールなので使わない）。
 
 ## Project Overview
 
