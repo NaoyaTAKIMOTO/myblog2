@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="カラーE Inkフォトフレーム向けに写真の赤みを抑えて明るさを整え、スマホから送れるアプリ（仮称Inkfit）の事前登録ページです。">
+<!-- たたき台のため検索結果に出さない。正式公開時に外す -->
+<meta name="robots" content="noindex">
+<title>Inkfit（仮称） 事前登録｜E Inkフォトフレームの色補正アプリ</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL5G30FP5R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XL5G30FP5R');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Murecho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 電子ペーパーの「紙面」を一枚の縦長シートとして見せる。セクションは罫線で区切り、比較スライダーだけを主役にする */
+:root{
+  --paper:#e8eae7;      /* E Inkの地色に近い、わずかに青みのグレー */
+  --sheet:#f4f5f2;
+  --ink:#1c1f22;
+  --ink-soft:#4a5157;
+  --rule:#c6cbc8;
+  --accent:#2f6f8f;     /* 補正後の「正しい青」 */
+  --accent-ink:#ffffff;
+  --warm:#b4533a;       /* 赤み（課題側でだけ使う） */
+  --pr:#7a5a00;
+  --pr-bg:#f3e7bf;
+  --font-display:"Murecho","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  --font-body:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#15181a; --sheet:#1d2124; --ink:#e7eae8; --ink-soft:#a9b1b5; --rule:#343a3e;
+    --accent:#6fb3d3; --accent-ink:#0d1a21; --warm:#e0866c; --pr:#f0d27a; --pr-bg:#3a3214;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15181a; --sheet:#1d2124; --ink:#e7eae8; --ink-soft:#a9b1b5; --rule:#343a3e;
+  --accent:#6fb3d3; --accent-ink:#0d1a21; --warm:#e0866c; --pr:#f0d27a; --pr-bg:#3a3214;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.8;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:960px;margin:0 auto}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.draft{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);border-bottom:1px dashed var(--rule);padding-block:10px;display:flex;gap:8px 16px;flex-wrap:wrap;justify-content:space-between}
+
+header.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding-block:48px 40px}
+.hero > *{min-width:0}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 12px}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.2vw,50px);line-height:1.25;margin:0 0 18px;text-wrap:balance;letter-spacing:.01em}
+h1 .soft{color:var(--warm)}
+h1 .fix{color:var(--accent)}
+.lede{font-size:17px;color:var(--ink-soft);margin:0 0 24px;max-width:34em}
+.compat{display:inline-block;font-size:13px;border:1px solid var(--rule);padding:4px 10px;border-radius:4px;margin:0 0 24px;color:var(--ink-soft)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);font-family:var(--font-display);font-weight:700;font-size:16px;padding:14px 22px;border-radius:6px;border:0;text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.hero-note{font-size:13px;color:var(--ink-soft);margin-top:10px}
+
+/* 比較スライダー */
+.compare{position:relative;width:100%;max-width:100%;aspect-ratio:5/3;border-radius:6px;overflow:hidden;background:#000;
+  box-shadow:0 0 0 10px var(--sheet),0 0 0 11px var(--rule)}
+.compare canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.compare .after{clip-path:inset(0 0 0 var(--pos,50%))}
+.compare .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:#fff;transform:translateX(-1px);pointer-events:none}
+.compare .handle::after{content:"";position:absolute;top:50%;left:50%;width:30px;height:30px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.compare .tag{position:absolute;top:10px;font-family:var(--font-mono);font-size:11px;padding:2px 8px;border-radius:3px;background:rgba(0,0,0,.55);color:#fff}
+.compare .tag.l{left:10px}.compare .tag.r{right:10px}
+.compare input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.cap{font-size:12px;color:var(--ink-soft);margin-top:20px;font-family:var(--font-mono)}
+
+section{border-top:1px solid var(--rule);padding-block:44px}
+h2{font-family:var(--font-display);font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.4;margin:0 0 20px;text-wrap:balance}
+.sec-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 6px}
+
+.pains{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.pain{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:20px 22px}
+.pain h3{font-family:var(--font-display);font-size:18px;margin:0 0 8px}
+.pain p{margin:0;color:var(--ink-soft)}
+.pain .steps{font-family:var(--font-mono);font-size:13px;color:var(--warm);margin-top:12px;line-height:1.6}
+
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.feature h3{font-family:var(--font-display);font-size:18px;margin:10px 0 8px}
+.feature p{margin:0;color:var(--ink-soft);font-size:15px}
+.feature .spec{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);margin-top:10px;border-top:1px dashed var(--rule);padding-top:8px}
+.glyph{width:40px;height:40px;display:block}
+.glyph *{stroke:var(--ink);fill:none;stroke-width:1.6}
+.glyph .a{stroke:var(--accent)}
+
+.sizes{overflow-x:auto;margin-top:24px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:420px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule)}
+th{font-weight:500;color:var(--ink-soft);font-size:12px}
+td.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+/* 事前登録 */
+.signup{display:grid;grid-template-columns:1fr 1.2fr;gap:36px}
+.signup > *{min-width:0}
+form{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:24px;display:grid;gap:18px}
+label,legend{font-weight:700;font-size:14px}
+input[type=email],select{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink);margin-top:6px}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:6px}
+.check{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:15px}
+.check input{margin-top:6px}
+.fine{font-size:12px;color:var(--ink-soft);margin:0}
+.thanks{background:var(--sheet);border:1px solid var(--accent);border-radius:8px;padding:24px}
+.thanks h3{font-family:var(--font-display);margin:0 0 6px}
+
+/* アフィリエイト */
+.shop{display:grid;grid-template-columns:auto 1fr;gap:16px 20px;align-items:start;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:22px}
+.pr{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--pr);background:var(--pr-bg);padding:3px 8px;border-radius:3px;white-space:nowrap}
+.shop h3{font-family:var(--font-display);font-size:18px;margin:0 0 6px}
+.shop p{margin:0 0 12px;color:var(--ink-soft);font-size:15px}
+.shop-links{display:flex;flex-wrap:wrap;gap:10px}
+.shop-links a{display:inline-block;font-size:14px;border:1px solid var(--rule);padding:8px 14px;border-radius:5px;text-decoration:none;color:var(--ink);background:var(--paper)}
+.shop-links a[aria-disabled="true"]{color:var(--ink-soft);cursor:not-allowed}
+
+footer{border-top:1px solid var(--rule);padding-top:24px;font-size:12px;color:var(--ink-soft);display:grid;gap:8px}
+footer p{margin:0;max-width:70em}
+
+@media (max-width:760px){
+  header.hero,.signup{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr}
+  .pains{grid-template-columns:1fr}
+  header.hero{padding-block:32px 32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="draft"><span>たたき台 v0.1 ・ アプリ名は仮</span><span>仮名案: Inkfit ／ いろもどし ／ Frame Tone</span></div>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">E INK フォトフレーム用 写真補正＆送信アプリ</p>
+      <h1>あの写真、<span class="soft">赤っぽく</span>映っていませんか。<br><span class="fix">スマホで直して</span>、そのまま飾る。</h1>
+      <p class="lede">Inkfitは、カラーE Inkフォトフレームに合わせて写真の色を整え、スマホから直接送るアプリです。いまアプリを開発中で、事前登録を受け付けています。</p>
+      <p class="compat">SwitchBot AI Art Frame 対応予定（非公式アプリ）</p>
+      <div><a class="btn" href="#signup">事前登録する（無料）</a></div>
+      <p class="hero-note">リリース時にメールで1回だけお知らせします。</p>
+    </div>
+    <div>
+      <div class="compare" id="compare" style="--pos:50%">
+        <canvas class="before" id="cv-before" width="800" height="480" aria-hidden="true"></canvas>
+        <canvas class="after" id="cv-after" width="800" height="480" aria-hidden="true"></canvas>
+        <div class="handle"></div>
+        <span class="tag l">補正前</span><span class="tag r">補正後</span>
+        <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="補正前と補正後の比較位置">
+      </div>
+      <p class="cap">作例はイメージです。実機で撮った比較写真に差し替えます ・ 800×480（7.3インチ相当）</p>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-pain">
+    <p class="sec-label">いまの困りごと</p>
+    <h2 id="h-pain">飾るまでの手間と、思ったのと違う発色</h2>
+    <div class="pains">
+      <div class="pain">
+        <h3>1枚飾るのに、何度も行ったり来たり</h3>
+        <p>トリミング、明るさ調整、アプリへの取り込み、送信。フレームに入る枚数にも限りがあるので、古い写真の整理も手作業です。</p>
+        <p class="steps">写真アプリ → 編集アプリ → 書き出し → フレームのアプリ → 送信 → 古い写真を削除</p>
+      </div>
+      <div class="pain">
+        <h3>顔も空も、全体に赤みがかる</h3>
+        <p>カラーE Inkは色数が少なく、スマホの画面と同じ写真を送っても赤や橙に寄って見えがちです。肌が日焼けしたように、空がくすんで見えることもあります。</p>
+        <p class="steps">原因の例: 色数の少ない減色、液晶向けに作られた色の写真</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-feat">
+    <p class="sec-label">できること</p>
+    <h2 id="h-feat">補正から送信まで、アプリひとつで</h2>
+    <div class="features">
+      <div class="feature">
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><circle cx="16" cy="20" r="10"/><circle class="a" cx="24" cy="20" r="10"/></svg>
+        <h3>赤みを抑える色補正</h3>
+        <p>ホワイトバランスを整え、赤〜橙だけ鮮やかさを控えめにします。全体は鮮やかなまま、肌は赤く転びません。</p>
+        <p class="spec">強さは4段階のテスト画像を実機に出して選べます</p>
+      </div>
+      <div class="feature">
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="8" width="28" height="24" rx="2"/><path class="a" d="M6 26 L16 18 L22 23 L28 17 L34 22"/></svg>
+        <h3>E Ink向けの見え方に調整</h3>
+        <p>暗く沈みがちな紙の画面に合わせて、明るさ・コントラスト・彩度をまとめて整えます。フレームの比率に合わせた切り抜きも自動です。</p>
+        <p class="spec">明るさ ／ コントラスト ／ 彩度 ／ 切り抜き</p>
+      </div>
+      <div class="feature">
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="6" width="12" height="22" rx="2"/><rect x="24" y="14" width="10" height="16" rx="1"/><path class="a" d="M20 17 H24 M22 15 L24 17 L22 19"/></svg>
+        <h3>スマホから送信・同期</h3>
+        <p>選んだ写真をそのままフレームへ。アルバムを決めておけば毎日入れ替え、枚数を超えたら古い順に整理します。</p>
+        <p class="spec">日替わりアルバム ／ 保存枚数の自動整理</p>
+      </div>
+    </div>
+    <div class="sizes">
+      <table>
+        <caption class="fine" style="text-align:left;caption-side:bottom;padding-top:8px">対応を予定しているサイズ。解像度はメーカーの公開情報によります。</caption>
+        <thead><tr><th>画面サイズ</th><th>解像度</th><th>補正後の書き出し</th></tr></thead>
+        <tbody>
+          <tr><td>7.3インチ</td><td class="num">800 × 480</td><td>横長</td></tr>
+          <tr><td>13.3インチ</td><td class="num">1200 × 1600</td><td>縦長</td></tr>
+          <tr><td>31.5インチ</td><td class="num">2560 × 1440</td><td>横長</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="signup" aria-labelledby="h-sign">
+    <div class="signup">
+      <div>
+        <p class="sec-label">事前登録</p>
+        <h2 id="h-sign">リリースのお知らせを受け取る</h2>
+        <p>登録は無料です。いただいた回答は、どのサイズから対応するか、どの機能を先に作るかの参考にします。</p>
+        <p class="fine">このページはたたき台です。フォームは送信しても保存されません。</p>
+      </div>
+      <div>
+        <form id="signup-form" novalidate>
+          <div>
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+          <div>
+            <label for="size">お使いのフレーム</label>
+            <select id="size" name="size">
+              <option value="7.3">7.3インチ</option>
+              <option value="13.3">13.3インチ</option>
+              <option value="31.5">31.5インチ</option>
+              <option value="none">まだ持っていない・検討中</option>
+            </select>
+          </div>
+          <fieldset>
+            <legend>いちばん困っていること（いくつでも）</legend>
+            <label class="check"><input type="checkbox" id="p-red" name="pain" value="red"> 色が赤っぽくなる</label>
+            <label class="check"><input type="checkbox" id="p-dark" name="pain" value="dark"> 暗い・メリハリがない</label>
+            <label class="check"><input type="checkbox" id="p-send" name="pain" value="send"> 送るまでの手間</label>
+            <label class="check"><input type="checkbox" id="p-rotate" name="pain" value="rotate"> 写真の入れ替え・整理</label>
+          </fieldset>
+          <p class="fine" id="email-error" role="alert" hidden>メールアドレスの形式を確認してください。</p>
+          <button class="btn" type="submit">事前登録する</button>
+          <p class="fine">お知らせ以外の目的には使いません。いつでも配信を停止できます。</p>
+        </form>
+        <div class="thanks" id="thanks" hidden>
+          <h3>登録を受け付けました（デモ）</h3>
+          <p class="fine">たたき台のため、入力内容は保存していません。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-shop">
+    <p class="sec-label">フレームをまだお持ちでない方へ</p>
+    <h2 id="h-shop">対応予定のフレーム</h2>
+    <div class="shop">
+      <span class="pr">PR</span>
+      <div>
+        <h3>SwitchBot AI Art Frame</h3>
+        <p>このリンクはアフィリエイト広告です。リンク経由で購入されると、運営者に紹介料が支払われることがあります。価格や在庫は販売ページでご確認ください。</p>
+        <div class="shop-links">
+          <a href="#" aria-disabled="true" onclick="return false">Amazonで見る（7.3インチ）リンク準備中</a>
+          <a href="#" aria-disabled="true" onclick="return false">Amazonで見る（13.3インチ）リンク準備中</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Inkfit（仮称）は個人が開発中の非公式アプリです。SwitchBot株式会社およびその関連会社とは関係がなく、承認・提携を受けたものではありません。</p>
+    <p>SwitchBotは各社の商標または登録商標です。本ページでは対応機種を説明する目的でのみ名称を記載しています。</p>
+    <!-- Amazonアソシエイト参加後に有効化: <p>Amazonのアソシエイトとして、運営者は適格販売により収入を得ています。</p> -->
+  </footer>
+</div>
+
+<script>
+(function(){
+  // 作例シーン（実写差し替えまでのイメージ）
+  function scene(ctx,w,h){
+    var sky=ctx.createLinearGradient(0,0,0,h*0.6);
+    sky.addColorStop(0,"#5d93c8");sky.addColorStop(1,"#c9dcea");
+    ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+    ctx.fillStyle="#f2efe4";ctx.beginPath();ctx.arc(w*0.18,h*0.22,h*0.08,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle="#6d8f5a";ctx.beginPath();ctx.moveTo(0,h*0.62);
+    ctx.quadraticCurveTo(w*0.3,h*0.45,w*0.6,h*0.6);ctx.quadraticCurveTo(w*0.85,h*0.7,w,h*0.55);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
+    ctx.fillStyle="#4f6e43";ctx.beginPath();ctx.moveTo(0,h*0.78);ctx.quadraticCurveTo(w*0.5,h*0.66,w,h*0.8);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
+    // 人物（肌色）
+    ctx.fillStyle="#2f3b55";ctx.beginPath();ctx.ellipse(w*0.66,h*0.98,w*0.14,h*0.28,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle="#e2b597";ctx.beginPath();ctx.arc(w*0.66,h*0.5,h*0.13,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle="#2a211c";ctx.beginPath();ctx.arc(w*0.66,h*0.45,h*0.135,Math.PI,0);ctx.fill();
+  }
+  function grade(src,dst,fn){
+    var d=src.getImageData(0,0,src.canvas.width,src.canvas.height),p=d.data;
+    for(var i=0;i<p.length;i+=4){var o=fn(p[i],p[i+1],p[i+2]);p[i]=o[0];p[i+1]=o[1];p[i+2]=o[2];}
+    dst.putImageData(d,0,0);
+  }
+  function c(v){return v<0?0:v>255?255:v}
+  var b=document.getElementById("cv-before"),a=document.getElementById("cv-after");
+  var bx=b.getContext("2d"),ax=a.getContext("2d");
+  scene(ax,a.width,a.height);
+  // 補正前: 赤に寄り、暗く、メリハリがない
+  grade(ax,bx,function(r,g,bl){
+    r=r*1.12+18;g=g*0.94;bl=bl*0.78;
+    var m=118;r=m+(r-m)*0.8;g=m+(g-m)*0.8;bl=m+(bl-m)*0.8;
+    return [c(r*0.9),c(g*0.88),c(bl*0.88)];
+  });
+  // 補正後: 少しだけ明るく鮮やかに
+  grade(ax,ax,function(r,g,bl){
+    var y=0.299*r+0.587*g+0.114*bl,s=1.12;
+    return [c((y+(r-y)*s)*1.03),c((y+(g-y)*s)*1.03),c((y+(bl-y)*s)*1.03)];
+  });
+
+  var box=document.getElementById("compare"),range=document.getElementById("compare-range");
+  range.addEventListener("input",function(){box.style.setProperty("--pos",range.value+"%")});
+
+  var form=document.getElementById("signup-form"),err=document.getElementById("email-error"),email=document.getElementById("email");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){err.hidden=false;email.focus();return;}
+    err.hidden=true;form.hidden=true;document.getElementById("thanks").hidden=false;
+  });
+})();
+</script>
+</body>
+</html>
