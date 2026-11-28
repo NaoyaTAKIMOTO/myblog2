@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="カラーE Inkフォトフレーム向けに写真の赤みを抑えて明るさを整え、スマホから送れるアプリ（仮称Inkfit）の事前登録ページです。">
+<meta name="description" content="カラーE Inkフォトフレーム向けにカラーE Inkフォトフレームの紹介と、写真の赤みを抑えてスマホから送れるアプリ（仮称Inkfit）の事前登録ページです。">
 <!-- たたき台のため検索結果に出さない。正式公開時に外す -->
 <meta name="robots" content="noindex">
 <title>Inkfit（仮称） 事前登録｜E Inkフォトフレームの色補正アプリ</title>
@@ -118,6 +118,12 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:6px}
 .thanks{background:var(--sheet);border:1px solid var(--accent);border-radius:8px;padding:24px}
 .thanks h3{font-family:var(--font-display);margin:0 0 6px}
 
+/* フレーム表示イメージ */
+.frame-mock{background:#f7f7f4;padding:5%;border:14px solid #2b2b2b;border-radius:4px;box-shadow:0 18px 40px rgba(0,0,0,.18);max-width:100%}
+.frame-mock canvas{display:block;width:100%;height:auto}
+.app-intro{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
+.app-intro > *{min-width:0}
+.hero .shop{margin-top:8px}
 /* アフィリエイト */
 .shop{display:grid;grid-template-columns:auto 1fr;gap:16px 20px;align-items:start;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:22px}
 .pr{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--pr);background:var(--pr-bg);padding:3px 8px;border-radius:3px;white-space:nowrap}
@@ -131,7 +137,7 @@ footer{border-top:1px solid var(--rule);padding-top:24px;font-size:12px;color:va
 footer p{margin:0;max-width:70em}
 
 @media (max-width:760px){
-  header.hero,.signup{grid-template-columns:1fr}
+  header.hero,.signup,.app-intro{grid-template-columns:1fr}
   .features{grid-template-columns:1fr}
   .pains{grid-template-columns:1fr}
   header.hero{padding-block:32px 32px}
@@ -142,31 +148,66 @@ footer p{margin:0;max-width:70em}
 </head>
 <body>
 <div class="wrap">
-  <div class="draft"><span>たたき台 v0.1 ・ アプリ名は仮</span><span>仮名案: Inkfit ／ いろもどし ／ Frame Tone</span></div>
+  <div class="draft"><span>たたき台 v0.2 ・ アプリ名は仮（Inkfit ／ いろもどし ／ Frame Tone）</span><span>このページにはアフィリエイト広告（PR）が含まれます</span></div>
 
   <header class="hero">
     <div>
-      <p class="eyebrow">E INK フォトフレーム用 写真補正＆送信アプリ</p>
-      <h1>あの写真、<span class="soft">赤っぽく</span>映っていませんか。<br><span class="fix">スマホで直して</span>、そのまま飾る。</h1>
-      <p class="lede">Inkfitは、カラーE Inkフォトフレームに合わせて写真の色を整え、スマホから直接送るアプリです。いまアプリを開発中で、事前登録を受け付けています。</p>
-      <p class="compat">SwitchBot AI Art Frame 対応予定（非公式アプリ）</p>
-      <div><a class="btn" href="#signup">事前登録する（無料）</a></div>
-      <p class="hero-note">リリース時にメールで1回だけお知らせします。</p>
+      <p class="eyebrow">カラーE INK フォトフレーム</p>
+      <h1>光らない画面に、<br><span style="white-space:nowrap">写真を<span class="fix">紙のように</span>飾る。</span></h1>
+      <p class="lede">カラーE Inkのフォトフレームは、液晶のように自分では光らず、部屋の光を反射して写真を見せます。プリントした写真に近い落ち着いた見え方で、壁や棚に置いたまま、スマホから写真を入れ替えられます。</p>
+      <div class="shop">
+        <span class="pr">PR</span>
+        <div>
+          <h3>SwitchBot AI Art Frame</h3>
+          <p>7.3 ／ 13.3 ／ 31.5インチのカラーE Inkフレーム。このリンクはアフィリエイト広告で、購入されると運営者に紹介料が支払われることがあります。価格や在庫は販売ページでご確認ください。</p>
+          <div class="shop-links">
+            <a href="#" aria-disabled="true" onclick="return false">Amazonで見る（7.3インチ）リンク準備中</a>
+            <a href="#" aria-disabled="true" onclick="return false">Amazonで見る（13.3インチ）リンク準備中</a>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
-      <div class="compare" id="compare" style="--pos:50%">
-        <canvas class="before" id="cv-before" width="800" height="480" aria-hidden="true"></canvas>
-        <canvas class="after" id="cv-after" width="800" height="480" aria-hidden="true"></canvas>
-        <div class="handle"></div>
-        <span class="tag l">補正前</span><span class="tag r">補正後</span>
-        <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="補正前と補正後の比較位置">
-      </div>
-      <p class="cap">作例はイメージです。実機で撮った比較写真に差し替えます ・ 800×480（7.3インチ相当）</p>
+      <div class="frame-mock"><canvas id="cv-hero" width="800" height="480" aria-hidden="true"></canvas></div>
+      <p class="cap">表示イメージ（サンプル画像）・ 7.3インチ相当 800×480</p>
     </div>
   </header>
 
+  <section aria-labelledby="h-frame">
+    <p class="sec-label">E Inkフレームのよさ</p>
+    <h2 id="h-frame">「画面」ではなく「写真」として部屋になじむ</h2>
+    <div class="features">
+      <div class="feature">
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="7" y="8" width="26" height="24" rx="1"/><path class="a" d="M3 4 L12 13 M20 2 V9 M37 4 L30 11"/></svg>
+        <h3>光らないから、まぶしくない</h3>
+        <p>バックライトがなく、部屋の明るさに合わせて見え方が変わります。夜にリビングで光り続けることもありません。</p>
+      </div>
+      <div class="feature">
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="10" width="24" height="20" rx="2"/><rect class="a" x="10" y="14" width="10" height="12"/><path d="M30 17 H34 V23 H30"/></svg>
+        <h3>描き替えるときだけ電力を使う</h3>
+        <p>E Inkは、一度描いた写真を電力を使わずに表示し続けられます。電力を使うのは写真を入れ替えるときだけです。</p>
+      </div>
+      <div class="feature">
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="6" width="12" height="22" rx="2"/><rect x="24" y="14" width="10" height="16" rx="1"/><path class="a" d="M20 17 H24 M22 15 L24 17 L22 19"/></svg>
+        <h3>スマホから写真を入れ替え</h3>
+        <p>旅行の写真、子どもの絵、季節の一枚。プリントし直さなくても、飾る写真を気軽に替えられます。</p>
+      </div>
+    </div>
+    <div class="sizes">
+      <table>
+        <caption class="fine" style="text-align:left;caption-side:bottom;padding-top:8px">解像度はメーカーの公開情報によります。</caption>
+        <thead><tr><th>画面サイズ</th><th>解像度</th><th>向き</th></tr></thead>
+        <tbody>
+          <tr><td>7.3インチ</td><td class="num">800 × 480</td><td>横長</td></tr>
+          <tr><td>13.3インチ</td><td class="num">1200 × 1600</td><td>縦長</td></tr>
+          <tr><td>31.5インチ</td><td class="num">2560 × 1440</td><td>横長</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <section aria-labelledby="h-pain">
-    <p class="sec-label">いまの困りごと</p>
+    <p class="sec-label">でも、使ってみると</p>
     <h2 id="h-pain">飾るまでの手間と、思ったのと違う発色</h2>
     <div class="pains">
       <div class="pain">
@@ -182,10 +223,27 @@ footer p{margin:0;max-width:70em}
     </div>
   </section>
 
-  <section aria-labelledby="h-feat">
-    <p class="sec-label">できること</p>
-    <h2 id="h-feat">補正から送信まで、アプリひとつで</h2>
-    <div class="features">
+  <section aria-labelledby="h-app">
+    <p class="sec-label">そこで</p>
+    <div class="app-intro">
+      <div>
+        <h2 id="h-app"><span class="fix">Inkfit</span>（仮称）で、補正から送信までスマホひとつに。</h2>
+        <p class="lede">E Inkに合わせて写真の色を整え、そのままフレームへ送るアプリを開発しています。いま事前登録を受け付けています。</p>
+        <p class="compat">SwitchBot AI Art Frame 対応予定（非公式アプリ）</p>
+        <div><a class="btn" href="#signup">事前登録する（無料）</a></div>
+      </div>
+      <div>
+        <div class="compare" id="compare" style="--pos:50%">
+          <canvas class="before" id="cv-before" width="800" height="480" aria-hidden="true"></canvas>
+          <canvas class="after" id="cv-after" width="800" height="480" aria-hidden="true"></canvas>
+          <div class="handle"></div>
+          <span class="tag l">補正前</span><span class="tag r">補正後</span>
+          <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="補正前と補正後の比較位置">
+        </div>
+        <p class="cap">表示イメージ（サンプル画像）。実機で撮った比較写真に差し替えます</p>
+      </div>
+    </div>
+    <div class="features" style="margin-top:40px">
       <div class="feature">
         <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><circle cx="16" cy="20" r="10"/><circle class="a" cx="24" cy="20" r="10"/></svg>
         <h3>赤みを抑える色補正</h3>
@@ -199,22 +257,11 @@ footer p{margin:0;max-width:70em}
         <p class="spec">明るさ ／ コントラスト ／ 彩度 ／ 切り抜き</p>
       </div>
       <div class="feature">
-        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="6" width="12" height="22" rx="2"/><rect x="24" y="14" width="10" height="16" rx="1"/><path class="a" d="M20 17 H24 M22 15 L24 17 L22 19"/></svg>
+        <svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 14 A12 12 0 0 1 32 14"/><path class="a" d="M32 26 A12 12 0 0 1 8 26"/><path d="M28 10 L32 14 L36 10 M4 30 L8 26 L12 30"/></svg>
         <h3>スマホから送信・同期</h3>
         <p>選んだ写真をそのままフレームへ。アルバムを決めておけば毎日入れ替え、枚数を超えたら古い順に整理します。</p>
         <p class="spec">日替わりアルバム ／ 保存枚数の自動整理</p>
       </div>
-    </div>
-    <div class="sizes">
-      <table>
-        <caption class="fine" style="text-align:left;caption-side:bottom;padding-top:8px">対応を予定しているサイズ。解像度はメーカーの公開情報によります。</caption>
-        <thead><tr><th>画面サイズ</th><th>解像度</th><th>補正後の書き出し</th></tr></thead>
-        <tbody>
-          <tr><td>7.3インチ</td><td class="num">800 × 480</td><td>横長</td></tr>
-          <tr><td>13.3インチ</td><td class="num">1200 × 1600</td><td>縦長</td></tr>
-          <tr><td>31.5インチ</td><td class="num">2560 × 1440</td><td>横長</td></tr>
-        </tbody>
-      </table>
     </div>
   </section>
 
@@ -223,7 +270,7 @@ footer p{margin:0;max-width:70em}
       <div>
         <p class="sec-label">事前登録</p>
         <h2 id="h-sign">リリースのお知らせを受け取る</h2>
-        <p>登録は無料です。いただいた回答は、どのサイズから対応するか、どの機能を先に作るかの参考にします。</p>
+        <p>登録は無料です。リリース時にメールで1回だけお知らせします。いただいた回答は、どのサイズから対応するか、どの機能を先に作るかの参考にします。</p>
         <p class="fine">このページはたたき台です。フォームは送信しても保存されません。</p>
       </div>
       <div>
@@ -260,25 +307,9 @@ footer p{margin:0;max-width:70em}
     </div>
   </section>
 
-  <section aria-labelledby="h-shop">
-    <p class="sec-label">フレームをまだお持ちでない方へ</p>
-    <h2 id="h-shop">対応予定のフレーム</h2>
-    <div class="shop">
-      <span class="pr">PR</span>
-      <div>
-        <h3>SwitchBot AI Art Frame</h3>
-        <p>このリンクはアフィリエイト広告です。リンク経由で購入されると、運営者に紹介料が支払われることがあります。価格や在庫は販売ページでご確認ください。</p>
-        <div class="shop-links">
-          <a href="#" aria-disabled="true" onclick="return false">Amazonで見る（7.3インチ）リンク準備中</a>
-          <a href="#" aria-disabled="true" onclick="return false">Amazonで見る（13.3インチ）リンク準備中</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <p>Inkfit（仮称）は個人が開発中の非公式アプリです。SwitchBot株式会社およびその関連会社とは関係がなく、承認・提携を受けたものではありません。</p>
-    <p>SwitchBotは各社の商標または登録商標です。本ページでは対応機種を説明する目的でのみ名称を記載しています。</p>
+    <p>SwitchBotは各社の商標または登録商標です。本ページでは製品と対応機種を説明する目的でのみ名称を記載しています。</p>
     <!-- Amazonアソシエイト参加後に有効化: <p>Amazonのアソシエイトとして、運営者は適格販売により収入を得ています。</p> -->
   </footer>
 </div>
@@ -320,6 +351,7 @@ footer p{margin:0;max-width:70em}
     return [c((y+(r-y)*s)*1.03),c((y+(g-y)*s)*1.03),c((y+(bl-y)*s)*1.03)];
   });
 
+  document.getElementById("cv-hero").getContext("2d").drawImage(a,0,0);
   var box=document.getElementById("compare"),range=document.getElementById("compare-range");
   range.addEventListener("input",function(){box.style.setProperty("--pos",range.value+"%")});
 
