@@ -176,12 +176,10 @@ footer p{margin:0;max-width:70em}
       <div class="shop" id="shop" hidden>
         <span class="pr">PR</span>
         <div>
-          <h3>SwitchBot AI Art Frame</h3>
-          <p>7.3 ／ 13.3 ／ 31.5インチのカラーE Inkフレーム。このリンクはアフィリエイト広告で、購入されると運営者に紹介料が支払われることがあります。価格や在庫は販売ページでご確認ください。</p>
+          <h3>SwitchBot AIアートキャンバス</h3>
+          <p>7.3 ／ 13.3 ／ 31.5インチのカラーE Inkフレーム。リンク先はAmazonの検索結果で、サイズや後継モデルの「AIアートキャンバス2」もそこから選べます。このリンクはアフィリエイト広告で、購入されると運営者に紹介料が支払われることがあります。価格や在庫は販売ページでご確認ください。</p>
           <div class="shop-links">
-            <a id="aff-7" href="#" rel="sponsored noopener" target="_blank" data-cta="aff_7.3" hidden>Amazonで見る（7.3インチ）</a>
-            <a id="aff-13" href="#" rel="sponsored noopener" target="_blank" data-cta="aff_13.3" hidden>Amazonで見る（13.3インチ）</a>
-            <a id="aff-31" href="#" rel="sponsored noopener" target="_blank" data-cta="aff_31.5" hidden>Amazonで見る（31.5インチ）</a>
+            <a id="aff-all" href="#" rel="sponsored noopener" target="_blank" data-cta="aff_amazon_search" hidden>Amazonで見る</a>
           </div>
         </div>
       </div>
@@ -214,7 +212,7 @@ footer p{margin:0;max-width:70em}
     </div>
     <div class="sizes">
       <table>
-        <caption class="fine" style="text-align:left;caption-side:bottom;padding-top:8px">解像度はメーカーの公開情報によります。</caption>
+        <caption class="fine" style="text-align:left;caption-side:bottom;padding-top:8px">SwitchBot AIアートキャンバス（初代）の場合。解像度はメーカーの公開情報によります。</caption>
         <thead><tr><th>画面サイズ</th><th>解像度</th><th>向き</th></tr></thead>
         <tbody>
           <tr><td>7.3インチ</td><td class="num">800 × 480</td><td>横長</td></tr>
@@ -248,7 +246,7 @@ footer p{margin:0;max-width:70em}
       <div>
         <h2 id="h-app"><span class="fix">Inkfit</span>で、補正から送信までスマホひとつに。</h2>
         <p class="lede">E Inkに合わせて写真の色を整え、そのままフレームへ送るアプリを開発しています。いま事前登録を受け付けています。</p>
-        <p class="compat">SwitchBot AI Art Frame 対応予定（非公式アプリ）</p>
+        <p class="compat">SwitchBot AIアートキャンバス 対応予定（非公式アプリ）</p>
         <div><a class="btn" href="#signup" data-cta="app_signup">事前登録する（無料）</a></div>
       </div>
       <div>
@@ -339,7 +337,7 @@ footer p{margin:0;max-width:70em}
 <script>
 (function(){
   // Amazonアソシエイトのリンク。URLを入れたサイズだけ表示し、PR表記とアソシエイト表記も出す
-  var AFFILIATE={"aff-7":"","aff-13":"","aff-31":""};
+  var AFFILIATE={"aff-all":"https://www.amazon.co.jp/s?k=SwitchBot+AI%E3%82%A2%E3%83%BC%E3%83%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%90%E3%82%B9&tag=subculturesci-22"};
   var any=false;
   Object.keys(AFFILIATE).forEach(function(id){var u=AFFILIATE[id];if(u){var el=document.getElementById(id);el.href=u;el.hidden=false;any=true;}});
   if(any){["shop","pr-disclosure","aff-note"].forEach(function(id){document.getElementById(id).hidden=false;});}
